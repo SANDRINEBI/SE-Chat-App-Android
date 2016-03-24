@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:touchscreenBlocksFocus="false"
+    android:transitionGroup="false"
+    android:clickable="false"
+    android:contextClickable="false">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/outgoing_message"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        tools:ignore="UselessParent"
+        android:measureWithLargestChild="true"
+        android:longClickable="false"
+        android:gravity="right"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="You should be excited!"
+            android:id="@+id/message"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:layout_gravity="right" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Apr 22, 5:40 PM"
+            android:id="@+id/datetime"
+            android:layout_gravity="right" />
+    </LinearLayout>
+</RelativeLayout>
