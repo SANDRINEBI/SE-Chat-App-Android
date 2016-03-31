@@ -8,22 +8,20 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.BaseAdapter;
 import android.widget.ListView;
 
+import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 import com.gigster.semessaging.gigs.Datum;
 import com.gigster.semessaging.gigs.GigList;
-import com.gigster.semessaging.user.User;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -56,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Firebase.setAndroidContext(this);
-        db = new Firebase("https://gigster-dev.firebaseio.com/messages/");
+        db = new Firebase("https://gigster-debo.firebaseio.com/messages/");
         SharedPreferences settings = getSharedPreferences("settings", 0);
         boolean loggedIn = settings.getBoolean("loggedIn", false);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -198,26 +196,38 @@ public class MainActivity extends AppCompatActivity {
                         chats.add(c);
                     }
                     final ArrayList<ChatMessage> chat = c.getChat();
-                    String gigID = c.getGigID();
-                    db.child(gigID).addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot snapshot) {
-                            Iterable<DataSnapshot> snapshots = snapshot.getChildren();
-                            ArrayList<DataSnapshot> messages = Lists.newArrayList(snapshots);
-                            if (chat.size() < messages.size())
-                                for (DataSnapshot snap : messages) {
-                                    HashMap val = (HashMap) snap.getValue();
-                                    ChatMessage msg = new ChatMessage(val);
-                                    chat.add(msg);
-                                    adapter.notifyDataSetChanged();
-                                }
+                    final String gigID = c.getGigID();
+                    if(chat.size()==0) {
+                        db.child(gigID).orderByChild("timestamp").limitToLast(1).addChildEventListener(new ChildEventListener() {
+                            @Override
+                            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                                HashMap val = (HashMap) dataSnapshot.getValue();
+                                ChatMessage msg = new ChatMessage(val,gigID);
+                                chat.add(msg);
+                                adapter.notifyDataSetChanged();
+                            }
 
-                        }
+                            @Override
+                            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
 
-                        @Override
-                        public void onCancelled(FirebaseError error) {
-                        }
-                    });
+                            }
+
+                            @Override
+                            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+                            }
+
+                            @Override
+                            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+                            }
+
+                            @Override
+                            public void onCancelled(FirebaseError firebaseError) {
+
+                            }
+                        });
+                    }
                 }
                 adapter.notifyDataSetChanged();
             } else {

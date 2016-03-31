@@ -40,7 +40,8 @@ public interface GigsterService {
 
     @FormUrlEncoded
     @POST("api/v1/gigs/{gig_id}/messages")
-    Response sendMessage(@Header("Cookie") String cookie, @Path("gig_id") String gigID, @Field("message") String message);
+    Call<Object> sendMessage(@Header("Cookie") String cookie, @Path("gig_id") String gigID, @Field("text") String message,
+                          @Field("type") String type, @Field("toClient") boolean toClient );
 
 
 }

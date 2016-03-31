@@ -47,4 +47,5 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-gson:2.0.0'
     compile 'com.google.guava:guava:19.0'
     compile 'com.google.android.gms:play-services-appindexing:8.4.0'
+    compile 'com.github.boxme:asyncmanager:1.0.0'
 }
