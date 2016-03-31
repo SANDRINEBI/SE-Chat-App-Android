@@ -6,6 +6,7 @@ import android.annotation.TargetApi;
 import android.app.LoaderManager;
 import android.content.CursorLoader;
 import android.content.Loader;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
@@ -17,6 +18,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -26,28 +28,23 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.gigster.semessaging.user.User;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
 public class LoginActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
-    /**
-     * Id to identity READ_CONTACTS permission request.
-     */
     private static final int REQUEST_READ_CONTACTS = 0;
 
-    /**
-     * A dummy authentication store containing known user names and passwords.
-     * TODO: remove after connecting to a real authentication system.
-     */
-    private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "hi@gigster.com:password", "anthonylobko@gmail.com:blahblah"
-    };
-    /**
-     * Keep track of the login task to ensure we can cancel it if requested.
-     */
     private UserLoginTask mAuthTask = null;
 
     // UI references.
@@ -132,11 +129,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
     }
 
 
-    /**
-     * Attempts to sign in or register the account specified by the login form.
-     * If there are form errors (invalid email, missing fields, etc.), the
-     * errors are presented and no actual login attempt is made.
-     */
     private void attemptLogin() {
         if (mAuthTask != null) {
             return;
@@ -178,19 +170,17 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
         } else {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
-            showProgress(true);
+            showProgress(false);
             mAuthTask = new UserLoginTask(email, password);
             mAuthTask.execute((Void) null);
         }
     }
 
     private boolean isEmailValid(String email) {
-        //TODO: Replace this with your own logic
         return email.contains("@");
     }
 
     private boolean isPasswordValid(String password) {
-        //TODO: Replace this with your own logic
         return password.length() > 4;
     }
 
@@ -199,9 +189,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
      */
     @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
     private void showProgress(final boolean show) {
-        // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
-        // for very easy animations. If available, use these APIs to fade-in
-        // the progress spinner.
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
             int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
 
@@ -302,23 +290,35 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
 
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl("https://app.gigster.com/")
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+            GigsterService serv = retrofit.create(GigsterService.class);
+            Call<User> test = serv.attemptLogin(mEmail, mPassword);
             try {
-                // Simulate network access.
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                return false;
-            }
-
-            for (String credential : DUMMY_CREDENTIALS) {
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(mEmail)) {
-                    // Account exists, return true if the password matches.
-                    return pieces[1].equals(mPassword);
+                Response<User> r = test.execute();
+                Log.d("Code", String.valueOf(r.code()));
+                Log.d("Message", String.valueOf(r.message()));
+                if (r.code()!=200){
+                    Log.d("Status", "logging in failed");
+                    return false;
+                }else{
+                    Log.d("Status", "logging in succeded");
+                    SharedPreferences settings = getSharedPreferences("settings", 0);
+                    SharedPreferences.Editor editor = settings.edit();
+                    editor.putString("cookie", r.headers().get("Set-Cookie"));
+                    editor.putString("email", mEmail);
+                    editor.putString("password", mPassword);
+                    editor.putBoolean("loggedIn", true);
+                    editor.commit();
+                    return true;
                 }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
 
-            // TODO: register the new account here.
-            return true;
+            return false;
         }
 
         @Override

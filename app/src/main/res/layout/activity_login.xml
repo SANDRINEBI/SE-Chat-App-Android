@@ -27,7 +27,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:weightSum="1">
+            android:weightSum="1"
+            android:gravity="center_vertical">
 
             <ImageView
                 android:layout_width="161dp"
@@ -75,8 +76,8 @@
             <android.support.design.widget.TextInputLayout
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                style="@style/Autocomplete">
+                style="@style/Autocomplete"
+                android:layout_gravity="center_horizontal">
 
                 <AutoCompleteTextView
                     android:id="@+id/email"
@@ -90,15 +91,16 @@
                     android:textIsSelectable="false"
                     android:clickable="false"
                     style="@style/Autocomplete"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:gravity="center_vertical" />
 
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                style="@style/Autocomplete">
+                style="@style/Autocomplete"
+                android:layout_gravity="center_horizontal">
 
                 <EditText
                     android:id="@+id/password"
@@ -114,7 +116,8 @@
                     android:textColor="#ffffff"
                     android:textColorHint="#ffffff"
                     style="@style/Autocomplete"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:gravity="center_vertical" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -135,7 +138,7 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/action_sign_in"
                 android:textStyle="bold"
-                android:layout_marginStart="40dp" />
+                android:layout_gravity="center_horizontal" />
 
         </LinearLayout>
     </ScrollView>

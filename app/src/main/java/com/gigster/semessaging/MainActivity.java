@@ -1,38 +1,74 @@
 package com.gigster.semessaging;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.ListView;
 
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
+import com.gigster.semessaging.gigs.Datum;
+import com.gigster.semessaging.gigs.GigList;
+import com.gigster.semessaging.user.User;
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.common.collect.Lists;
+
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import butterknife.OnClick;
+import retrofit2.Call;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
     private ListView lv;
-    private boolean loggedIn = false;
+    Firebase db;
+    ArrayList<Chat> chats;
+    ChatListAdapter adapter;
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Firebase.setAndroidContext(this);
+        db = new Firebase("https://gigster-dev.firebaseio.com/messages/");
+        SharedPreferences settings = getSharedPreferences("settings", 0);
+        boolean loggedIn = settings.getBoolean("loggedIn", false);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        if(!loggedIn){
+        if (!loggedIn) {
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(intent);
         }
-
-        ArrayList<Chat> chats= new ArrayList<>();
-        chats.add(new Chat("http://dreamatico.com/data_images/kitten/kitten-3.jpg", "Kitten 1 / Kittens are Us", "Did you get our litter?", 1));
-        chats.add(new Chat("https://catlovers2015.files.wordpress.com/2015/05/cute-kitten-kittens-16123158-1280-800.jpg", "Kitten 2 / Kittens aren't Us", "You're late!", 2));
-        chats.add(new Chat("http://vignette4.wikia.nocookie.net/happypasta/images/6/6c/Anime-kittens-cats-praying-496315.jpg/revision/latest?cb=20130914024839", "Kitten 3 / Give us Dogs", "Perfect!", 0));
-        chats.add(new Chat());
+        chats = new ArrayList<>();
         lv = (ListView) findViewById(R.id.listView);
-        lv.setAdapter(new ChatListAdapter(this,R.id.listView, chats));
+        adapter = new ChatListAdapter(this, R.id.listView, chats);
+        lv.setAdapter(adapter);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
@@ -40,10 +76,159 @@ public class MainActivity extends AppCompatActivity {
                 Chat entry = (Chat) parent.getItemAtPosition(position);
                 Intent intent = new Intent(MainActivity.this, ChatActivity.class);
                 intent.putExtra("Chat", entry);
-                startActivity(intent);
+                startActivityForResult(intent, position);
             }
         });
 
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Chat c = (Chat) data.getExtras().getSerializable("Chat");
+        if (c==null)
+            return;
+        chats.set(requestCode, c);
+        adapter.notifyDataSetChanged();
+    }
+
+    @OnClick(R.id.settingsDots)
+    public void logoutAndReset(View v){
+        Context context = getApplicationContext();
+        Intent mStartActivity = new Intent(context, MainActivity.class);
+        int mPendingIntentId = 123456;
+        PendingIntent mPendingIntent = PendingIntent.getActivity(context, mPendingIntentId, mStartActivity, PendingIntent.FLAG_CANCEL_CURRENT);
+        AlarmManager mgr = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
+        mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 100, mPendingIntent);
+        SharedPreferences settings = getSharedPreferences("settings", 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.clear();
+        editor.commit();
+        finish();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        client.connect();
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "Main Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app deep link URI is correct.
+                Uri.parse("android-app://com.gigster.semessaging/http/host/path")
+        );
+        AppIndex.AppIndexApi.start(client, viewAction);
+
+        GetGigsTask task = new GetGigsTask();
+        task.execute();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "Main Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app deep link URI is correct.
+                Uri.parse("android-app://com.gigster.semessaging/http/host/path")
+        );
+        AppIndex.AppIndexApi.end(client, viewAction);
+        client.disconnect();
+    }
+
+    public class GetGigsTask extends AsyncTask<Void, Void, GigList> {
+
+        GetGigsTask() {
+
+        }
+
+        @Override
+        protected GigList doInBackground(Void... params) {
+
+            SharedPreferences settings = getSharedPreferences("settings", 0);
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl("https://app.gigster.com/")
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+            GigsterService serv = retrofit.create(GigsterService.class);
+            String cookie = settings.getString("cookie", "");
+            GigList gigs = null;
+            Call<GigList> gigsRequest = serv.getSeGigs(cookie);
+            try {
+                Response<GigList> resp = gigsRequest.execute();
+                if (resp.code() == 200) {
+                    Log.d("GetGigsTask", "Successfully retrieved SE gigs");
+                    return resp.body();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(final GigList gigs) {
+
+            if (gigs != null) {
+//                chats.clear();
+                for (Datum d : gigs.getData()) {
+                    String img = d.getPoster().getImgURL();
+                    if (img == null) {
+                        img = "https://app.gigster.com/media/sprites/generic-avatars/av1.png";
+                    }
+                    Chat c = new Chat(img, d.getName(), d.getId());
+                    if(chats.contains(c)){
+                        c = chats.get(chats.indexOf(c));
+                    }
+                    else{
+                        chats.add(c);
+                    }
+                    final ArrayList<ChatMessage> chat = c.getChat();
+                    String gigID = c.getGigID();
+                    db.child(gigID).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot snapshot) {
+                            Iterable<DataSnapshot> snapshots = snapshot.getChildren();
+                            ArrayList<DataSnapshot> messages = Lists.newArrayList(snapshots);
+                            if (chat.size() < messages.size())
+                                for (DataSnapshot snap : messages) {
+                                    HashMap val = (HashMap) snap.getValue();
+                                    ChatMessage msg = new ChatMessage(val);
+                                    chat.add(msg);
+                                    adapter.notifyDataSetChanged();
+                                }
+
+                        }
+
+                        @Override
+                        public void onCancelled(FirebaseError error) {
+                        }
+                    });
+                }
+                adapter.notifyDataSetChanged();
+            } else {
+                Log.d("Status", "failed to load chat");
+            }
+        }
+
+        @Override
+        protected void onCancelled() {
+
+        }
     }
 
 }

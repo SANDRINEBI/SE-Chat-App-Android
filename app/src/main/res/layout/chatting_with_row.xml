@@ -17,7 +17,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="I&apos;m just always curious"
+            android:text="@string/default_client_message"
             android:id="@+id/message"
             android:textColor="#000000"
             android:textSize="20sp" />
@@ -25,7 +25,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Apr 22, 5:40 PM"
+            android:text="@string/default_date"
             android:id="@+id/datetime" />
     </LinearLayout>
 

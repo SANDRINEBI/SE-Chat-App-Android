@@ -6,12 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -22,9 +19,11 @@ import butterknife.OnClick;
 
 public class ChatActivity extends AppCompatActivity {
     private ListView lv;
-    ArrayList<ChatMessage> messages= new ArrayList<>();
+    ArrayList<ChatMessage> messages= new ArrayList<ChatMessage>();
     ChatAdapter adapter;
+    Chat chat;
     @Bind(R.id.editText) EditText text;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,52 +31,58 @@ public class ChatActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ButterKnife.bind(this);
-        Chat c = new Chat();
+        chat = new Chat();
         try{
-           c = (Chat) getIntent().getSerializableExtra("Chat");
+           chat = (Chat) getIntent().getSerializableExtra("Chat");
         } catch (Exception e){
 
         }
         Date d = new Date();
-        messages.add(new ChatMessage("How's it coming?", d, false));
-        messages.add(new ChatMessage("Ahead of schedule! All cool?", d, true));
-        messages.add(new ChatMessage("I'm just always curious", d, false));
-        messages.add(new ChatMessage("You should be excited!", d, true));
-        messages.add(new ChatMessage("It's going well!", d, true));
-        messages.add(new ChatMessage("Glad to hear it!!!Glad to hear it!!!Glad to hear it!!!Glad to hear it!!!Glad to hear it!!!Glad to hear it!!!Glad to hear it!!!", d, false));
-        messages.add(new ChatMessage("How's it coming?", d, false));
-        messages.add(new ChatMessage("Ahead of schedule! All cool?", d, true));
-        messages.add(new ChatMessage("I'm just always curious", d, false));
-        messages.add(new ChatMessage("You should be excited!", d, true));
-        messages.add(new ChatMessage("It's going well!", d, true));
-        messages.add(new ChatMessage("Glad to hear it!!!", d, false));
         TextView title = (TextView) findViewById(R.id.chatName);
-        if (c!=null) {
-            Log.d("C", c.toString());
-            title.setText(c.getChatName());
+        if (chat!=null) {
+            title.setText(chat.getChatName());
+            messages = chat.getChat();
+            adapter = new ChatAdapter(this, messages);
         }
-        adapter = new ChatAdapter(this, R.id.chatListView, messages);
+        else
+            adapter = new ChatAdapter(this);
         lv = (ListView) findViewById(R.id.chatListView);
+
         lv.setAdapter(adapter);
-//        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position,
-//                                    long id) {
-//                ChatMessage entry = (ChatMessage) parent.getItemAtPosition(position);
-//            }
-//        });
 
     }
     @OnClick(R.id.send)
     public void addItems(View v) {
-        messages.add(new ChatMessage( text.getText().toString(),new Date(), true));
-        text.setText("");
+        String message = text.getText().toString();
+        if(message.length()<=0)
+            return;
+
+        message = message.trim();
+        String emoij = EmojiParser.demojizedText(message);
+        ChatMessage msg = new ChatMessage(emoij, new Date(), true);
+        messages.add(msg);
+
         adapter.notifyDataSetChanged();
+
+
+        text.setText("", TextView.BufferType.EDITABLE);
     }
 
     @OnClick(R.id.backArrow)
     public void back(View v){
+        int resultCode = 200;
+        Intent resultIntent = new Intent();
+        resultIntent.putExtra("Chat", chat);
+        setResult(resultCode, resultIntent);
         finish();
     }
 
+    @Override
+    public void onBackPressed() {
+        int resultCode = 200;
+        Intent resultIntent = new Intent();
+        resultIntent.putExtra("Chat", chat);
+        setResult(resultCode, resultIntent);
+        finish();
+    }
 }

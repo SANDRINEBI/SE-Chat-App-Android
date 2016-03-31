@@ -75,17 +75,21 @@
 
         <ListView
             android:layout_width="match_parent"
-            android:layout_height="462dp"
+            android:layout_height="wrap_content"
             android:id="@+id/chatListView"
             android:layout_gravity="center_horizontal"
             android:background="#eeeeee"
-            android:divider="@null" />
+            android:divider="@null"
+            android:layout_weight="0.7"
+            android:stackFromBottom="true"
+            android:transcriptMode="alwaysScroll" />
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="fill_parent"
-            android:layout_height="50dp"
-            android:layout_gravity="center_horizontal">
+            android:layout_height="80dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="0.3">
 
             <EditText
                 android:layout_width="wrap_content"
@@ -95,7 +99,7 @@
                 android:id="@+id/editText"
                 android:singleLine="false"
                 android:layout_weight="0.89"
-                android:hint="Send message" />
+                android:hint="@string/edit_text_hint" />
 
             <ImageView
                 android:layout_width="wrap_content"

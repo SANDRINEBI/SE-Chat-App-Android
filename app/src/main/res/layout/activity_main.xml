@@ -29,16 +29,19 @@
                     android:src="@drawable/logo_titlebar"
                     android:layout_centerVertical="true"
                     android:layout_centerHorizontal="true"
-                    android:id="@+id/imageView3" />
+                    android:id="@+id/gigsterLogo"
+                    android:clickable="true" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/imageView2"
+                    android:id="@+id/settingsDots"
                     android:layout_centerVertical="true"
                     android:layout_alignParentEnd="true"
                     android:src="@drawable/ic_more_vert"
-                    android:layout_marginEnd="10dp" />
+                    android:layout_marginEnd="10dp"
+                    android:clickable="true"
+                    android:onClick="logoutAndReset" />
 
             </RelativeLayout>
 
