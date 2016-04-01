@@ -26,13 +26,20 @@ import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.common.collect.Lists;
+import com.google.common.collect.TreeMultiset;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Level;
 
 import butterknife.OnClick;
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
@@ -41,8 +48,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainActivity extends AppCompatActivity {
     private ListView lv;
     Firebase db;
-    ArrayList<Chat> chats;
+//    TreeMultiset<Chat> chats;
+    FixSizeArrayList chats;
     ChatListAdapter adapter;
+    Comparator chatComparator;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -63,7 +72,25 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(intent);
         }
-        chats = new ArrayList<>();
+        chats = new FixSizeArrayList(30);
+        chatComparator= new  Comparator<Chat>() {
+            @Override
+            public int compare(Chat c1, Chat c2)
+            {
+
+                return  Long.valueOf(c1.getMillisSinceLastMessage()).compareTo(c2.getMillisSinceLastMessage());
+            }
+
+        };
+//                TreeMultiset.create(new Comparator<Chat>() {
+//            @Override
+//            public int compare(Chat c1, Chat c2)
+//            {
+//
+//                return  Long.valueOf(c1.getMillisSinceLastMessage()).compareTo(c2.getMillisSinceLastMessage());
+//            }
+//        });
+
         lv = (ListView) findViewById(R.id.listView);
         adapter = new ChatListAdapter(this, R.id.listView, chats);
         lv.setAdapter(adapter);
@@ -88,6 +115,8 @@ public class MainActivity extends AppCompatActivity {
         if (c==null)
             return;
         chats.set(requestCode, c);
+        GetGigsTask task = new GetGigsTask();
+        task.execute();
         adapter.notifyDataSetChanged();
     }
 
@@ -125,6 +154,7 @@ public class MainActivity extends AppCompatActivity {
 
         GetGigsTask task = new GetGigsTask();
         task.execute();
+        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -157,6 +187,9 @@ public class MainActivity extends AppCompatActivity {
         protected GigList doInBackground(Void... params) {
 
             SharedPreferences settings = getSharedPreferences("settings", 0);
+//            HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+//            logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+//            OkHttpClient httpClient = new OkHttpClient.Builder().addInterceptor((okhttp3.Interceptor)logging).build();
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl("https://app.gigster.com/")
                     .addConverterFactory(GsonConverterFactory.create())
@@ -184,6 +217,8 @@ public class MainActivity extends AppCompatActivity {
             if (gigs != null) {
 //                chats.clear();
                 for (Datum d : gigs.getData()) {
+                    if(d==null || d.getPoster()==null)
+                        continue;
                     String img = d.getPoster().getImgURL();
                     if (img == null) {
                         img = "https://app.gigster.com/media/sprites/generic-avatars/av1.png";
@@ -192,18 +227,23 @@ public class MainActivity extends AppCompatActivity {
                     if(chats.contains(c)){
                         c = chats.get(chats.indexOf(c));
                     }
-                    else{
-                        chats.add(c);
-                    }
-                    final ArrayList<ChatMessage> chat = c.getChat();
-                    final String gigID = c.getGigID();
+                    final Chat ch = c;
+                    final ArrayList<ChatMessage> chat = ch.getChat();
+                    final String gigID = ch.getGigID();
                     if(chat.size()==0) {
                         db.child(gigID).orderByChild("timestamp").limitToLast(1).addChildEventListener(new ChildEventListener() {
                             @Override
                             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+
                                 HashMap val = (HashMap) dataSnapshot.getValue();
                                 ChatMessage msg = new ChatMessage(val,gigID);
+                                if (new Date().getTime()-msg.getTimestamp()>1000000000)
+                                    return;
                                 chat.add(msg);
+                                if(!chats.contains(ch)){
+                                    chats.insertOrdered(ch);
+                                }
+                                adapter.sort(chatComparator);
                                 adapter.notifyDataSetChanged();
                             }
 
@@ -240,5 +280,4 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
-
 }

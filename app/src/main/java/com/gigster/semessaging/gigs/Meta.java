@@ -1,36 +1,62 @@
 
 package com.gigster.semessaging.gigs;
 
-import java.util.HashMap;
-import java.util.Map;
 import javax.annotation.Generated;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 @Generated("org.jsonschema2pojo")
 public class Meta {
 
-    private int chats;
-    private int chatsCharacterCount;
-    private int chatsClient;
-    private int chatsClientCharacterCount;
-    private int chatsPOC;
-    private int chatsPOCCharacterCount;
-    private int chatsPOCOnline;
-    private int chatsPOCOffline;
-    private int emails;
-    private int emailsClient;
-    private int emailsPOC;
-    private int phoneCalls;
-    private int responseTime;
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    @SerializedName("chats")
+    @Expose
+    private long chats;
+    @SerializedName("chatsCharacterCount")
+    @Expose
+    private long chatsCharacterCount;
+    @SerializedName("chatsClient")
+    @Expose
+    private long chatsClient;
+    @SerializedName("chatsClientCharacterCount")
+    @Expose
+    private long chatsClientCharacterCount;
+    @SerializedName("chatsPOC")
+    @Expose
+    private long chatsPOC;
+    @SerializedName("chatsPOCCharacterCount")
+    @Expose
+    private long chatsPOCCharacterCount;
+    @SerializedName("chatsPOCOnline")
+    @Expose
+    private long chatsPOCOnline;
+    @SerializedName("chatsPOCOffline")
+    @Expose
+    private long chatsPOCOffline;
+    @SerializedName("emails")
+    @Expose
+    private long emails;
+    @SerializedName("emailsClient")
+    @Expose
+    private long emailsClient;
+    @SerializedName("emailsPOC")
+    @Expose
+    private long emailsPOC;
+    @SerializedName("phoneCalls")
+    @Expose
+    private long phoneCalls;
+    @SerializedName("responseTime")
+    @Expose
+    private long responseTime;
 
     /**
      * 
      * @return
      *     The chats
      */
-    public int getChats() {
+    public long getChats() {
         return chats;
     }
 
@@ -39,7 +65,7 @@ public class Meta {
      * @param chats
      *     The chats
      */
-    public void setChats(int chats) {
+    public void setChats(long chats) {
         this.chats = chats;
     }
 
@@ -48,7 +74,7 @@ public class Meta {
      * @return
      *     The chatsCharacterCount
      */
-    public int getChatsCharacterCount() {
+    public long getChatsCharacterCount() {
         return chatsCharacterCount;
     }
 
@@ -57,7 +83,7 @@ public class Meta {
      * @param chatsCharacterCount
      *     The chatsCharacterCount
      */
-    public void setChatsCharacterCount(int chatsCharacterCount) {
+    public void setChatsCharacterCount(long chatsCharacterCount) {
         this.chatsCharacterCount = chatsCharacterCount;
     }
 
@@ -66,7 +92,7 @@ public class Meta {
      * @return
      *     The chatsClient
      */
-    public int getChatsClient() {
+    public long getChatsClient() {
         return chatsClient;
     }
 
@@ -75,7 +101,7 @@ public class Meta {
      * @param chatsClient
      *     The chatsClient
      */
-    public void setChatsClient(int chatsClient) {
+    public void setChatsClient(long chatsClient) {
         this.chatsClient = chatsClient;
     }
 
@@ -84,7 +110,7 @@ public class Meta {
      * @return
      *     The chatsClientCharacterCount
      */
-    public int getChatsClientCharacterCount() {
+    public long getChatsClientCharacterCount() {
         return chatsClientCharacterCount;
     }
 
@@ -93,7 +119,7 @@ public class Meta {
      * @param chatsClientCharacterCount
      *     The chatsClientCharacterCount
      */
-    public void setChatsClientCharacterCount(int chatsClientCharacterCount) {
+    public void setChatsClientCharacterCount(long chatsClientCharacterCount) {
         this.chatsClientCharacterCount = chatsClientCharacterCount;
     }
 
@@ -102,7 +128,7 @@ public class Meta {
      * @return
      *     The chatsPOC
      */
-    public int getChatsPOC() {
+    public long getChatsPOC() {
         return chatsPOC;
     }
 
@@ -111,7 +137,7 @@ public class Meta {
      * @param chatsPOC
      *     The chatsPOC
      */
-    public void setChatsPOC(int chatsPOC) {
+    public void setChatsPOC(long chatsPOC) {
         this.chatsPOC = chatsPOC;
     }
 
@@ -120,7 +146,7 @@ public class Meta {
      * @return
      *     The chatsPOCCharacterCount
      */
-    public int getChatsPOCCharacterCount() {
+    public long getChatsPOCCharacterCount() {
         return chatsPOCCharacterCount;
     }
 
@@ -129,7 +155,7 @@ public class Meta {
      * @param chatsPOCCharacterCount
      *     The chatsPOCCharacterCount
      */
-    public void setChatsPOCCharacterCount(int chatsPOCCharacterCount) {
+    public void setChatsPOCCharacterCount(long chatsPOCCharacterCount) {
         this.chatsPOCCharacterCount = chatsPOCCharacterCount;
     }
 
@@ -138,7 +164,7 @@ public class Meta {
      * @return
      *     The chatsPOCOnline
      */
-    public int getChatsPOCOnline() {
+    public long getChatsPOCOnline() {
         return chatsPOCOnline;
     }
 
@@ -147,7 +173,7 @@ public class Meta {
      * @param chatsPOCOnline
      *     The chatsPOCOnline
      */
-    public void setChatsPOCOnline(int chatsPOCOnline) {
+    public void setChatsPOCOnline(long chatsPOCOnline) {
         this.chatsPOCOnline = chatsPOCOnline;
     }
 
@@ -156,7 +182,7 @@ public class Meta {
      * @return
      *     The chatsPOCOffline
      */
-    public int getChatsPOCOffline() {
+    public long getChatsPOCOffline() {
         return chatsPOCOffline;
     }
 
@@ -165,7 +191,7 @@ public class Meta {
      * @param chatsPOCOffline
      *     The chatsPOCOffline
      */
-    public void setChatsPOCOffline(int chatsPOCOffline) {
+    public void setChatsPOCOffline(long chatsPOCOffline) {
         this.chatsPOCOffline = chatsPOCOffline;
     }
 
@@ -174,7 +200,7 @@ public class Meta {
      * @return
      *     The emails
      */
-    public int getEmails() {
+    public long getEmails() {
         return emails;
     }
 
@@ -183,7 +209,7 @@ public class Meta {
      * @param emails
      *     The emails
      */
-    public void setEmails(int emails) {
+    public void setEmails(long emails) {
         this.emails = emails;
     }
 
@@ -192,7 +218,7 @@ public class Meta {
      * @return
      *     The emailsClient
      */
-    public int getEmailsClient() {
+    public long getEmailsClient() {
         return emailsClient;
     }
 
@@ -201,7 +227,7 @@ public class Meta {
      * @param emailsClient
      *     The emailsClient
      */
-    public void setEmailsClient(int emailsClient) {
+    public void setEmailsClient(long emailsClient) {
         this.emailsClient = emailsClient;
     }
 
@@ -210,7 +236,7 @@ public class Meta {
      * @return
      *     The emailsPOC
      */
-    public int getEmailsPOC() {
+    public long getEmailsPOC() {
         return emailsPOC;
     }
 
@@ -219,7 +245,7 @@ public class Meta {
      * @param emailsPOC
      *     The emailsPOC
      */
-    public void setEmailsPOC(int emailsPOC) {
+    public void setEmailsPOC(long emailsPOC) {
         this.emailsPOC = emailsPOC;
     }
 
@@ -228,7 +254,7 @@ public class Meta {
      * @return
      *     The phoneCalls
      */
-    public int getPhoneCalls() {
+    public long getPhoneCalls() {
         return phoneCalls;
     }
 
@@ -237,7 +263,7 @@ public class Meta {
      * @param phoneCalls
      *     The phoneCalls
      */
-    public void setPhoneCalls(int phoneCalls) {
+    public void setPhoneCalls(long phoneCalls) {
         this.phoneCalls = phoneCalls;
     }
 
@@ -246,7 +272,7 @@ public class Meta {
      * @return
      *     The responseTime
      */
-    public int getResponseTime() {
+    public long getResponseTime() {
         return responseTime;
     }
 
@@ -255,21 +281,18 @@ public class Meta {
      * @param responseTime
      *     The responseTime
      */
-    public void setResponseTime(int responseTime) {
+    public void setResponseTime(long responseTime) {
         this.responseTime = responseTime;
     }
 
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(chats).append(chatsCharacterCount).append(chatsClient).append(chatsClientCharacterCount).append(chatsPOC).append(chatsPOCCharacterCount).append(chatsPOCOnline).append(chatsPOCOffline).append(emails).append(emailsClient).append(emailsPOC).append(phoneCalls).append(responseTime).append(additionalProperties).toHashCode();
+        return new HashCodeBuilder().append(chats).append(chatsCharacterCount).append(chatsClient).append(chatsClientCharacterCount).append(chatsPOC).append(chatsPOCCharacterCount).append(chatsPOCOnline).append(chatsPOCOffline).append(emails).append(emailsClient).append(emailsPOC).append(phoneCalls).append(responseTime).toHashCode();
     }
 
     @Override
@@ -281,7 +304,7 @@ public class Meta {
             return false;
         }
         Meta rhs = ((Meta) other);
-        return new EqualsBuilder().append(chats, rhs.chats).append(chatsCharacterCount, rhs.chatsCharacterCount).append(chatsClient, rhs.chatsClient).append(chatsClientCharacterCount, rhs.chatsClientCharacterCount).append(chatsPOC, rhs.chatsPOC).append(chatsPOCCharacterCount, rhs.chatsPOCCharacterCount).append(chatsPOCOnline, rhs.chatsPOCOnline).append(chatsPOCOffline, rhs.chatsPOCOffline).append(emails, rhs.emails).append(emailsClient, rhs.emailsClient).append(emailsPOC, rhs.emailsPOC).append(phoneCalls, rhs.phoneCalls).append(responseTime, rhs.responseTime).append(additionalProperties, rhs.additionalProperties).isEquals();
+        return new EqualsBuilder().append(chats, rhs.chats).append(chatsCharacterCount, rhs.chatsCharacterCount).append(chatsClient, rhs.chatsClient).append(chatsClientCharacterCount, rhs.chatsClientCharacterCount).append(chatsPOC, rhs.chatsPOC).append(chatsPOCCharacterCount, rhs.chatsPOCCharacterCount).append(chatsPOCOnline, rhs.chatsPOCOnline).append(chatsPOCOffline, rhs.chatsPOCOffline).append(emails, rhs.emails).append(emailsClient, rhs.emailsClient).append(emailsPOC, rhs.emailsPOC).append(phoneCalls, rhs.phoneCalls).append(responseTime, rhs.responseTime).isEquals();
     }
 
 }

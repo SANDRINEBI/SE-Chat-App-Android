@@ -2,28 +2,50 @@
 package com.gigster.semessaging.gigs;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import javax.annotation.Generated;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 @Generated("org.jsonschema2pojo")
 public class MilestonesSpecification {
 
+    @SerializedName("finalized")
+    @Expose
     private boolean finalized;
+    @SerializedName("finalizedDate")
+    @Expose
     private Object finalizedDate;
+    @SerializedName("finalizedBy")
+    @Expose
     private Object finalizedBy;
+    @SerializedName("ready")
+    @Expose
     private boolean ready;
+    @SerializedName("readyDate")
+    @Expose
     private Object readyDate;
+    @SerializedName("readyBy")
+    @Expose
     private Object readyBy;
+    @SerializedName("approved")
+    @Expose
     private boolean approved;
+    @SerializedName("approvedDate")
+    @Expose
     private Object approvedDate;
+    @SerializedName("approvedBy")
+    @Expose
     private Object approvedBy;
+    @SerializedName("team")
+    @Expose
     private List<Object> team = new ArrayList<Object>();
+    @SerializedName("revisions")
+    @Expose
     private List<Object> revisions = new ArrayList<Object>();
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     /**
      * 
@@ -223,17 +245,14 @@ public class MilestonesSpecification {
         this.revisions = revisions;
     }
 
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(finalized).append(finalizedDate).append(finalizedBy).append(ready).append(readyDate).append(readyBy).append(approved).append(approvedDate).append(approvedBy).append(team).append(revisions).append(additionalProperties).toHashCode();
+        return new HashCodeBuilder().append(finalized).append(finalizedDate).append(finalizedBy).append(ready).append(readyDate).append(readyBy).append(approved).append(approvedDate).append(approvedBy).append(team).append(revisions).toHashCode();
     }
 
     @Override
@@ -245,7 +264,7 @@ public class MilestonesSpecification {
             return false;
         }
         MilestonesSpecification rhs = ((MilestonesSpecification) other);
-        return new EqualsBuilder().append(finalized, rhs.finalized).append(finalizedDate, rhs.finalizedDate).append(finalizedBy, rhs.finalizedBy).append(ready, rhs.ready).append(readyDate, rhs.readyDate).append(readyBy, rhs.readyBy).append(approved, rhs.approved).append(approvedDate, rhs.approvedDate).append(approvedBy, rhs.approvedBy).append(team, rhs.team).append(revisions, rhs.revisions).append(additionalProperties, rhs.additionalProperties).isEquals();
+        return new EqualsBuilder().append(finalized, rhs.finalized).append(finalizedDate, rhs.finalizedDate).append(finalizedBy, rhs.finalizedBy).append(ready, rhs.ready).append(readyDate, rhs.readyDate).append(readyBy, rhs.readyBy).append(approved, rhs.approved).append(approvedDate, rhs.approvedDate).append(approvedBy, rhs.approvedBy).append(team, rhs.team).append(revisions, rhs.revisions).isEquals();
     }
 
 }

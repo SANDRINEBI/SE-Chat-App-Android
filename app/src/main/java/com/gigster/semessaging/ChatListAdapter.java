@@ -3,6 +3,7 @@ package com.gigster.semessaging;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,12 +51,15 @@ class ChatListAdapter extends ArrayAdapter<Chat> {
 
             switch(p.getUrgency()) {
                 case 0:
+                    timeSinceMessage.setTextColor(Color.BLACK);
                     break;
                 case 1:
                     dotDrawable.setColor(Color.BLUE);
+                    timeSinceMessage.setTextColor(Color.BLUE);
                     break;
                 case 2:
                     dotDrawable.setColor(Color.RED);
+                    timeSinceMessage.setTextColor(Color.RED);
                     break;
                 default:
                     break;
@@ -82,6 +86,7 @@ class ChatListAdapter extends ArrayAdapter<Chat> {
             if (timeSinceMessage!=null){
                 timeSinceMessage.setText(p.getTimeSinceMessage());
             }
+//            Log.d("Time Since", String.valueOf(p.getMillisSinceLastMessage()));
         }
 
         return v;

@@ -1,25 +1,37 @@
 
 package com.gigster.semessaging.gigs;
 
-import java.util.HashMap;
-import java.util.Map;
 import javax.annotation.Generated;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 @Generated("org.jsonschema2pojo")
 public class Doc {
 
+    @SerializedName("isOpenDefault")
+    @Expose
     private boolean isOpenDefault;
-    private boolean isValid;
+    @SerializedName("isValid")
+    @Expose
+    private String isValid;
+    @SerializedName("type")
+    @Expose
     private String type;
+    @SerializedName("subType")
+    @Expose
     private String subType;
+    @SerializedName("name")
+    @Expose
     private String name;
+    @SerializedName("uploaderName")
+    @Expose
     private String uploaderName;
+    @SerializedName("isCloseable")
+    @Expose
     private boolean isCloseable;
-    private String url;
-    private IsOpenByUser isOpenByUser;
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     /**
      * 
@@ -44,7 +56,7 @@ public class Doc {
      * @return
      *     The isValid
      */
-    public boolean isIsValid() {
+    public String getIsValid() {
         return isValid;
     }
 
@@ -53,7 +65,7 @@ public class Doc {
      * @param isValid
      *     The isValid
      */
-    public void setIsValid(boolean isValid) {
+    public void setIsValid(String isValid) {
         this.isValid = isValid;
     }
 
@@ -147,53 +159,14 @@ public class Doc {
         this.isCloseable = isCloseable;
     }
 
-    /**
-     * 
-     * @return
-     *     The url
-     */
-    public String getUrl() {
-        return url;
-    }
-
-    /**
-     * 
-     * @param url
-     *     The url
-     */
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    /**
-     * 
-     * @return
-     *     The isOpenByUser
-     */
-    public IsOpenByUser getIsOpenByUser() {
-        return isOpenByUser;
-    }
-
-    /**
-     * 
-     * @param isOpenByUser
-     *     The isOpenByUser
-     */
-    public void setIsOpenByUser(IsOpenByUser isOpenByUser) {
-        this.isOpenByUser = isOpenByUser;
-    }
-
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(isOpenDefault).append(isValid).append(type).append(subType).append(name).append(uploaderName).append(isCloseable).append(url).append(isOpenByUser).append(additionalProperties).toHashCode();
+        return new HashCodeBuilder().append(isOpenDefault).append(isValid).append(type).append(subType).append(name).append(uploaderName).append(isCloseable).toHashCode();
     }
 
     @Override
@@ -205,7 +178,7 @@ public class Doc {
             return false;
         }
         Doc rhs = ((Doc) other);
-        return new EqualsBuilder().append(isOpenDefault, rhs.isOpenDefault).append(isValid, rhs.isValid).append(type, rhs.type).append(subType, rhs.subType).append(name, rhs.name).append(uploaderName, rhs.uploaderName).append(isCloseable, rhs.isCloseable).append(url, rhs.url).append(isOpenByUser, rhs.isOpenByUser).append(additionalProperties, rhs.additionalProperties).isEquals();
+        return new EqualsBuilder().append(isOpenDefault, rhs.isOpenDefault).append(isValid, rhs.isValid).append(type, rhs.type).append(subType, rhs.subType).append(name, rhs.name).append(uploaderName, rhs.uploaderName).append(isCloseable, rhs.isCloseable).isEquals();
     }
 
 }

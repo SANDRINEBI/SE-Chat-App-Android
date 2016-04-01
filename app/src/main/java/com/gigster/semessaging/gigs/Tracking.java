@@ -1,18 +1,22 @@
 
 package com.gigster.semessaging.gigs;
 
-import java.util.HashMap;
-import java.util.Map;
 import javax.annotation.Generated;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 @Generated("org.jsonschema2pojo")
 public class Tracking {
 
+    @SerializedName("isQualified")
+    @Expose
     private boolean isQualified;
+    @SerializedName("isProposalSent")
+    @Expose
     private boolean isProposalSent;
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     /**
      * 
@@ -50,17 +54,14 @@ public class Tracking {
         this.isProposalSent = isProposalSent;
     }
 
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(isQualified).append(isProposalSent).append(additionalProperties).toHashCode();
+        return new HashCodeBuilder().append(isQualified).append(isProposalSent).toHashCode();
     }
 
     @Override
@@ -72,7 +73,7 @@ public class Tracking {
             return false;
         }
         Tracking rhs = ((Tracking) other);
-        return new EqualsBuilder().append(isQualified, rhs.isQualified).append(isProposalSent, rhs.isProposalSent).append(additionalProperties, rhs.additionalProperties).isEquals();
+        return new EqualsBuilder().append(isQualified, rhs.isQualified).append(isProposalSent, rhs.isProposalSent).isEquals();
     }
 
 }

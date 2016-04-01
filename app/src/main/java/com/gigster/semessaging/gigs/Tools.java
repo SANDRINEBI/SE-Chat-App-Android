@@ -1,19 +1,25 @@
 
 package com.gigster.semessaging.gigs;
 
-import java.util.HashMap;
-import java.util.Map;
 import javax.annotation.Generated;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 @Generated("org.jsonschema2pojo")
 public class Tools {
 
+    @SerializedName("trello")
+    @Expose
     private Trello trello;
+    @SerializedName("slack")
+    @Expose
     private Slack slack;
+    @SerializedName("github")
+    @Expose
     private Github github;
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     /**
      * 
@@ -69,17 +75,14 @@ public class Tools {
         this.github = github;
     }
 
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(trello).append(slack).append(github).append(additionalProperties).toHashCode();
+        return new HashCodeBuilder().append(trello).append(slack).append(github).toHashCode();
     }
 
     @Override
@@ -91,7 +94,7 @@ public class Tools {
             return false;
         }
         Tools rhs = ((Tools) other);
-        return new EqualsBuilder().append(trello, rhs.trello).append(slack, rhs.slack).append(github, rhs.github).append(additionalProperties, rhs.additionalProperties).isEquals();
+        return new EqualsBuilder().append(trello, rhs.trello).append(slack, rhs.slack).append(github, rhs.github).isEquals();
     }
 
 }

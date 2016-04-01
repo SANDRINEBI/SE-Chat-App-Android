@@ -1,21 +1,31 @@
 
 package com.gigster.semessaging.gigs;
 
-import java.util.HashMap;
-import java.util.Map;
 import javax.annotation.Generated;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 @Generated("org.jsonschema2pojo")
 public class Timezone {
 
+    @SerializedName("value")
+    @Expose
     private String value;
+    @SerializedName("abbr")
+    @Expose
     private String abbr;
-    private int offset;
+    @SerializedName("offset")
+    @Expose
+    private long offset;
+    @SerializedName("isdst")
+    @Expose
     private boolean isdst;
+    @SerializedName("text")
+    @Expose
     private String text;
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     /**
      * 
@@ -58,7 +68,7 @@ public class Timezone {
      * @return
      *     The offset
      */
-    public int getOffset() {
+    public long getOffset() {
         return offset;
     }
 
@@ -67,7 +77,7 @@ public class Timezone {
      * @param offset
      *     The offset
      */
-    public void setOffset(int offset) {
+    public void setOffset(long offset) {
         this.offset = offset;
     }
 
@@ -107,17 +117,14 @@ public class Timezone {
         this.text = text;
     }
 
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(value).append(abbr).append(offset).append(isdst).append(text).append(additionalProperties).toHashCode();
+        return new HashCodeBuilder().append(value).append(abbr).append(offset).append(isdst).append(text).toHashCode();
     }
 
     @Override
@@ -129,7 +136,7 @@ public class Timezone {
             return false;
         }
         Timezone rhs = ((Timezone) other);
-        return new EqualsBuilder().append(value, rhs.value).append(abbr, rhs.abbr).append(offset, rhs.offset).append(isdst, rhs.isdst).append(text, rhs.text).append(additionalProperties, rhs.additionalProperties).isEquals();
+        return new EqualsBuilder().append(value, rhs.value).append(abbr, rhs.abbr).append(offset, rhs.offset).append(isdst, rhs.isdst).append(text, rhs.text).isEquals();
     }
 
 }

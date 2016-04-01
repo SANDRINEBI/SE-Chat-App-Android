@@ -2,18 +2,20 @@
 package com.gigster.semessaging.gigs;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import javax.annotation.Generated;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 @Generated("org.jsonschema2pojo")
 public class Slack {
 
+    @SerializedName("groups")
+    @Expose
     private List<Object> groups = new ArrayList<Object>();
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     /**
      * 
@@ -33,17 +35,14 @@ public class Slack {
         this.groups = groups;
     }
 
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(groups).append(additionalProperties).toHashCode();
+        return new HashCodeBuilder().append(groups).toHashCode();
     }
 
     @Override
@@ -55,7 +54,7 @@ public class Slack {
             return false;
         }
         Slack rhs = ((Slack) other);
-        return new EqualsBuilder().append(groups, rhs.groups).append(additionalProperties, rhs.additionalProperties).isEquals();
+        return new EqualsBuilder().append(groups, rhs.groups).isEquals();
     }
 
 }

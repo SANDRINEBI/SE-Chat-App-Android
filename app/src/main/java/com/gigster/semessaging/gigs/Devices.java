@@ -11,49 +11,49 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 @Generated("org.jsonschema2pojo")
-public class GigList {
+public class Devices {
 
-    @SerializedName("success")
+    @SerializedName("gcm")
     @Expose
-    private boolean success;
-    @SerializedName("data")
+    private List<Object> gcm = new ArrayList<Object>();
+    @SerializedName("apns")
     @Expose
-    private List<Datum> data = new ArrayList<Datum>();
+    private List<Object> apns = new ArrayList<Object>();
 
     /**
      * 
      * @return
-     *     The success
+     *     The gcm
      */
-    public boolean isSuccess() {
-        return success;
+    public List<Object> getGcm() {
+        return gcm;
     }
 
     /**
      * 
-     * @param success
-     *     The success
+     * @param gcm
+     *     The gcm
      */
-    public void setSuccess(boolean success) {
-        this.success = success;
+    public void setGcm(List<Object> gcm) {
+        this.gcm = gcm;
     }
 
     /**
      * 
      * @return
-     *     The data
+     *     The apns
      */
-    public List<Datum> getData() {
-        return data;
+    public List<Object> getApns() {
+        return apns;
     }
 
     /**
      * 
-     * @param data
-     *     The data
+     * @param apns
+     *     The apns
      */
-    public void setData(List<Datum> data) {
-        this.data = data;
+    public void setApns(List<Object> apns) {
+        this.apns = apns;
     }
 
     @Override
@@ -63,7 +63,7 @@ public class GigList {
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(success).append(data).toHashCode();
+        return new HashCodeBuilder().append(gcm).append(apns).toHashCode();
     }
 
     @Override
@@ -71,11 +71,11 @@ public class GigList {
         if (other == this) {
             return true;
         }
-        if ((other instanceof GigList) == false) {
+        if ((other instanceof Devices) == false) {
             return false;
         }
-        GigList rhs = ((GigList) other);
-        return new EqualsBuilder().append(success, rhs.success).append(data, rhs.data).isEquals();
+        Devices rhs = ((Devices) other);
+        return new EqualsBuilder().append(gcm, rhs.gcm).append(apns, rhs.apns).isEquals();
     }
 
 }

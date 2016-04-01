@@ -1,8 +1,6 @@
 
 package com.gigster.semessaging.gigs;
 
-import java.util.ArrayList;
-import java.util.List;
 import javax.annotation.Generated;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -11,49 +9,49 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 @Generated("org.jsonschema2pojo")
-public class GigList {
+public class BestProject {
 
-    @SerializedName("success")
+    @SerializedName("url")
     @Expose
-    private boolean success;
-    @SerializedName("data")
+    private String url;
+    @SerializedName("description")
     @Expose
-    private List<Datum> data = new ArrayList<Datum>();
+    private String description;
 
     /**
      * 
      * @return
-     *     The success
+     *     The url
      */
-    public boolean isSuccess() {
-        return success;
+    public String getUrl() {
+        return url;
     }
 
     /**
      * 
-     * @param success
-     *     The success
+     * @param url
+     *     The url
      */
-    public void setSuccess(boolean success) {
-        this.success = success;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     /**
      * 
      * @return
-     *     The data
+     *     The description
      */
-    public List<Datum> getData() {
-        return data;
+    public String getDescription() {
+        return description;
     }
 
     /**
      * 
-     * @param data
-     *     The data
+     * @param description
+     *     The description
      */
-    public void setData(List<Datum> data) {
-        this.data = data;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override
@@ -63,7 +61,7 @@ public class GigList {
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(success).append(data).toHashCode();
+        return new HashCodeBuilder().append(url).append(description).toHashCode();
     }
 
     @Override
@@ -71,11 +69,11 @@ public class GigList {
         if (other == this) {
             return true;
         }
-        if ((other instanceof GigList) == false) {
+        if ((other instanceof BestProject) == false) {
             return false;
         }
-        GigList rhs = ((GigList) other);
-        return new EqualsBuilder().append(success, rhs.success).append(data, rhs.data).isEquals();
+        BestProject rhs = ((BestProject) other);
+        return new EqualsBuilder().append(url, rhs.url).append(description, rhs.description).isEquals();
     }
 
 }

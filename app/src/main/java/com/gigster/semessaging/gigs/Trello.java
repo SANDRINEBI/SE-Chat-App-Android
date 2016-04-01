@@ -2,19 +2,23 @@
 package com.gigster.semessaging.gigs;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import javax.annotation.Generated;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 @Generated("org.jsonschema2pojo")
 public class Trello {
 
+    @SerializedName("publishedMilestones")
+    @Expose
     private List<Object> publishedMilestones = new ArrayList<Object>();
+    @SerializedName("boards")
+    @Expose
     private List<Object> boards = new ArrayList<Object>();
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     /**
      * 
@@ -52,17 +56,14 @@ public class Trello {
         this.boards = boards;
     }
 
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(publishedMilestones).append(boards).append(additionalProperties).toHashCode();
+        return new HashCodeBuilder().append(publishedMilestones).append(boards).toHashCode();
     }
 
     @Override
@@ -74,7 +75,7 @@ public class Trello {
             return false;
         }
         Trello rhs = ((Trello) other);
-        return new EqualsBuilder().append(publishedMilestones, rhs.publishedMilestones).append(boards, rhs.boards).append(additionalProperties, rhs.additionalProperties).isEquals();
+        return new EqualsBuilder().append(publishedMilestones, rhs.publishedMilestones).append(boards, rhs.boards).isEquals();
     }
 
 }

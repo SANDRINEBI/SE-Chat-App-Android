@@ -1,25 +1,29 @@
 
 package com.gigster.semessaging.gigs;
 
-import java.util.HashMap;
-import java.util.Map;
 import javax.annotation.Generated;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 @Generated("org.jsonschema2pojo")
 public class Centroid {
 
-    private int longitude;
-    private int latitude;
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    @SerializedName("longitude")
+    @Expose
+    private double longitude;
+    @SerializedName("latitude")
+    @Expose
+    private double latitude;
 
     /**
      * 
      * @return
      *     The longitude
      */
-    public int getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
@@ -28,7 +32,7 @@ public class Centroid {
      * @param longitude
      *     The longitude
      */
-    public void setLongitude(int longitude) {
+    public void setLongitude(long longitude) {
         this.longitude = longitude;
     }
 
@@ -37,7 +41,7 @@ public class Centroid {
      * @return
      *     The latitude
      */
-    public int getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
@@ -46,21 +50,18 @@ public class Centroid {
      * @param latitude
      *     The latitude
      */
-    public void setLatitude(int latitude) {
+    public void setLatitude(long latitude) {
         this.latitude = latitude;
     }
 
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(longitude).append(latitude).append(additionalProperties).toHashCode();
+        return new HashCodeBuilder().append(longitude).append(latitude).toHashCode();
     }
 
     @Override
@@ -72,7 +73,7 @@ public class Centroid {
             return false;
         }
         Centroid rhs = ((Centroid) other);
-        return new EqualsBuilder().append(longitude, rhs.longitude).append(latitude, rhs.latitude).append(additionalProperties, rhs.additionalProperties).isEquals();
+        return new EqualsBuilder().append(longitude, rhs.longitude).append(latitude, rhs.latitude).isEquals();
     }
 
 }

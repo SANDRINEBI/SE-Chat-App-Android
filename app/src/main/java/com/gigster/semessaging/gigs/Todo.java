@@ -1,36 +1,22 @@
 
 package com.gigster.semessaging.gigs;
 
-import java.util.HashMap;
-import java.util.Map;
 import javax.annotation.Generated;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 @Generated("org.jsonschema2pojo")
 public class Todo {
 
-    private boolean complete;
+    @SerializedName("task")
+    @Expose
     private String task;
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
-
-    /**
-     * 
-     * @return
-     *     The complete
-     */
-    public boolean isComplete() {
-        return complete;
-    }
-
-    /**
-     * 
-     * @param complete
-     *     The complete
-     */
-    public void setComplete(boolean complete) {
-        this.complete = complete;
-    }
+    @SerializedName("complete")
+    @Expose
+    private boolean complete;
 
     /**
      * 
@@ -50,17 +36,32 @@ public class Todo {
         this.task = task;
     }
 
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
+    /**
+     * 
+     * @return
+     *     The complete
+     */
+    public boolean isComplete() {
+        return complete;
     }
 
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
+    /**
+     * 
+     * @param complete
+     *     The complete
+     */
+    public void setComplete(boolean complete) {
+        this.complete = complete;
+    }
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(complete).append(task).append(additionalProperties).toHashCode();
+        return new HashCodeBuilder().append(task).append(complete).toHashCode();
     }
 
     @Override
@@ -72,7 +73,7 @@ public class Todo {
             return false;
         }
         Todo rhs = ((Todo) other);
-        return new EqualsBuilder().append(complete, rhs.complete).append(task, rhs.task).append(additionalProperties, rhs.additionalProperties).isEquals();
+        return new EqualsBuilder().append(task, rhs.task).append(complete, rhs.complete).isEquals();
     }
 
 }

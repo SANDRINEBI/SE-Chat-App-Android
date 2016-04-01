@@ -1,18 +1,22 @@
 
 package com.gigster.semessaging.gigs;
 
-import java.util.HashMap;
-import java.util.Map;
 import javax.annotation.Generated;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 @Generated("org.jsonschema2pojo")
 public class PolishLevel {
 
+    @SerializedName("title")
+    @Expose
     private String title;
+    @SerializedName("key")
+    @Expose
     private String key;
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     /**
      * 
@@ -50,17 +54,14 @@ public class PolishLevel {
         this.key = key;
     }
 
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(title).append(key).append(additionalProperties).toHashCode();
+        return new HashCodeBuilder().append(title).append(key).toHashCode();
     }
 
     @Override
@@ -72,7 +73,7 @@ public class PolishLevel {
             return false;
         }
         PolishLevel rhs = ((PolishLevel) other);
-        return new EqualsBuilder().append(title, rhs.title).append(key, rhs.key).append(additionalProperties, rhs.additionalProperties).isEquals();
+        return new EqualsBuilder().append(title, rhs.title).append(key, rhs.key).isEquals();
     }
 
 }

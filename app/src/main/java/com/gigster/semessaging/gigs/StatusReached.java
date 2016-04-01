@@ -1,19 +1,40 @@
 
 package com.gigster.semessaging.gigs;
 
-import java.util.HashMap;
-import java.util.Map;
 import javax.annotation.Generated;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 @Generated("org.jsonschema2pojo")
 public class StatusReached {
 
-    private long stale;
-    private long ready;
+    @SerializedName("unstarted")
+    @Expose
     private long unstarted;
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    @SerializedName("stale")
+    @Expose
+    private long stale;
+
+    /**
+     * 
+     * @return
+     *     The unstarted
+     */
+    public long getUnstarted() {
+        return unstarted;
+    }
+
+    /**
+     * 
+     * @param unstarted
+     *     The unstarted
+     */
+    public void setUnstarted(long unstarted) {
+        this.unstarted = unstarted;
+    }
 
     /**
      * 
@@ -33,53 +54,14 @@ public class StatusReached {
         this.stale = stale;
     }
 
-    /**
-     * 
-     * @return
-     *     The ready
-     */
-    public long getReady() {
-        return ready;
-    }
-
-    /**
-     * 
-     * @param ready
-     *     The ready
-     */
-    public void setReady(long ready) {
-        this.ready = ready;
-    }
-
-    /**
-     * 
-     * @return
-     *     The unstarted
-     */
-    public long getUnstarted() {
-        return unstarted;
-    }
-
-    /**
-     * 
-     * @param unstarted
-     *     The unstarted
-     */
-    public void setUnstarted(int unstarted) {
-        this.unstarted = unstarted;
-    }
-
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(stale).append(ready).append(unstarted).append(additionalProperties).toHashCode();
+        return new HashCodeBuilder().append(unstarted).append(stale).toHashCode();
     }
 
     @Override
@@ -91,7 +73,7 @@ public class StatusReached {
             return false;
         }
         StatusReached rhs = ((StatusReached) other);
-        return new EqualsBuilder().append(stale, rhs.stale).append(ready, rhs.ready).append(unstarted, rhs.unstarted).append(additionalProperties, rhs.additionalProperties).isEquals();
+        return new EqualsBuilder().append(unstarted, rhs.unstarted).append(stale, rhs.stale).isEquals();
     }
 
 }

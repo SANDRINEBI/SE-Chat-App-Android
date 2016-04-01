@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
 
-class Chat implements Serializable {
+class Chat implements Serializable, Comparable<Chat> {
     private int urgency;
     private final String imageUri;
     private final String chatName;
@@ -38,36 +38,56 @@ class Chat implements Serializable {
     }
 
     public String getChatName() {
-        return chatName;
+        String name = chatName;
+        if(name.length()>25)
+            name = name.substring(0, 25) + "...";
+        return name;
     }
 
     public String getMostRecentMsg() {
         if(chat!=null && chat.size()>0){
-            return chat.get(chat.size()-1).getText();
+            String msg = chat.get(chat.size()-1).getText();
+            if(msg.length()>30)
+                msg = msg.substring(0, 30) + "...";
+            return msg;
         }
-        return "Default Recent Message";
+        return "Loading Message...";
+    }
+
+    public long getMillisSinceLastMessage(){
+        if(chat==null || chat.size()==0)
+            return -1;
+        Date d = new Date();
+        long millis = d.getTime()-chat.get(chat.size()-1).getDate().getTime();
+        return millis;
     }
 
     public String getTimeSinceMessage(){
         if(chat!=null && chat.size()>0){
-            Date d = new Date();
-            long millis = d.getTime()-chat.get(chat.size()-1).getDate().getTime();
+            long millis = getMillisSinceLastMessage();
             long second = (millis / 1000) % 60;
             long minute = (millis / (1000 * 60)) % 60;
             long hour = (millis / (1000 * 60 * 60)) % 24;
-            if (hour>0)
-            {
-                if(hour>2)
-                    urgency=2;
-                else
-                    urgency=1;
-                return String.valueOf(hour) + "h " + String.valueOf(minute) +"m";
-            }
+            long day = (millis / (1000 * 60 * 60 * 24)) % 365;
+
+            if(millis>1000*60*60*24)
+                urgency=2;
+            else if(millis>1000*60*60*5)
+                urgency=1;
             else
-            {
-                urgency = 0;
-                return String.valueOf(minute) + "m " + String.valueOf(second) +"s";
-            }
+                urgency=0;
+            StringBuilder sb = new StringBuilder();
+            if(day!=0)
+                sb.append(day + "d ");
+            if(hour!=0)
+                sb.append(hour + "h ");
+            if(minute!=0)
+                sb.append(minute + "m ");
+            if(second!=0)
+                sb.append(second + "s");
+
+            return sb.toString().trim();
+
         }
         return "Default Time Message";
     }
@@ -81,5 +101,9 @@ class Chat implements Serializable {
     @Override public boolean equals(Object obj){
         EqualsBuilder builder = new EqualsBuilder().append(this.getGigID(), ((Chat)obj).getGigID());
         return builder.isEquals();
+    }
+
+    public int compareTo(Chat c) {
+        return Long.valueOf(this.getMillisSinceLastMessage()).compareTo(Long.valueOf(c.getMillisSinceLastMessage()));
     }
 }

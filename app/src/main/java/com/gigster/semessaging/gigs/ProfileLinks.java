@@ -1,20 +1,28 @@
 
 package com.gigster.semessaging.gigs;
 
-import java.util.HashMap;
-import java.util.Map;
 import javax.annotation.Generated;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 @Generated("org.jsonschema2pojo")
 public class ProfileLinks {
 
+    @SerializedName("linkedin")
+    @Expose
     private String linkedin;
+    @SerializedName("personal")
+    @Expose
     private String personal;
+    @SerializedName("twitter")
+    @Expose
     private String twitter;
+    @SerializedName("github")
+    @Expose
     private String github;
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     /**
      * 
@@ -88,17 +96,14 @@ public class ProfileLinks {
         this.github = github;
     }
 
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(linkedin).append(personal).append(twitter).append(github).append(additionalProperties).toHashCode();
+        return new HashCodeBuilder().append(linkedin).append(personal).append(twitter).append(github).toHashCode();
     }
 
     @Override
@@ -110,7 +115,7 @@ public class ProfileLinks {
             return false;
         }
         ProfileLinks rhs = ((ProfileLinks) other);
-        return new EqualsBuilder().append(linkedin, rhs.linkedin).append(personal, rhs.personal).append(twitter, rhs.twitter).append(github, rhs.github).append(additionalProperties, rhs.additionalProperties).isEquals();
+        return new EqualsBuilder().append(linkedin, rhs.linkedin).append(personal, rhs.personal).append(twitter, rhs.twitter).append(github, rhs.github).isEquals();
     }
 
 }

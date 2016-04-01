@@ -1,8 +1,6 @@
 
 package com.gigster.semessaging.gigs;
 
-import java.util.ArrayList;
-import java.util.List;
 import javax.annotation.Generated;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -11,49 +9,49 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 @Generated("org.jsonschema2pojo")
-public class GigList {
+public class Quote {
 
-    @SerializedName("success")
+    @SerializedName("high")
     @Expose
-    private boolean success;
-    @SerializedName("data")
+    private long high;
+    @SerializedName("low")
     @Expose
-    private List<Datum> data = new ArrayList<Datum>();
+    private long low;
 
     /**
      * 
      * @return
-     *     The success
+     *     The high
      */
-    public boolean isSuccess() {
-        return success;
+    public long getHigh() {
+        return high;
     }
 
     /**
      * 
-     * @param success
-     *     The success
+     * @param high
+     *     The high
      */
-    public void setSuccess(boolean success) {
-        this.success = success;
+    public void setHigh(long high) {
+        this.high = high;
     }
 
     /**
      * 
      * @return
-     *     The data
+     *     The low
      */
-    public List<Datum> getData() {
-        return data;
+    public long getLow() {
+        return low;
     }
 
     /**
      * 
-     * @param data
-     *     The data
+     * @param low
+     *     The low
      */
-    public void setData(List<Datum> data) {
-        this.data = data;
+    public void setLow(long low) {
+        this.low = low;
     }
 
     @Override
@@ -63,7 +61,7 @@ public class GigList {
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(success).append(data).toHashCode();
+        return new HashCodeBuilder().append(high).append(low).toHashCode();
     }
 
     @Override
@@ -71,11 +69,11 @@ public class GigList {
         if (other == this) {
             return true;
         }
-        if ((other instanceof GigList) == false) {
+        if ((other instanceof Quote) == false) {
             return false;
         }
-        GigList rhs = ((GigList) other);
-        return new EqualsBuilder().append(success, rhs.success).append(data, rhs.data).isEquals();
+        Quote rhs = ((Quote) other);
+        return new EqualsBuilder().append(high, rhs.high).append(low, rhs.low).isEquals();
     }
 
 }

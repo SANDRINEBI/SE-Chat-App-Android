@@ -1,18 +1,22 @@
 
 package com.gigster.semessaging.gigs;
 
-import java.util.HashMap;
-import java.util.Map;
 import javax.annotation.Generated;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 @Generated("org.jsonschema2pojo")
 public class Organization {
 
+    @SerializedName("approvedDate")
+    @Expose
     private Object approvedDate;
+    @SerializedName("approved")
+    @Expose
     private boolean approved;
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     /**
      * 
@@ -50,17 +54,14 @@ public class Organization {
         this.approved = approved;
     }
 
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(approvedDate).append(approved).append(additionalProperties).toHashCode();
+        return new HashCodeBuilder().append(approvedDate).append(approved).toHashCode();
     }
 
     @Override
@@ -72,7 +73,7 @@ public class Organization {
             return false;
         }
         Organization rhs = ((Organization) other);
-        return new EqualsBuilder().append(approvedDate, rhs.approvedDate).append(approved, rhs.approved).append(additionalProperties, rhs.additionalProperties).isEquals();
+        return new EqualsBuilder().append(approvedDate, rhs.approvedDate).append(approved, rhs.approved).isEquals();
     }
 
 }

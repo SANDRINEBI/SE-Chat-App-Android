@@ -1,34 +1,56 @@
 
 package com.gigster.semessaging.gigs;
 
-import java.util.HashMap;
-import java.util.Map;
 import javax.annotation.Generated;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 @Generated("org.jsonschema2pojo")
 public class KarmaDimensions {
 
-    private int speed;
-    private int responsiveness;
-    private int referrals;
-    private int reliability;
-    private int awesomeness;
-    private int questionAnswering;
-    private int ux;
-    private int codeQuality;
-    private int components;
-    private int customerSatisfaction;
-    private int productQuality;
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    @SerializedName("speed")
+    @Expose
+    private long speed;
+    @SerializedName("responsiveness")
+    @Expose
+    private long responsiveness;
+    @SerializedName("referrals")
+    @Expose
+    private long referrals;
+    @SerializedName("reliability")
+    @Expose
+    private long reliability;
+    @SerializedName("awesomeness")
+    @Expose
+    private long awesomeness;
+    @SerializedName("questionAnswering")
+    @Expose
+    private long questionAnswering;
+    @SerializedName("ux")
+    @Expose
+    private long ux;
+    @SerializedName("codeQuality")
+    @Expose
+    private long codeQuality;
+    @SerializedName("components")
+    @Expose
+    private long components;
+    @SerializedName("customerSatisfaction")
+    @Expose
+    private long customerSatisfaction;
+    @SerializedName("productQuality")
+    @Expose
+    private long productQuality;
 
     /**
      * 
      * @return
      *     The speed
      */
-    public int getSpeed() {
+    public long getSpeed() {
         return speed;
     }
 
@@ -37,7 +59,7 @@ public class KarmaDimensions {
      * @param speed
      *     The speed
      */
-    public void setSpeed(int speed) {
+    public void setSpeed(long speed) {
         this.speed = speed;
     }
 
@@ -46,7 +68,7 @@ public class KarmaDimensions {
      * @return
      *     The responsiveness
      */
-    public int getResponsiveness() {
+    public long getResponsiveness() {
         return responsiveness;
     }
 
@@ -55,7 +77,7 @@ public class KarmaDimensions {
      * @param responsiveness
      *     The responsiveness
      */
-    public void setResponsiveness(int responsiveness) {
+    public void setResponsiveness(long responsiveness) {
         this.responsiveness = responsiveness;
     }
 
@@ -64,7 +86,7 @@ public class KarmaDimensions {
      * @return
      *     The referrals
      */
-    public int getReferrals() {
+    public long getReferrals() {
         return referrals;
     }
 
@@ -73,7 +95,7 @@ public class KarmaDimensions {
      * @param referrals
      *     The referrals
      */
-    public void setReferrals(int referrals) {
+    public void setReferrals(long referrals) {
         this.referrals = referrals;
     }
 
@@ -82,7 +104,7 @@ public class KarmaDimensions {
      * @return
      *     The reliability
      */
-    public int getReliability() {
+    public long getReliability() {
         return reliability;
     }
 
@@ -91,7 +113,7 @@ public class KarmaDimensions {
      * @param reliability
      *     The reliability
      */
-    public void setReliability(int reliability) {
+    public void setReliability(long reliability) {
         this.reliability = reliability;
     }
 
@@ -100,7 +122,7 @@ public class KarmaDimensions {
      * @return
      *     The awesomeness
      */
-    public int getAwesomeness() {
+    public long getAwesomeness() {
         return awesomeness;
     }
 
@@ -109,7 +131,7 @@ public class KarmaDimensions {
      * @param awesomeness
      *     The awesomeness
      */
-    public void setAwesomeness(int awesomeness) {
+    public void setAwesomeness(long awesomeness) {
         this.awesomeness = awesomeness;
     }
 
@@ -118,7 +140,7 @@ public class KarmaDimensions {
      * @return
      *     The questionAnswering
      */
-    public int getQuestionAnswering() {
+    public long getQuestionAnswering() {
         return questionAnswering;
     }
 
@@ -127,7 +149,7 @@ public class KarmaDimensions {
      * @param questionAnswering
      *     The questionAnswering
      */
-    public void setQuestionAnswering(int questionAnswering) {
+    public void setQuestionAnswering(long questionAnswering) {
         this.questionAnswering = questionAnswering;
     }
 
@@ -136,7 +158,7 @@ public class KarmaDimensions {
      * @return
      *     The ux
      */
-    public int getUx() {
+    public long getUx() {
         return ux;
     }
 
@@ -145,7 +167,7 @@ public class KarmaDimensions {
      * @param ux
      *     The ux
      */
-    public void setUx(int ux) {
+    public void setUx(long ux) {
         this.ux = ux;
     }
 
@@ -154,7 +176,7 @@ public class KarmaDimensions {
      * @return
      *     The codeQuality
      */
-    public int getCodeQuality() {
+    public long getCodeQuality() {
         return codeQuality;
     }
 
@@ -163,7 +185,7 @@ public class KarmaDimensions {
      * @param codeQuality
      *     The codeQuality
      */
-    public void setCodeQuality(int codeQuality) {
+    public void setCodeQuality(long codeQuality) {
         this.codeQuality = codeQuality;
     }
 
@@ -172,7 +194,7 @@ public class KarmaDimensions {
      * @return
      *     The components
      */
-    public int getComponents() {
+    public long getComponents() {
         return components;
     }
 
@@ -181,7 +203,7 @@ public class KarmaDimensions {
      * @param components
      *     The components
      */
-    public void setComponents(int components) {
+    public void setComponents(long components) {
         this.components = components;
     }
 
@@ -190,7 +212,7 @@ public class KarmaDimensions {
      * @return
      *     The customerSatisfaction
      */
-    public int getCustomerSatisfaction() {
+    public long getCustomerSatisfaction() {
         return customerSatisfaction;
     }
 
@@ -199,7 +221,7 @@ public class KarmaDimensions {
      * @param customerSatisfaction
      *     The customerSatisfaction
      */
-    public void setCustomerSatisfaction(int customerSatisfaction) {
+    public void setCustomerSatisfaction(long customerSatisfaction) {
         this.customerSatisfaction = customerSatisfaction;
     }
 
@@ -208,7 +230,7 @@ public class KarmaDimensions {
      * @return
      *     The productQuality
      */
-    public int getProductQuality() {
+    public long getProductQuality() {
         return productQuality;
     }
 
@@ -217,21 +239,18 @@ public class KarmaDimensions {
      * @param productQuality
      *     The productQuality
      */
-    public void setProductQuality(int productQuality) {
+    public void setProductQuality(long productQuality) {
         this.productQuality = productQuality;
     }
 
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(speed).append(responsiveness).append(referrals).append(reliability).append(awesomeness).append(questionAnswering).append(ux).append(codeQuality).append(components).append(customerSatisfaction).append(productQuality).append(additionalProperties).toHashCode();
+        return new HashCodeBuilder().append(speed).append(responsiveness).append(referrals).append(reliability).append(awesomeness).append(questionAnswering).append(ux).append(codeQuality).append(components).append(customerSatisfaction).append(productQuality).toHashCode();
     }
 
     @Override
@@ -243,7 +262,7 @@ public class KarmaDimensions {
             return false;
         }
         KarmaDimensions rhs = ((KarmaDimensions) other);
-        return new EqualsBuilder().append(speed, rhs.speed).append(responsiveness, rhs.responsiveness).append(referrals, rhs.referrals).append(reliability, rhs.reliability).append(awesomeness, rhs.awesomeness).append(questionAnswering, rhs.questionAnswering).append(ux, rhs.ux).append(codeQuality, rhs.codeQuality).append(components, rhs.components).append(customerSatisfaction, rhs.customerSatisfaction).append(productQuality, rhs.productQuality).append(additionalProperties, rhs.additionalProperties).isEquals();
+        return new EqualsBuilder().append(speed, rhs.speed).append(responsiveness, rhs.responsiveness).append(referrals, rhs.referrals).append(reliability, rhs.reliability).append(awesomeness, rhs.awesomeness).append(questionAnswering, rhs.questionAnswering).append(ux, rhs.ux).append(codeQuality, rhs.codeQuality).append(components, rhs.components).append(customerSatisfaction, rhs.customerSatisfaction).append(productQuality, rhs.productQuality).isEquals();
     }
 
 }

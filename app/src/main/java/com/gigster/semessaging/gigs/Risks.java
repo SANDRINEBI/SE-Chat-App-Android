@@ -2,20 +2,26 @@
 package com.gigster.semessaging.gigs;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import javax.annotation.Generated;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 @Generated("org.jsonschema2pojo")
 public class Risks {
 
+    @SerializedName("team")
+    @Expose
     private List<Object> team = new ArrayList<Object>();
+    @SerializedName("project")
+    @Expose
     private List<Object> project = new ArrayList<Object>();
+    @SerializedName("customer")
+    @Expose
     private List<Object> customer = new ArrayList<Object>();
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     /**
      * 
@@ -71,17 +77,14 @@ public class Risks {
         this.customer = customer;
     }
 
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(team).append(project).append(customer).append(additionalProperties).toHashCode();
+        return new HashCodeBuilder().append(team).append(project).append(customer).toHashCode();
     }
 
     @Override
@@ -93,7 +96,7 @@ public class Risks {
             return false;
         }
         Risks rhs = ((Risks) other);
-        return new EqualsBuilder().append(team, rhs.team).append(project, rhs.project).append(customer, rhs.customer).append(additionalProperties, rhs.additionalProperties).isEquals();
+        return new EqualsBuilder().append(team, rhs.team).append(project, rhs.project).append(customer, rhs.customer).isEquals();
     }
 
 }

@@ -1,116 +1,345 @@
 
 package com.gigster.semessaging.gigs;
 
-import com.google.gson.annotations.SerializedName;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import javax.annotation.Generated;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 @Generated("org.jsonschema2pojo")
 public class Datum {
 
     @SerializedName("_id")
+    @Expose
     private String Id;
-
-    private String category;
-    private int duration;
-    private String durationUnits;
-    private int dollarAmount;
-    private String name;
-    private String salesEngineerGuess;
-    private String techStack;
-    private Poster poster;
-    private Object startDate;
-    private int V;
-    private String salesEngineer;
-    private String projectManager;
-    private String info;
-    private String timeline;
-    private Object legalEntity;
-    private boolean stale;
+    @SerializedName("canonical")
+    @Expose
     private String canonical;
+    @SerializedName("category")
+    @Expose
+    private String category;
+    @SerializedName("duration")
+    @Expose
+    private long duration;
+    @SerializedName("durationUnits")
+    @Expose
+    private String durationUnits;
+    @SerializedName("dollarAmount")
+    @Expose
+    private long dollarAmount;
+    @SerializedName("name")
+    @Expose
+    private String name;
+    @SerializedName("salesEngineerGuess")
+    @Expose
+    private String salesEngineerGuess;
+    @SerializedName("emailLater")
+    @Expose
+    private boolean emailLater;
+    @SerializedName("organizationSize")
+    @Expose
+    private String organizationSize;
+    @SerializedName("poster")
+    @Expose
+    private Poster poster;
+    @SerializedName("__v")
+    @Expose
+    private long V;
+    @SerializedName("stale")
+    @Expose
+    private boolean stale;
+    @SerializedName("organization")
+    @Expose
     private Organization organization;
+    @SerializedName("tracking")
+    @Expose
     private Tracking tracking;
+    @SerializedName("flags")
+    @Expose
     private Flags flags;
-    private String qualified;
-    private Object engaged;
+    @SerializedName("qualified")
+    @Expose
+    private Object qualified;
+    @SerializedName("engaged")
+    @Expose
+    private String engaged;
+    @SerializedName("meta")
+    @Expose
     private Meta meta;
+    @SerializedName("designPolish")
+    @Expose
     private Object designPolish;
+    @SerializedName("checkedForMissedChatEmail")
+    @Expose
     private boolean checkedForMissedChatEmail;
+    @SerializedName("docs")
+    @Expose
     private List<Doc> docs = new ArrayList<Doc>();
-    private int payMilestones;
+    @SerializedName("payMilestones")
+    @Expose
+    private long payMilestones;
+    @SerializedName("tags")
+    @Expose
     private List<Object> tags = new ArrayList<Object>();
-    private PdfUrl pdfUrl;
+    @SerializedName("tools")
+    @Expose
     private Tools tools;
+    @SerializedName("risks")
+    @Expose
     private Risks risks;
+    @SerializedName("reviews")
+    @Expose
     private List<Object> reviews = new ArrayList<Object>();
-    private int requiredTeamSize;
+    @SerializedName("requiredTeamSize")
+    @Expose
+    private long requiredTeamSize;
+    @SerializedName("team")
+    @Expose
     private List<Object> team = new ArrayList<Object>();
+    @SerializedName("colleagues")
+    @Expose
     private List<Object> colleagues = new ArrayList<Object>();
+    @SerializedName("qualityReviews")
+    @Expose
     private List<Object> qualityReviews = new ArrayList<Object>();
+    @SerializedName("specReviews")
+    @Expose
     private List<Object> specReviews = new ArrayList<Object>();
-    private int nps;
+    @SerializedName("nps")
+    @Expose
+    private long nps;
+    @SerializedName("customerLike")
+    @Expose
     private List<Object> customerLike = new ArrayList<Object>();
+    @SerializedName("customerDislike")
+    @Expose
     private List<Object> customerDislike = new ArrayList<Object>();
+    @SerializedName("customerLikelyToRecommend")
+    @Expose
     private List<Object> customerLikelyToRecommend = new ArrayList<Object>();
+    @SerializedName("customerSatisfactions")
+    @Expose
     private List<Object> customerSatisfactions = new ArrayList<Object>();
+    @SerializedName("pmStatus")
+    @Expose
     private String pmStatus;
+    @SerializedName("statusReached")
+    @Expose
     private StatusReached statusReached;
+    @SerializedName("staleReason")
+    @Expose
     private String staleReason;
+    @SerializedName("state")
+    @Expose
     private String state;
+    @SerializedName("status")
+    @Expose
     private String status;
-    private int paymentMade;
-    private int paymentReceived;
+    @SerializedName("paymentMade")
+    @Expose
+    private long paymentMade;
+    @SerializedName("paymentReceived")
+    @Expose
+    private long paymentReceived;
+    @SerializedName("terms")
+    @Expose
     private List<Object> terms = new ArrayList<Object>();
+    @SerializedName("progressUpdates")
+    @Expose
     private List<Object> progressUpdates = new ArrayList<Object>();
+    @SerializedName("milestonesSpecification")
+    @Expose
     private MilestonesSpecification milestonesSpecification;
-    private int currentMilestoneIndex;
+    @SerializedName("currentMilestoneIndex")
+    @Expose
+    private long currentMilestoneIndex;
+    @SerializedName("milestones")
+    @Expose
     private List<Milestone> milestones = new ArrayList<Milestone>();
+    @SerializedName("qualifiers")
+    @Expose
     private List<Object> qualifiers = new ArrayList<Object>();
+    @SerializedName("postDevTasks")
+    @Expose
     private List<Object> postDevTasks = new ArrayList<Object>();
+    @SerializedName("preDevTasks")
+    @Expose
     private List<Object> preDevTasks = new ArrayList<Object>();
+    @SerializedName("whiteboard")
+    @Expose
     private List<Object> whiteboard = new ArrayList<Object>();
+    @SerializedName("features")
+    @Expose
     private List<Object> features = new ArrayList<Object>();
+    @SerializedName("keyFeatures")
+    @Expose
     private List<Object> keyFeatures = new ArrayList<Object>();
+    @SerializedName("polishLevel")
+    @Expose
     private PolishLevel polishLevel;
-    private List<Template> templates = new ArrayList<Template>();
+    @SerializedName("templates")
+    @Expose
+    private List<Object> templates = new ArrayList<Object>();
+    @SerializedName("skills")
+    @Expose
     private List<Object> skills = new ArrayList<Object>();
+    @SerializedName("projectTypes")
+    @Expose
     private List<Object> projectTypes = new ArrayList<Object>();
+    @SerializedName("techs")
+    @Expose
     private List<Object> techs = new ArrayList<Object>();
+    @SerializedName("platforms")
+    @Expose
     private List<String> platforms = new ArrayList<String>();
-    private int margin;
-    private int cost;
+    @SerializedName("margin")
+    @Expose
+    private double margin;
+    @SerializedName("cost")
+    @Expose
+    private double cost;
+    @SerializedName("costingType")
+    @Expose
     private String costingType;
-    private int hoursEstimate;
-    private int chatPrice;
-    private int price;
+    @SerializedName("hoursEstimate")
+    @Expose
+    private double hoursEstimate;
+    @SerializedName("chatPrice")
+    @Expose
+    private double chatPrice;
+    @SerializedName("price")
+    @Expose
+    private double price;
+    @SerializedName("firstMessage")
+    @Expose
     private Object firstMessage;
+    @SerializedName("lastContactChannel")
+    @Expose
     private Object lastContactChannel;
+    @SerializedName("lastContactByGigster")
+    @Expose
     private String lastContactByGigster;
+    @SerializedName("lastContactByClient")
+    @Expose
     private String lastContactByClient;
+    @SerializedName("lastEmailBy")
+    @Expose
     private Object lastEmailBy;
+    @SerializedName("lastEmailTime")
+    @Expose
     private Object lastEmailTime;
+    @SerializedName("lastChatBy")
+    @Expose
     private String lastChatBy;
+    @SerializedName("lastMissedChatEmailToPoc")
+    @Expose
     private String lastMissedChatEmailToPoc;
+    @SerializedName("lastMissedChatEmailToClient")
+    @Expose
     private String lastMissedChatEmailToClient;
+    @SerializedName("lastChatEmail")
+    @Expose
     private String lastChatEmail;
+    @SerializedName("lastChatTime")
+    @Expose
     private String lastChatTime;
+    @SerializedName("clientOwnsCode")
+    @Expose
     private boolean clientOwnsCode;
+    @SerializedName("gigsterEsign")
+    @Expose
     private Object gigsterEsign;
+    @SerializedName("boughtNDA")
+    @Expose
     private boolean boughtNDA;
+    @SerializedName("clientNDASign")
+    @Expose
     private String clientNDASign;
-    private String clientEsign;
+    @SerializedName("clientEsign")
+    @Expose
+    private Object clientEsign;
+    @SerializedName("internalType")
+    @Expose
     private Object internalType;
+    @SerializedName("type")
+    @Expose
     private Object type;
+    @SerializedName("lastUpdate")
+    @Expose
     private String lastUpdate;
+    @SerializedName("updated")
+    @Expose
     private String updated;
+    @SerializedName("created")
+    @Expose
     private String created;
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    @SerializedName("howDidTheCustomerFindUs")
+    @Expose
+    private String howDidTheCustomerFindUs;
+    @SerializedName("pdfUrl")
+    @Expose
+    private PdfUrl pdfUrl;
+    @SerializedName("salesEngineer")
+    @Expose
+    private String salesEngineer;
+    @SerializedName("seNotes")
+    @Expose
+    private String seNotes;
+    @SerializedName("info")
+    @Expose
+    private String info;
+    @SerializedName("timeline")
+    @Expose
+    private String timeline;
+    @SerializedName("customerPersonality")
+    @Expose
+    private String customerPersonality;
+    @SerializedName("legalEntity")
+    @Expose
+    private Object legalEntity;
+    @SerializedName("startDate")
+    @Expose
+    private Object startDate;
+    @SerializedName("projectManager")
+    @Expose
+    private String projectManager;
+    @SerializedName("lastHealthReportDate")
+    @Expose
+    private String lastHealthReportDate;
+    @SerializedName("quote")
+    @Expose
+    private Quote quote;
+    @SerializedName("calculator")
+    @Expose
+    private Calculator calculator;
+    @SerializedName("gdriveUrl")
+    @Expose
+    private String gdriveUrl;
+    @SerializedName("trelloUrl")
+    @Expose
+    private String trelloUrl;
+    @SerializedName("githubUrl")
+    @Expose
+    private String githubUrl;
+    @SerializedName("buildUrl")
+    @Expose
+    private String buildUrl;
+    @SerializedName("dropboxUrl")
+    @Expose
+    private String dropboxUrl;
+    @SerializedName("numberOfFeatures")
+    @Expose
+    private long numberOfFeatures;
+    @SerializedName("maxStartDate")
+    @Expose
+    private String maxStartDate;
+    @SerializedName("techStack")
+    @Expose
+    private String techStack;
 
     /**
      * 
@@ -128,6 +357,24 @@ public class Datum {
      */
     public void setId(String Id) {
         this.Id = Id;
+    }
+
+    /**
+     * 
+     * @return
+     *     The canonical
+     */
+    public String getCanonical() {
+        return canonical;
+    }
+
+    /**
+     * 
+     * @param canonical
+     *     The canonical
+     */
+    public void setCanonical(String canonical) {
+        this.canonical = canonical;
     }
 
     /**
@@ -153,7 +400,7 @@ public class Datum {
      * @return
      *     The duration
      */
-    public int getDuration() {
+    public long getDuration() {
         return duration;
     }
 
@@ -162,7 +409,7 @@ public class Datum {
      * @param duration
      *     The duration
      */
-    public void setDuration(int duration) {
+    public void setDuration(long duration) {
         this.duration = duration;
     }
 
@@ -189,7 +436,7 @@ public class Datum {
      * @return
      *     The dollarAmount
      */
-    public int getDollarAmount() {
+    public long getDollarAmount() {
         return dollarAmount;
     }
 
@@ -198,7 +445,7 @@ public class Datum {
      * @param dollarAmount
      *     The dollarAmount
      */
-    public void setDollarAmount(int dollarAmount) {
+    public void setDollarAmount(long dollarAmount) {
         this.dollarAmount = dollarAmount;
     }
 
@@ -241,19 +488,37 @@ public class Datum {
     /**
      * 
      * @return
-     *     The techStack
+     *     The emailLater
      */
-    public String getTechStack() {
-        return techStack;
+    public boolean isEmailLater() {
+        return emailLater;
     }
 
     /**
      * 
-     * @param techStack
-     *     The techStack
+     * @param emailLater
+     *     The emailLater
      */
-    public void setTechStack(String techStack) {
-        this.techStack = techStack;
+    public void setEmailLater(boolean emailLater) {
+        this.emailLater = emailLater;
+    }
+
+    /**
+     * 
+     * @return
+     *     The organizationSize
+     */
+    public String getOrganizationSize() {
+        return organizationSize;
+    }
+
+    /**
+     * 
+     * @param organizationSize
+     *     The organizationSize
+     */
+    public void setOrganizationSize(String organizationSize) {
+        this.organizationSize = organizationSize;
     }
 
     /**
@@ -277,27 +542,9 @@ public class Datum {
     /**
      * 
      * @return
-     *     The startDate
-     */
-    public Object getStartDate() {
-        return startDate;
-    }
-
-    /**
-     * 
-     * @param startDate
-     *     The startDate
-     */
-    public void setStartDate(Object startDate) {
-        this.startDate = startDate;
-    }
-
-    /**
-     * 
-     * @return
      *     The V
      */
-    public int getV() {
+    public long getV() {
         return V;
     }
 
@@ -306,98 +553,8 @@ public class Datum {
      * @param V
      *     The __v
      */
-    public void setV(int V) {
+    public void setV(long V) {
         this.V = V;
-    }
-
-    /**
-     * 
-     * @return
-     *     The salesEngineer
-     */
-    public String getSalesEngineer() {
-        return salesEngineer;
-    }
-
-    /**
-     * 
-     * @param salesEngineer
-     *     The salesEngineer
-     */
-    public void setSalesEngineer(String salesEngineer) {
-        this.salesEngineer = salesEngineer;
-    }
-
-    /**
-     * 
-     * @return
-     *     The projectManager
-     */
-    public String getProjectManager() {
-        return projectManager;
-    }
-
-    /**
-     * 
-     * @param projectManager
-     *     The projectManager
-     */
-    public void setProjectManager(String projectManager) {
-        this.projectManager = projectManager;
-    }
-
-    /**
-     * 
-     * @return
-     *     The info
-     */
-    public String getInfo() {
-        return info;
-    }
-
-    /**
-     * 
-     * @param info
-     *     The info
-     */
-    public void setInfo(String info) {
-        this.info = info;
-    }
-
-    /**
-     * 
-     * @return
-     *     The timeline
-     */
-    public String getTimeline() {
-        return timeline;
-    }
-
-    /**
-     * 
-     * @param timeline
-     *     The timeline
-     */
-    public void setTimeline(String timeline) {
-        this.timeline = timeline;
-    }
-
-    /**
-     * 
-     * @return
-     *     The legalEntity
-     */
-    public Object getLegalEntity() {
-        return legalEntity;
-    }
-
-    /**
-     * 
-     * @param legalEntity
-     *     The legalEntity
-     */
-    public void setLegalEntity(Object legalEntity) {
-        this.legalEntity = legalEntity;
     }
 
     /**
@@ -416,24 +573,6 @@ public class Datum {
      */
     public void setStale(boolean stale) {
         this.stale = stale;
-    }
-
-    /**
-     * 
-     * @return
-     *     The canonical
-     */
-    public String getCanonical() {
-        return canonical;
-    }
-
-    /**
-     * 
-     * @param canonical
-     *     The canonical
-     */
-    public void setCanonical(String canonical) {
-        this.canonical = canonical;
     }
 
     /**
@@ -495,7 +634,7 @@ public class Datum {
      * @return
      *     The qualified
      */
-    public String getQualified() {
+    public Object getQualified() {
         return qualified;
     }
 
@@ -504,7 +643,7 @@ public class Datum {
      * @param qualified
      *     The qualified
      */
-    public void setQualified(String qualified) {
+    public void setQualified(Object qualified) {
         this.qualified = qualified;
     }
 
@@ -513,7 +652,7 @@ public class Datum {
      * @return
      *     The engaged
      */
-    public Object getEngaged() {
+    public String getEngaged() {
         return engaged;
     }
 
@@ -522,7 +661,7 @@ public class Datum {
      * @param engaged
      *     The engaged
      */
-    public void setEngaged(Object engaged) {
+    public void setEngaged(String engaged) {
         this.engaged = engaged;
     }
 
@@ -603,7 +742,7 @@ public class Datum {
      * @return
      *     The payMilestones
      */
-    public int getPayMilestones() {
+    public long getPayMilestones() {
         return payMilestones;
     }
 
@@ -612,7 +751,7 @@ public class Datum {
      * @param payMilestones
      *     The payMilestones
      */
-    public void setPayMilestones(int payMilestones) {
+    public void setPayMilestones(long payMilestones) {
         this.payMilestones = payMilestones;
     }
 
@@ -632,24 +771,6 @@ public class Datum {
      */
     public void setTags(List<Object> tags) {
         this.tags = tags;
-    }
-
-    /**
-     * 
-     * @return
-     *     The pdfUrl
-     */
-    public PdfUrl getPdfUrl() {
-        return pdfUrl;
-    }
-
-    /**
-     * 
-     * @param pdfUrl
-     *     The pdfUrl
-     */
-    public void setPdfUrl(PdfUrl pdfUrl) {
-        this.pdfUrl = pdfUrl;
     }
 
     /**
@@ -711,7 +832,7 @@ public class Datum {
      * @return
      *     The requiredTeamSize
      */
-    public int getRequiredTeamSize() {
+    public long getRequiredTeamSize() {
         return requiredTeamSize;
     }
 
@@ -720,7 +841,7 @@ public class Datum {
      * @param requiredTeamSize
      *     The requiredTeamSize
      */
-    public void setRequiredTeamSize(int requiredTeamSize) {
+    public void setRequiredTeamSize(long requiredTeamSize) {
         this.requiredTeamSize = requiredTeamSize;
     }
 
@@ -801,7 +922,7 @@ public class Datum {
      * @return
      *     The nps
      */
-    public int getNps() {
+    public long getNps() {
         return nps;
     }
 
@@ -810,7 +931,7 @@ public class Datum {
      * @param nps
      *     The nps
      */
-    public void setNps(int nps) {
+    public void setNps(long nps) {
         this.nps = nps;
     }
 
@@ -981,7 +1102,7 @@ public class Datum {
      * @return
      *     The paymentMade
      */
-    public int getPaymentMade() {
+    public long getPaymentMade() {
         return paymentMade;
     }
 
@@ -990,7 +1111,7 @@ public class Datum {
      * @param paymentMade
      *     The paymentMade
      */
-    public void setPaymentMade(int paymentMade) {
+    public void setPaymentMade(long paymentMade) {
         this.paymentMade = paymentMade;
     }
 
@@ -999,7 +1120,7 @@ public class Datum {
      * @return
      *     The paymentReceived
      */
-    public int getPaymentReceived() {
+    public long getPaymentReceived() {
         return paymentReceived;
     }
 
@@ -1008,7 +1129,7 @@ public class Datum {
      * @param paymentReceived
      *     The paymentReceived
      */
-    public void setPaymentReceived(int paymentReceived) {
+    public void setPaymentReceived(long paymentReceived) {
         this.paymentReceived = paymentReceived;
     }
 
@@ -1071,7 +1192,7 @@ public class Datum {
      * @return
      *     The currentMilestoneIndex
      */
-    public int getCurrentMilestoneIndex() {
+    public long getCurrentMilestoneIndex() {
         return currentMilestoneIndex;
     }
 
@@ -1080,7 +1201,7 @@ public class Datum {
      * @param currentMilestoneIndex
      *     The currentMilestoneIndex
      */
-    public void setCurrentMilestoneIndex(int currentMilestoneIndex) {
+    public void setCurrentMilestoneIndex(long currentMilestoneIndex) {
         this.currentMilestoneIndex = currentMilestoneIndex;
     }
 
@@ -1233,7 +1354,7 @@ public class Datum {
      * @return
      *     The templates
      */
-    public List<Template> getTemplates() {
+    public List<Object> getTemplates() {
         return templates;
     }
 
@@ -1242,7 +1363,7 @@ public class Datum {
      * @param templates
      *     The templates
      */
-    public void setTemplates(List<Template> templates) {
+    public void setTemplates(List<Object> templates) {
         this.templates = templates;
     }
 
@@ -1323,7 +1444,7 @@ public class Datum {
      * @return
      *     The margin
      */
-    public int getMargin() {
+    public double getMargin() {
         return margin;
     }
 
@@ -1332,7 +1453,7 @@ public class Datum {
      * @param margin
      *     The margin
      */
-    public void setMargin(int margin) {
+    public void setMargin(long margin) {
         this.margin = margin;
     }
 
@@ -1341,7 +1462,7 @@ public class Datum {
      * @return
      *     The cost
      */
-    public int getCost() {
+    public double getCost() {
         return cost;
     }
 
@@ -1350,7 +1471,7 @@ public class Datum {
      * @param cost
      *     The cost
      */
-    public void setCost(int cost) {
+    public void setCost(long cost) {
         this.cost = cost;
     }
 
@@ -1377,7 +1498,7 @@ public class Datum {
      * @return
      *     The hoursEstimate
      */
-    public int getHoursEstimate() {
+    public double getHoursEstimate() {
         return hoursEstimate;
     }
 
@@ -1386,7 +1507,7 @@ public class Datum {
      * @param hoursEstimate
      *     The hoursEstimate
      */
-    public void setHoursEstimate(int hoursEstimate) {
+    public void setHoursEstimate(long hoursEstimate) {
         this.hoursEstimate = hoursEstimate;
     }
 
@@ -1395,7 +1516,7 @@ public class Datum {
      * @return
      *     The chatPrice
      */
-    public int getChatPrice() {
+    public double getChatPrice() {
         return chatPrice;
     }
 
@@ -1404,7 +1525,7 @@ public class Datum {
      * @param chatPrice
      *     The chatPrice
      */
-    public void setChatPrice(int chatPrice) {
+    public void setChatPrice(long chatPrice) {
         this.chatPrice = chatPrice;
     }
 
@@ -1413,7 +1534,7 @@ public class Datum {
      * @return
      *     The price
      */
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
@@ -1422,7 +1543,7 @@ public class Datum {
      * @param price
      *     The price
      */
-    public void setPrice(int price) {
+    public void setPrice(long price) {
         this.price = price;
     }
 
@@ -1701,7 +1822,7 @@ public class Datum {
      * @return
      *     The clientEsign
      */
-    public String getClientEsign() {
+    public Object getClientEsign() {
         return clientEsign;
     }
 
@@ -1710,7 +1831,7 @@ public class Datum {
      * @param clientEsign
      *     The clientEsign
      */
-    public void setClientEsign(String clientEsign) {
+    public void setClientEsign(Object clientEsign) {
         this.clientEsign = clientEsign;
     }
 
@@ -1804,17 +1925,392 @@ public class Datum {
         this.created = created;
     }
 
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
+    /**
+     * 
+     * @return
+     *     The howDidTheCustomerFindUs
+     */
+    public String getHowDidTheCustomerFindUs() {
+        return howDidTheCustomerFindUs;
     }
 
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
+    /**
+     * 
+     * @param howDidTheCustomerFindUs
+     *     The howDidTheCustomerFindUs
+     */
+    public void setHowDidTheCustomerFindUs(String howDidTheCustomerFindUs) {
+        this.howDidTheCustomerFindUs = howDidTheCustomerFindUs;
+    }
+
+    /**
+     * 
+     * @return
+     *     The pdfUrl
+     */
+    public PdfUrl getPdfUrl() {
+        return pdfUrl;
+    }
+
+    /**
+     * 
+     * @param pdfUrl
+     *     The pdfUrl
+     */
+    public void setPdfUrl(PdfUrl pdfUrl) {
+        this.pdfUrl = pdfUrl;
+    }
+
+    /**
+     * 
+     * @return
+     *     The salesEngineer
+     */
+    public String getSalesEngineer() {
+        return salesEngineer;
+    }
+
+    /**
+     * 
+     * @param salesEngineer
+     *     The salesEngineer
+     */
+    public void setSalesEngineer(String salesEngineer) {
+        this.salesEngineer = salesEngineer;
+    }
+
+    /**
+     * 
+     * @return
+     *     The seNotes
+     */
+    public String getSeNotes() {
+        return seNotes;
+    }
+
+    /**
+     * 
+     * @param seNotes
+     *     The seNotes
+     */
+    public void setSeNotes(String seNotes) {
+        this.seNotes = seNotes;
+    }
+
+    /**
+     * 
+     * @return
+     *     The info
+     */
+    public String getInfo() {
+        return info;
+    }
+
+    /**
+     * 
+     * @param info
+     *     The info
+     */
+    public void setInfo(String info) {
+        this.info = info;
+    }
+
+    /**
+     * 
+     * @return
+     *     The timeline
+     */
+    public String getTimeline() {
+        return timeline;
+    }
+
+    /**
+     * 
+     * @param timeline
+     *     The timeline
+     */
+    public void setTimeline(String timeline) {
+        this.timeline = timeline;
+    }
+
+    /**
+     * 
+     * @return
+     *     The customerPersonality
+     */
+    public String getCustomerPersonality() {
+        return customerPersonality;
+    }
+
+    /**
+     * 
+     * @param customerPersonality
+     *     The customerPersonality
+     */
+    public void setCustomerPersonality(String customerPersonality) {
+        this.customerPersonality = customerPersonality;
+    }
+
+    /**
+     * 
+     * @return
+     *     The legalEntity
+     */
+    public Object getLegalEntity() {
+        return legalEntity;
+    }
+
+    /**
+     * 
+     * @param legalEntity
+     *     The legalEntity
+     */
+    public void setLegalEntity(Object legalEntity) {
+        this.legalEntity = legalEntity;
+    }
+
+    /**
+     * 
+     * @return
+     *     The startDate
+     */
+    public Object getStartDate() {
+        return startDate;
+    }
+
+    /**
+     * 
+     * @param startDate
+     *     The startDate
+     */
+    public void setStartDate(Object startDate) {
+        this.startDate = startDate;
+    }
+
+    /**
+     * 
+     * @return
+     *     The projectManager
+     */
+    public String getProjectManager() {
+        return projectManager;
+    }
+
+    /**
+     * 
+     * @param projectManager
+     *     The projectManager
+     */
+    public void setProjectManager(String projectManager) {
+        this.projectManager = projectManager;
+    }
+
+    /**
+     * 
+     * @return
+     *     The lastHealthReportDate
+     */
+    public String getLastHealthReportDate() {
+        return lastHealthReportDate;
+    }
+
+    /**
+     * 
+     * @param lastHealthReportDate
+     *     The lastHealthReportDate
+     */
+    public void setLastHealthReportDate(String lastHealthReportDate) {
+        this.lastHealthReportDate = lastHealthReportDate;
+    }
+
+    /**
+     * 
+     * @return
+     *     The quote
+     */
+    public Quote getQuote() {
+        return quote;
+    }
+
+    /**
+     * 
+     * @param quote
+     *     The quote
+     */
+    public void setQuote(Quote quote) {
+        this.quote = quote;
+    }
+
+    /**
+     * 
+     * @return
+     *     The calculator
+     */
+    public Calculator getCalculator() {
+        return calculator;
+    }
+
+    /**
+     * 
+     * @param calculator
+     *     The calculator
+     */
+    public void setCalculator(Calculator calculator) {
+        this.calculator = calculator;
+    }
+
+    /**
+     * 
+     * @return
+     *     The gdriveUrl
+     */
+    public String getGdriveUrl() {
+        return gdriveUrl;
+    }
+
+    /**
+     * 
+     * @param gdriveUrl
+     *     The gdriveUrl
+     */
+    public void setGdriveUrl(String gdriveUrl) {
+        this.gdriveUrl = gdriveUrl;
+    }
+
+    /**
+     * 
+     * @return
+     *     The trelloUrl
+     */
+    public String getTrelloUrl() {
+        return trelloUrl;
+    }
+
+    /**
+     * 
+     * @param trelloUrl
+     *     The trelloUrl
+     */
+    public void setTrelloUrl(String trelloUrl) {
+        this.trelloUrl = trelloUrl;
+    }
+
+    /**
+     * 
+     * @return
+     *     The githubUrl
+     */
+    public String getGithubUrl() {
+        return githubUrl;
+    }
+
+    /**
+     * 
+     * @param githubUrl
+     *     The githubUrl
+     */
+    public void setGithubUrl(String githubUrl) {
+        this.githubUrl = githubUrl;
+    }
+
+    /**
+     * 
+     * @return
+     *     The buildUrl
+     */
+    public String getBuildUrl() {
+        return buildUrl;
+    }
+
+    /**
+     * 
+     * @param buildUrl
+     *     The buildUrl
+     */
+    public void setBuildUrl(String buildUrl) {
+        this.buildUrl = buildUrl;
+    }
+
+    /**
+     * 
+     * @return
+     *     The dropboxUrl
+     */
+    public String getDropboxUrl() {
+        return dropboxUrl;
+    }
+
+    /**
+     * 
+     * @param dropboxUrl
+     *     The dropboxUrl
+     */
+    public void setDropboxUrl(String dropboxUrl) {
+        this.dropboxUrl = dropboxUrl;
+    }
+
+    /**
+     * 
+     * @return
+     *     The numberOfFeatures
+     */
+    public long getNumberOfFeatures() {
+        return numberOfFeatures;
+    }
+
+    /**
+     * 
+     * @param numberOfFeatures
+     *     The numberOfFeatures
+     */
+    public void setNumberOfFeatures(long numberOfFeatures) {
+        this.numberOfFeatures = numberOfFeatures;
+    }
+
+    /**
+     * 
+     * @return
+     *     The maxStartDate
+     */
+    public String getMaxStartDate() {
+        return maxStartDate;
+    }
+
+    /**
+     * 
+     * @param maxStartDate
+     *     The maxStartDate
+     */
+    public void setMaxStartDate(String maxStartDate) {
+        this.maxStartDate = maxStartDate;
+    }
+
+    /**
+     * 
+     * @return
+     *     The techStack
+     */
+    public String getTechStack() {
+        return techStack;
+    }
+
+    /**
+     * 
+     * @param techStack
+     *     The techStack
+     */
+    public void setTechStack(String techStack) {
+        this.techStack = techStack;
+    }
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(Id).append(category).append(duration).append(durationUnits).append(dollarAmount).append(name).append(salesEngineerGuess).append(techStack).append(poster).append(startDate).append(V).append(salesEngineer).append(projectManager).append(info).append(timeline).append(legalEntity).append(stale).append(canonical).append(organization).append(tracking).append(flags).append(qualified).append(engaged).append(meta).append(designPolish).append(checkedForMissedChatEmail).append(docs).append(payMilestones).append(tags).append(pdfUrl).append(tools).append(risks).append(reviews).append(requiredTeamSize).append(team).append(colleagues).append(qualityReviews).append(specReviews).append(nps).append(customerLike).append(customerDislike).append(customerLikelyToRecommend).append(customerSatisfactions).append(pmStatus).append(statusReached).append(staleReason).append(state).append(status).append(paymentMade).append(paymentReceived).append(terms).append(progressUpdates).append(milestonesSpecification).append(currentMilestoneIndex).append(milestones).append(qualifiers).append(postDevTasks).append(preDevTasks).append(whiteboard).append(features).append(keyFeatures).append(polishLevel).append(templates).append(skills).append(projectTypes).append(techs).append(platforms).append(margin).append(cost).append(costingType).append(hoursEstimate).append(chatPrice).append(price).append(firstMessage).append(lastContactChannel).append(lastContactByGigster).append(lastContactByClient).append(lastEmailBy).append(lastEmailTime).append(lastChatBy).append(lastMissedChatEmailToPoc).append(lastMissedChatEmailToClient).append(lastChatEmail).append(lastChatTime).append(clientOwnsCode).append(gigsterEsign).append(boughtNDA).append(clientNDASign).append(clientEsign).append(internalType).append(type).append(lastUpdate).append(updated).append(created).append(additionalProperties).toHashCode();
+        return new HashCodeBuilder().append(Id).append(canonical).append(category).append(duration).append(durationUnits).append(dollarAmount).append(name).append(salesEngineerGuess).append(emailLater).append(organizationSize).append(poster).append(V).append(stale).append(organization).append(tracking).append(flags).append(qualified).append(engaged).append(meta).append(designPolish).append(checkedForMissedChatEmail).append(docs).append(payMilestones).append(tags).append(tools).append(risks).append(reviews).append(requiredTeamSize).append(team).append(colleagues).append(qualityReviews).append(specReviews).append(nps).append(customerLike).append(customerDislike).append(customerLikelyToRecommend).append(customerSatisfactions).append(pmStatus).append(statusReached).append(staleReason).append(state).append(status).append(paymentMade).append(paymentReceived).append(terms).append(progressUpdates).append(milestonesSpecification).append(currentMilestoneIndex).append(milestones).append(qualifiers).append(postDevTasks).append(preDevTasks).append(whiteboard).append(features).append(keyFeatures).append(polishLevel).append(templates).append(skills).append(projectTypes).append(techs).append(platforms).append(margin).append(cost).append(costingType).append(hoursEstimate).append(chatPrice).append(price).append(firstMessage).append(lastContactChannel).append(lastContactByGigster).append(lastContactByClient).append(lastEmailBy).append(lastEmailTime).append(lastChatBy).append(lastMissedChatEmailToPoc).append(lastMissedChatEmailToClient).append(lastChatEmail).append(lastChatTime).append(clientOwnsCode).append(gigsterEsign).append(boughtNDA).append(clientNDASign).append(clientEsign).append(internalType).append(type).append(lastUpdate).append(updated).append(created).append(howDidTheCustomerFindUs).append(pdfUrl).append(salesEngineer).append(seNotes).append(info).append(timeline).append(customerPersonality).append(legalEntity).append(startDate).append(projectManager).append(lastHealthReportDate).append(quote).append(calculator).append(gdriveUrl).append(trelloUrl).append(githubUrl).append(buildUrl).append(dropboxUrl).append(numberOfFeatures).append(maxStartDate).append(techStack).toHashCode();
     }
 
     @Override
@@ -1826,7 +2322,7 @@ public class Datum {
             return false;
         }
         Datum rhs = ((Datum) other);
-        return new EqualsBuilder().append(Id, rhs.Id).append(category, rhs.category).append(duration, rhs.duration).append(durationUnits, rhs.durationUnits).append(dollarAmount, rhs.dollarAmount).append(name, rhs.name).append(salesEngineerGuess, rhs.salesEngineerGuess).append(techStack, rhs.techStack).append(poster, rhs.poster).append(startDate, rhs.startDate).append(V, rhs.V).append(salesEngineer, rhs.salesEngineer).append(projectManager, rhs.projectManager).append(info, rhs.info).append(timeline, rhs.timeline).append(legalEntity, rhs.legalEntity).append(stale, rhs.stale).append(canonical, rhs.canonical).append(organization, rhs.organization).append(tracking, rhs.tracking).append(flags, rhs.flags).append(qualified, rhs.qualified).append(engaged, rhs.engaged).append(meta, rhs.meta).append(designPolish, rhs.designPolish).append(checkedForMissedChatEmail, rhs.checkedForMissedChatEmail).append(docs, rhs.docs).append(payMilestones, rhs.payMilestones).append(tags, rhs.tags).append(pdfUrl, rhs.pdfUrl).append(tools, rhs.tools).append(risks, rhs.risks).append(reviews, rhs.reviews).append(requiredTeamSize, rhs.requiredTeamSize).append(team, rhs.team).append(colleagues, rhs.colleagues).append(qualityReviews, rhs.qualityReviews).append(specReviews, rhs.specReviews).append(nps, rhs.nps).append(customerLike, rhs.customerLike).append(customerDislike, rhs.customerDislike).append(customerLikelyToRecommend, rhs.customerLikelyToRecommend).append(customerSatisfactions, rhs.customerSatisfactions).append(pmStatus, rhs.pmStatus).append(statusReached, rhs.statusReached).append(staleReason, rhs.staleReason).append(state, rhs.state).append(status, rhs.status).append(paymentMade, rhs.paymentMade).append(paymentReceived, rhs.paymentReceived).append(terms, rhs.terms).append(progressUpdates, rhs.progressUpdates).append(milestonesSpecification, rhs.milestonesSpecification).append(currentMilestoneIndex, rhs.currentMilestoneIndex).append(milestones, rhs.milestones).append(qualifiers, rhs.qualifiers).append(postDevTasks, rhs.postDevTasks).append(preDevTasks, rhs.preDevTasks).append(whiteboard, rhs.whiteboard).append(features, rhs.features).append(keyFeatures, rhs.keyFeatures).append(polishLevel, rhs.polishLevel).append(templates, rhs.templates).append(skills, rhs.skills).append(projectTypes, rhs.projectTypes).append(techs, rhs.techs).append(platforms, rhs.platforms).append(margin, rhs.margin).append(cost, rhs.cost).append(costingType, rhs.costingType).append(hoursEstimate, rhs.hoursEstimate).append(chatPrice, rhs.chatPrice).append(price, rhs.price).append(firstMessage, rhs.firstMessage).append(lastContactChannel, rhs.lastContactChannel).append(lastContactByGigster, rhs.lastContactByGigster).append(lastContactByClient, rhs.lastContactByClient).append(lastEmailBy, rhs.lastEmailBy).append(lastEmailTime, rhs.lastEmailTime).append(lastChatBy, rhs.lastChatBy).append(lastMissedChatEmailToPoc, rhs.lastMissedChatEmailToPoc).append(lastMissedChatEmailToClient, rhs.lastMissedChatEmailToClient).append(lastChatEmail, rhs.lastChatEmail).append(lastChatTime, rhs.lastChatTime).append(clientOwnsCode, rhs.clientOwnsCode).append(gigsterEsign, rhs.gigsterEsign).append(boughtNDA, rhs.boughtNDA).append(clientNDASign, rhs.clientNDASign).append(clientEsign, rhs.clientEsign).append(internalType, rhs.internalType).append(type, rhs.type).append(lastUpdate, rhs.lastUpdate).append(updated, rhs.updated).append(created, rhs.created).append(additionalProperties, rhs.additionalProperties).isEquals();
+        return new EqualsBuilder().append(Id, rhs.Id).append(canonical, rhs.canonical).append(category, rhs.category).append(duration, rhs.duration).append(durationUnits, rhs.durationUnits).append(dollarAmount, rhs.dollarAmount).append(name, rhs.name).append(salesEngineerGuess, rhs.salesEngineerGuess).append(emailLater, rhs.emailLater).append(organizationSize, rhs.organizationSize).append(poster, rhs.poster).append(V, rhs.V).append(stale, rhs.stale).append(organization, rhs.organization).append(tracking, rhs.tracking).append(flags, rhs.flags).append(qualified, rhs.qualified).append(engaged, rhs.engaged).append(meta, rhs.meta).append(designPolish, rhs.designPolish).append(checkedForMissedChatEmail, rhs.checkedForMissedChatEmail).append(docs, rhs.docs).append(payMilestones, rhs.payMilestones).append(tags, rhs.tags).append(tools, rhs.tools).append(risks, rhs.risks).append(reviews, rhs.reviews).append(requiredTeamSize, rhs.requiredTeamSize).append(team, rhs.team).append(colleagues, rhs.colleagues).append(qualityReviews, rhs.qualityReviews).append(specReviews, rhs.specReviews).append(nps, rhs.nps).append(customerLike, rhs.customerLike).append(customerDislike, rhs.customerDislike).append(customerLikelyToRecommend, rhs.customerLikelyToRecommend).append(customerSatisfactions, rhs.customerSatisfactions).append(pmStatus, rhs.pmStatus).append(statusReached, rhs.statusReached).append(staleReason, rhs.staleReason).append(state, rhs.state).append(status, rhs.status).append(paymentMade, rhs.paymentMade).append(paymentReceived, rhs.paymentReceived).append(terms, rhs.terms).append(progressUpdates, rhs.progressUpdates).append(milestonesSpecification, rhs.milestonesSpecification).append(currentMilestoneIndex, rhs.currentMilestoneIndex).append(milestones, rhs.milestones).append(qualifiers, rhs.qualifiers).append(postDevTasks, rhs.postDevTasks).append(preDevTasks, rhs.preDevTasks).append(whiteboard, rhs.whiteboard).append(features, rhs.features).append(keyFeatures, rhs.keyFeatures).append(polishLevel, rhs.polishLevel).append(templates, rhs.templates).append(skills, rhs.skills).append(projectTypes, rhs.projectTypes).append(techs, rhs.techs).append(platforms, rhs.platforms).append(margin, rhs.margin).append(cost, rhs.cost).append(costingType, rhs.costingType).append(hoursEstimate, rhs.hoursEstimate).append(chatPrice, rhs.chatPrice).append(price, rhs.price).append(firstMessage, rhs.firstMessage).append(lastContactChannel, rhs.lastContactChannel).append(lastContactByGigster, rhs.lastContactByGigster).append(lastContactByClient, rhs.lastContactByClient).append(lastEmailBy, rhs.lastEmailBy).append(lastEmailTime, rhs.lastEmailTime).append(lastChatBy, rhs.lastChatBy).append(lastMissedChatEmailToPoc, rhs.lastMissedChatEmailToPoc).append(lastMissedChatEmailToClient, rhs.lastMissedChatEmailToClient).append(lastChatEmail, rhs.lastChatEmail).append(lastChatTime, rhs.lastChatTime).append(clientOwnsCode, rhs.clientOwnsCode).append(gigsterEsign, rhs.gigsterEsign).append(boughtNDA, rhs.boughtNDA).append(clientNDASign, rhs.clientNDASign).append(clientEsign, rhs.clientEsign).append(internalType, rhs.internalType).append(type, rhs.type).append(lastUpdate, rhs.lastUpdate).append(updated, rhs.updated).append(created, rhs.created).append(howDidTheCustomerFindUs, rhs.howDidTheCustomerFindUs).append(pdfUrl, rhs.pdfUrl).append(salesEngineer, rhs.salesEngineer).append(seNotes, rhs.seNotes).append(info, rhs.info).append(timeline, rhs.timeline).append(customerPersonality, rhs.customerPersonality).append(legalEntity, rhs.legalEntity).append(startDate, rhs.startDate).append(projectManager, rhs.projectManager).append(lastHealthReportDate, rhs.lastHealthReportDate).append(quote, rhs.quote).append(calculator, rhs.calculator).append(gdriveUrl, rhs.gdriveUrl).append(trelloUrl, rhs.trelloUrl).append(githubUrl, rhs.githubUrl).append(buildUrl, rhs.buildUrl).append(dropboxUrl, rhs.dropboxUrl).append(numberOfFeatures, rhs.numberOfFeatures).append(maxStartDate, rhs.maxStartDate).append(techStack, rhs.techStack).isEquals();
     }
 
 }

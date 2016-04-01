@@ -1,22 +1,55 @@
 
 package com.gigster.semessaging.gigs;
 
-import java.util.HashMap;
-import java.util.Map;
 import javax.annotation.Generated;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 @Generated("org.jsonschema2pojo")
 public class Flags {
 
+    @SerializedName("showPayButton")
+    @Expose
+    private boolean showPayButton;
+    @SerializedName("isEnterprise")
+    @Expose
     private boolean isEnterprise;
+    @SerializedName("isCodeReview")
+    @Expose
     private boolean isCodeReview;
+    @SerializedName("isHardDeadline")
+    @Expose
     private boolean isHardDeadline;
+    @SerializedName("isRepeat")
+    @Expose
     private boolean isRepeat;
+    @SerializedName("isRush")
+    @Expose
     private boolean isRush;
+    @SerializedName("isVIP")
+    @Expose
     private boolean isVIP;
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+    /**
+     * 
+     * @return
+     *     The showPayButton
+     */
+    public boolean isShowPayButton() {
+        return showPayButton;
+    }
+
+    /**
+     * 
+     * @param showPayButton
+     *     The showPayButton
+     */
+    public void setShowPayButton(boolean showPayButton) {
+        this.showPayButton = showPayButton;
+    }
 
     /**
      * 
@@ -126,17 +159,14 @@ public class Flags {
         this.isVIP = isVIP;
     }
 
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(isEnterprise).append(isCodeReview).append(isHardDeadline).append(isRepeat).append(isRush).append(isVIP).append(additionalProperties).toHashCode();
+        return new HashCodeBuilder().append(showPayButton).append(isEnterprise).append(isCodeReview).append(isHardDeadline).append(isRepeat).append(isRush).append(isVIP).toHashCode();
     }
 
     @Override
@@ -148,7 +178,7 @@ public class Flags {
             return false;
         }
         Flags rhs = ((Flags) other);
-        return new EqualsBuilder().append(isEnterprise, rhs.isEnterprise).append(isCodeReview, rhs.isCodeReview).append(isHardDeadline, rhs.isHardDeadline).append(isRepeat, rhs.isRepeat).append(isRush, rhs.isRush).append(isVIP, rhs.isVIP).append(additionalProperties, rhs.additionalProperties).isEquals();
+        return new EqualsBuilder().append(showPayButton, rhs.showPayButton).append(isEnterprise, rhs.isEnterprise).append(isCodeReview, rhs.isCodeReview).append(isHardDeadline, rhs.isHardDeadline).append(isRepeat, rhs.isRepeat).append(isRush, rhs.isRush).append(isVIP, rhs.isVIP).isEquals();
     }
 
 }

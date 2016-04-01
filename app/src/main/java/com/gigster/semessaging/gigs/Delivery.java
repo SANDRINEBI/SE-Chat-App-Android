@@ -2,189 +2,67 @@
 package com.gigster.semessaging.gigs;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import javax.annotation.Generated;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 @Generated("org.jsonschema2pojo")
 public class Delivery {
 
-    private List<Object> revisions = new ArrayList<Object>();
-    private Object rejectedReason;
-    private Object rejectedDate;
-    private boolean rejectedBy;
-    private boolean rejected;
-    private Object readyDate;
-    private Object readyBy;
-    private boolean ready;
-    private Object approvedDate;
-    private Object approvedBy;
+    @SerializedName("approved")
+    @Expose
     private boolean approved;
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    @SerializedName("approvedBy")
+    @Expose
+    private Object approvedBy;
+    @SerializedName("approvedDate")
+    @Expose
+    private Object approvedDate;
+    @SerializedName("ready")
+    @Expose
+    private boolean ready;
+    @SerializedName("readyBy")
+    @Expose
+    private Object readyBy;
+    @SerializedName("readyDate")
+    @Expose
+    private Object readyDate;
+    @SerializedName("rejected")
+    @Expose
+    private boolean rejected;
+    @SerializedName("rejectedBy")
+    @Expose
+    private boolean rejectedBy;
+    @SerializedName("rejectedDate")
+    @Expose
+    private Object rejectedDate;
+    @SerializedName("rejectedReason")
+    @Expose
+    private Object rejectedReason;
+    @SerializedName("revisions")
+    @Expose
+    private List<Object> revisions = new ArrayList<Object>();
 
     /**
      * 
      * @return
-     *     The revisions
+     *     The approved
      */
-    public List<Object> getRevisions() {
-        return revisions;
+    public boolean isApproved() {
+        return approved;
     }
 
     /**
      * 
-     * @param revisions
-     *     The revisions
+     * @param approved
+     *     The approved
      */
-    public void setRevisions(List<Object> revisions) {
-        this.revisions = revisions;
-    }
-
-    /**
-     * 
-     * @return
-     *     The rejectedReason
-     */
-    public Object getRejectedReason() {
-        return rejectedReason;
-    }
-
-    /**
-     * 
-     * @param rejectedReason
-     *     The rejectedReason
-     */
-    public void setRejectedReason(Object rejectedReason) {
-        this.rejectedReason = rejectedReason;
-    }
-
-    /**
-     * 
-     * @return
-     *     The rejectedDate
-     */
-    public Object getRejectedDate() {
-        return rejectedDate;
-    }
-
-    /**
-     * 
-     * @param rejectedDate
-     *     The rejectedDate
-     */
-    public void setRejectedDate(Object rejectedDate) {
-        this.rejectedDate = rejectedDate;
-    }
-
-    /**
-     * 
-     * @return
-     *     The rejectedBy
-     */
-    public boolean isRejectedBy() {
-        return rejectedBy;
-    }
-
-    /**
-     * 
-     * @param rejectedBy
-     *     The rejectedBy
-     */
-    public void setRejectedBy(boolean rejectedBy) {
-        this.rejectedBy = rejectedBy;
-    }
-
-    /**
-     * 
-     * @return
-     *     The rejected
-     */
-    public boolean isRejected() {
-        return rejected;
-    }
-
-    /**
-     * 
-     * @param rejected
-     *     The rejected
-     */
-    public void setRejected(boolean rejected) {
-        this.rejected = rejected;
-    }
-
-    /**
-     * 
-     * @return
-     *     The readyDate
-     */
-    public Object getReadyDate() {
-        return readyDate;
-    }
-
-    /**
-     * 
-     * @param readyDate
-     *     The readyDate
-     */
-    public void setReadyDate(Object readyDate) {
-        this.readyDate = readyDate;
-    }
-
-    /**
-     * 
-     * @return
-     *     The readyBy
-     */
-    public Object getReadyBy() {
-        return readyBy;
-    }
-
-    /**
-     * 
-     * @param readyBy
-     *     The readyBy
-     */
-    public void setReadyBy(Object readyBy) {
-        this.readyBy = readyBy;
-    }
-
-    /**
-     * 
-     * @return
-     *     The ready
-     */
-    public boolean isReady() {
-        return ready;
-    }
-
-    /**
-     * 
-     * @param ready
-     *     The ready
-     */
-    public void setReady(boolean ready) {
-        this.ready = ready;
-    }
-
-    /**
-     * 
-     * @return
-     *     The approvedDate
-     */
-    public Object getApprovedDate() {
-        return approvedDate;
-    }
-
-    /**
-     * 
-     * @param approvedDate
-     *     The approvedDate
-     */
-    public void setApprovedDate(Object approvedDate) {
-        this.approvedDate = approvedDate;
+    public void setApproved(boolean approved) {
+        this.approved = approved;
     }
 
     /**
@@ -208,32 +86,173 @@ public class Delivery {
     /**
      * 
      * @return
-     *     The approved
+     *     The approvedDate
      */
-    public boolean isApproved() {
-        return approved;
+    public Object getApprovedDate() {
+        return approvedDate;
     }
 
     /**
      * 
-     * @param approved
-     *     The approved
+     * @param approvedDate
+     *     The approvedDate
      */
-    public void setApproved(boolean approved) {
-        this.approved = approved;
+    public void setApprovedDate(Object approvedDate) {
+        this.approvedDate = approvedDate;
     }
 
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
+    /**
+     * 
+     * @return
+     *     The ready
+     */
+    public boolean isReady() {
+        return ready;
     }
 
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
+    /**
+     * 
+     * @param ready
+     *     The ready
+     */
+    public void setReady(boolean ready) {
+        this.ready = ready;
+    }
+
+    /**
+     * 
+     * @return
+     *     The readyBy
+     */
+    public Object getReadyBy() {
+        return readyBy;
+    }
+
+    /**
+     * 
+     * @param readyBy
+     *     The readyBy
+     */
+    public void setReadyBy(Object readyBy) {
+        this.readyBy = readyBy;
+    }
+
+    /**
+     * 
+     * @return
+     *     The readyDate
+     */
+    public Object getReadyDate() {
+        return readyDate;
+    }
+
+    /**
+     * 
+     * @param readyDate
+     *     The readyDate
+     */
+    public void setReadyDate(Object readyDate) {
+        this.readyDate = readyDate;
+    }
+
+    /**
+     * 
+     * @return
+     *     The rejected
+     */
+    public boolean isRejected() {
+        return rejected;
+    }
+
+    /**
+     * 
+     * @param rejected
+     *     The rejected
+     */
+    public void setRejected(boolean rejected) {
+        this.rejected = rejected;
+    }
+
+    /**
+     * 
+     * @return
+     *     The rejectedBy
+     */
+    public boolean isRejectedBy() {
+        return rejectedBy;
+    }
+
+    /**
+     * 
+     * @param rejectedBy
+     *     The rejectedBy
+     */
+    public void setRejectedBy(boolean rejectedBy) {
+        this.rejectedBy = rejectedBy;
+    }
+
+    /**
+     * 
+     * @return
+     *     The rejectedDate
+     */
+    public Object getRejectedDate() {
+        return rejectedDate;
+    }
+
+    /**
+     * 
+     * @param rejectedDate
+     *     The rejectedDate
+     */
+    public void setRejectedDate(Object rejectedDate) {
+        this.rejectedDate = rejectedDate;
+    }
+
+    /**
+     * 
+     * @return
+     *     The rejectedReason
+     */
+    public Object getRejectedReason() {
+        return rejectedReason;
+    }
+
+    /**
+     * 
+     * @param rejectedReason
+     *     The rejectedReason
+     */
+    public void setRejectedReason(Object rejectedReason) {
+        this.rejectedReason = rejectedReason;
+    }
+
+    /**
+     * 
+     * @return
+     *     The revisions
+     */
+    public List<Object> getRevisions() {
+        return revisions;
+    }
+
+    /**
+     * 
+     * @param revisions
+     *     The revisions
+     */
+    public void setRevisions(List<Object> revisions) {
+        this.revisions = revisions;
+    }
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(revisions).append(rejectedReason).append(rejectedDate).append(rejectedBy).append(rejected).append(readyDate).append(readyBy).append(ready).append(approvedDate).append(approvedBy).append(approved).append(additionalProperties).toHashCode();
+        return new HashCodeBuilder().append(approved).append(approvedBy).append(approvedDate).append(ready).append(readyBy).append(readyDate).append(rejected).append(rejectedBy).append(rejectedDate).append(rejectedReason).append(revisions).toHashCode();
     }
 
     @Override
@@ -245,7 +264,7 @@ public class Delivery {
             return false;
         }
         Delivery rhs = ((Delivery) other);
-        return new EqualsBuilder().append(revisions, rhs.revisions).append(rejectedReason, rhs.rejectedReason).append(rejectedDate, rhs.rejectedDate).append(rejectedBy, rhs.rejectedBy).append(rejected, rhs.rejected).append(readyDate, rhs.readyDate).append(readyBy, rhs.readyBy).append(ready, rhs.ready).append(approvedDate, rhs.approvedDate).append(approvedBy, rhs.approvedBy).append(approved, rhs.approved).append(additionalProperties, rhs.additionalProperties).isEquals();
+        return new EqualsBuilder().append(approved, rhs.approved).append(approvedBy, rhs.approvedBy).append(approvedDate, rhs.approvedDate).append(ready, rhs.ready).append(readyBy, rhs.readyBy).append(readyDate, rhs.readyDate).append(rejected, rhs.rejected).append(rejectedBy, rhs.rejectedBy).append(rejectedDate, rhs.rejectedDate).append(rejectedReason, rhs.rejectedReason).append(revisions, rhs.revisions).isEquals();
     }
 
 }

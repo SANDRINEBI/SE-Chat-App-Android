@@ -2,19 +2,23 @@
 package com.gigster.semessaging.gigs;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import javax.annotation.Generated;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 @Generated("org.jsonschema2pojo")
 public class Github {
 
+    @SerializedName("repos")
+    @Expose
     private List<Object> repos = new ArrayList<Object>();
+    @SerializedName("team")
+    @Expose
     private Team team;
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     /**
      * 
@@ -52,17 +56,14 @@ public class Github {
         this.team = team;
     }
 
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(repos).append(team).append(additionalProperties).toHashCode();
+        return new HashCodeBuilder().append(repos).append(team).toHashCode();
     }
 
     @Override
@@ -74,7 +75,7 @@ public class Github {
             return false;
         }
         Github rhs = ((Github) other);
-        return new EqualsBuilder().append(repos, rhs.repos).append(team, rhs.team).append(additionalProperties, rhs.additionalProperties).isEquals();
+        return new EqualsBuilder().append(repos, rhs.repos).append(team, rhs.team).isEquals();
     }
 
 }

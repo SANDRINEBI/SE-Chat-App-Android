@@ -1,47 +1,46 @@
 
 package com.gigster.semessaging.gigs;
 
-import java.util.HashMap;
-import java.util.Map;
 import javax.annotation.Generated;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 @Generated("org.jsonschema2pojo")
 public class PdfUrl {
 
-    private String proposal;
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    @SerializedName("proposalPdf")
+    @Expose
+    private String proposalPdf;
 
     /**
      * 
      * @return
-     *     The proposal
+     *     The proposalPdf
      */
-    public String getProposal() {
-        return proposal;
+    public String getProposalPdf() {
+        return proposalPdf;
     }
 
     /**
      * 
-     * @param proposal
-     *     The proposal
+     * @param proposalPdf
+     *     The proposalPdf
      */
-    public void setProposal(String proposal) {
-        this.proposal = proposal;
+    public void setProposalPdf(String proposalPdf) {
+        this.proposalPdf = proposalPdf;
     }
 
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(proposal).append(additionalProperties).toHashCode();
+        return new HashCodeBuilder().append(proposalPdf).toHashCode();
     }
 
     @Override
@@ -53,7 +52,7 @@ public class PdfUrl {
             return false;
         }
         PdfUrl rhs = ((PdfUrl) other);
-        return new EqualsBuilder().append(proposal, rhs.proposal).append(additionalProperties, rhs.additionalProperties).isEquals();
+        return new EqualsBuilder().append(proposalPdf, rhs.proposalPdf).isEquals();
     }
 
 }

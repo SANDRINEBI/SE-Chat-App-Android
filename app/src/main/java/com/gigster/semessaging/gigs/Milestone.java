@@ -2,32 +2,62 @@
 package com.gigster.semessaging.gigs;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import javax.annotation.Generated;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 @Generated("org.jsonschema2pojo")
 public class Milestone {
 
+    @SerializedName("_id")
+    @Expose
     private String Id;
+    @SerializedName("sentDueSoonAlerts")
+    @Expose
     private boolean sentDueSoonAlerts;
+    @SerializedName("paid")
+    @Expose
     private boolean paid;
+    @SerializedName("paidDate")
+    @Expose
     private Object paidDate;
+    @SerializedName("complete")
+    @Expose
     private boolean complete;
+    @SerializedName("active")
+    @Expose
     private boolean active;
+    @SerializedName("startDate")
+    @Expose
     private String startDate;
+    @SerializedName("endDate")
+    @Expose
     private String endDate;
-    private Object timeline;
+    @SerializedName("timeline")
+    @Expose
+    private String timeline;
+    @SerializedName("specification")
+    @Expose
     private Specification specification;
+    @SerializedName("delivery")
+    @Expose
     private Delivery delivery;
+    @SerializedName("title")
+    @Expose
     private String title;
-    private int duration;
+    @SerializedName("duration")
+    @Expose
+    private long duration;
+    @SerializedName("durationUnits")
+    @Expose
     private String durationUnits;
+    @SerializedName("todos")
+    @Expose
     private List<Todo> todos = new ArrayList<Todo>();
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     /**
      * 
@@ -178,7 +208,7 @@ public class Milestone {
      * @return
      *     The timeline
      */
-    public Object getTimeline() {
+    public String getTimeline() {
         return timeline;
     }
 
@@ -187,7 +217,7 @@ public class Milestone {
      * @param timeline
      *     The timeline
      */
-    public void setTimeline(Object timeline) {
+    public void setTimeline(String timeline) {
         this.timeline = timeline;
     }
 
@@ -250,7 +280,7 @@ public class Milestone {
      * @return
      *     The duration
      */
-    public int getDuration() {
+    public long getDuration() {
         return duration;
     }
 
@@ -259,7 +289,7 @@ public class Milestone {
      * @param duration
      *     The duration
      */
-    public void setDuration(int duration) {
+    public void setDuration(long duration) {
         this.duration = duration;
     }
 
@@ -299,17 +329,14 @@ public class Milestone {
         this.todos = todos;
     }
 
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(Id).append(sentDueSoonAlerts).append(paid).append(paidDate).append(complete).append(active).append(startDate).append(endDate).append(timeline).append(specification).append(delivery).append(title).append(duration).append(durationUnits).append(todos).append(additionalProperties).toHashCode();
+        return new HashCodeBuilder().append(Id).append(sentDueSoonAlerts).append(paid).append(paidDate).append(complete).append(active).append(startDate).append(endDate).append(timeline).append(specification).append(delivery).append(title).append(duration).append(durationUnits).append(todos).toHashCode();
     }
 
     @Override
@@ -321,7 +348,7 @@ public class Milestone {
             return false;
         }
         Milestone rhs = ((Milestone) other);
-        return new EqualsBuilder().append(Id, rhs.Id).append(sentDueSoonAlerts, rhs.sentDueSoonAlerts).append(paid, rhs.paid).append(paidDate, rhs.paidDate).append(complete, rhs.complete).append(active, rhs.active).append(startDate, rhs.startDate).append(endDate, rhs.endDate).append(timeline, rhs.timeline).append(specification, rhs.specification).append(delivery, rhs.delivery).append(title, rhs.title).append(duration, rhs.duration).append(durationUnits, rhs.durationUnits).append(todos, rhs.todos).append(additionalProperties, rhs.additionalProperties).isEquals();
+        return new EqualsBuilder().append(Id, rhs.Id).append(sentDueSoonAlerts, rhs.sentDueSoonAlerts).append(paid, rhs.paid).append(paidDate, rhs.paidDate).append(complete, rhs.complete).append(active, rhs.active).append(startDate, rhs.startDate).append(endDate, rhs.endDate).append(timeline, rhs.timeline).append(specification, rhs.specification).append(delivery, rhs.delivery).append(title, rhs.title).append(duration, rhs.duration).append(durationUnits, rhs.durationUnits).append(todos, rhs.todos).isEquals();
     }
 
 }

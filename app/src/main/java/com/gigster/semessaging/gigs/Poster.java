@@ -1,82 +1,227 @@
 
 package com.gigster.semessaging.gigs;
 
-import com.google.gson.annotations.SerializedName;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import javax.annotation.Generated;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 @Generated("org.jsonschema2pojo")
 public class Poster {
+
+    @SerializedName("_id")
+    @Expose
+    private String Id;
+
     @SerializedName("img_url")
+    @Expose
     private String imgURL;
 
-    private String Id;
+    @SerializedName("provider")
+    @Expose
     private String provider;
+    @SerializedName("name")
+    @Expose
     private String name;
+    @SerializedName("budget")
+    @Expose
     private String budget;
+    @SerializedName("durationPref")
+    @Expose
     private String durationPref;
+    @SerializedName("email")
+    @Expose
     private String email;
+    @SerializedName("hashedPassword")
+    @Expose
     private String hashedPassword;
+    @SerializedName("salt")
+    @Expose
     private String salt;
+    @SerializedName("fact")
+    @Expose
     private String fact;
+    @SerializedName("phone")
+    @Expose
     private String phone;
+    @SerializedName("profileRole")
+    @Expose
+    private String profileRole;
+    @SerializedName("company")
+    @Expose
+    private String company;
+    @SerializedName("timezone")
+    @Expose
     private Timezone timezone;
-    private int V;
+    @SerializedName("interestingProject")
+    @Expose
+    private String interestingProject;
+    @SerializedName("hearAboutGigster")
+    @Expose
+    private String hearAboutGigster;
+    @SerializedName("__v")
+    @Expose
+    private long V;
+    @SerializedName("signupGig")
+    @Expose
     private String signupGig;
+    @SerializedName("referral")
+    @Expose
     private String referral;
+    @SerializedName("passwordResetHash")
+    @Expose
+    private String passwordResetHash;
+    @SerializedName("passwordResetTimestamp")
+    @Expose
+    private String passwordResetTimestamp;
+    @SerializedName("uuid")
+    @Expose
+    private String uuid;
+    @SerializedName("slackId")
+    @Expose
     private Object slackId;
+    @SerializedName("notifyOnLogin")
+    @Expose
     private List<Object> notifyOnLogin = new ArrayList<Object>();
+    @SerializedName("hideMilestonesTutorial")
+    @Expose
     private boolean hideMilestonesTutorial;
+    @SerializedName("receiveKarmaNotifications")
+    @Expose
     private boolean receiveKarmaNotifications;
+    @SerializedName("workSamples")
+    @Expose
     private List<Object> workSamples = new ArrayList<Object>();
+    @SerializedName("acceptChats")
+    @Expose
     private boolean acceptChats;
+    @SerializedName("availabilityHistory")
+    @Expose
     private List<Object> availabilityHistory = new ArrayList<Object>();
+    @SerializedName("available")
+    @Expose
     private boolean available;
+    @SerializedName("seAvailableSlots")
+    @Expose
     private List<Object> seAvailableSlots = new ArrayList<Object>();
+    @SerializedName("devices")
+    @Expose
+    private Devices devices;
+    @SerializedName("delightApproved")
+    @Expose
     private boolean delightApproved;
+    @SerializedName("delightRequested")
+    @Expose
     private boolean delightRequested;
+    @SerializedName("architectApproved")
+    @Expose
     private boolean architectApproved;
+    @SerializedName("architectRequested")
+    @Expose
     private boolean architectRequested;
+    @SerializedName("codeReviewerApproved")
+    @Expose
     private boolean codeReviewerApproved;
+    @SerializedName("codeReviewerRequested")
+    @Expose
     private boolean codeReviewerRequested;
+    @SerializedName("qaApproved")
+    @Expose
     private boolean qaApproved;
+    @SerializedName("qaRequested")
+    @Expose
     private boolean qaRequested;
+    @SerializedName("writerApproved")
+    @Expose
     private boolean writerApproved;
+    @SerializedName("writerRequested")
+    @Expose
     private boolean writerRequested;
+    @SerializedName("designerApproved")
+    @Expose
     private boolean designerApproved;
+    @SerializedName("designerRequested")
+    @Expose
     private boolean designerRequested;
+    @SerializedName("seApproved")
+    @Expose
     private boolean seApproved;
+    @SerializedName("seRequested")
+    @Expose
     private boolean seRequested;
+    @SerializedName("pmApproved")
+    @Expose
     private boolean pmApproved;
+    @SerializedName("pmRequested")
+    @Expose
     private boolean pmRequested;
+    @SerializedName("gigsterApproved")
+    @Expose
     private boolean gigsterApproved;
+    @SerializedName("gigsterRequested")
+    @Expose
     private boolean gigsterRequested;
+    @SerializedName("type")
+    @Expose
     private String type;
+    @SerializedName("role")
+    @Expose
     private String role;
+    @SerializedName("votes")
+    @Expose
     private List<Object> votes = new ArrayList<Object>();
-    private int numRatings;
-    private int rating;
+    @SerializedName("numRatings")
+    @Expose
+    private long numRatings;
+    @SerializedName("rating")
+    @Expose
+    private long rating;
+    @SerializedName("karmaHistory")
+    @Expose
     private List<Object> karmaHistory = new ArrayList<Object>();
+    @SerializedName("karmaDimensions")
+    @Expose
     private KarmaDimensions karmaDimensions;
-    private int karma;
-    private List<Object> bestProjects = new ArrayList<Object>();
+    @SerializedName("karma")
+    @Expose
+    private long karma;
+    @SerializedName("bestProjects")
+    @Expose
+    private List<BestProject> bestProjects = new ArrayList<BestProject>();
+    @SerializedName("techs")
+    @Expose
     private List<Object> techs = new ArrayList<Object>();
+    @SerializedName("platforms")
+    @Expose
     private List<Object> platforms = new ArrayList<Object>();
+    @SerializedName("skills")
+    @Expose
     private List<Object> skills = new ArrayList<Object>();
+    @SerializedName("profileLinks")
+    @Expose
     private ProfileLinks profileLinks;
+    @SerializedName("city")
+    @Expose
     private City city;
+    @SerializedName("lastActionTime")
+    @Expose
     private String lastActionTime;
+    @SerializedName("interviews")
+    @Expose
     private List<Object> interviews = new ArrayList<Object>();
+    @SerializedName("updated")
+    @Expose
     private String updated;
+    @SerializedName("created")
+    @Expose
     private String created;
+    @SerializedName("accepted")
+    @Expose
     private boolean accepted;
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     /**
      * 
@@ -261,6 +406,42 @@ public class Poster {
     /**
      * 
      * @return
+     *     The profileRole
+     */
+    public String getProfileRole() {
+        return profileRole;
+    }
+
+    /**
+     * 
+     * @param profileRole
+     *     The profileRole
+     */
+    public void setProfileRole(String profileRole) {
+        this.profileRole = profileRole;
+    }
+
+    /**
+     * 
+     * @return
+     *     The company
+     */
+    public String getCompany() {
+        return company;
+    }
+
+    /**
+     * 
+     * @param company
+     *     The company
+     */
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
+    /**
+     * 
+     * @return
      *     The timezone
      */
     public Timezone getTimezone() {
@@ -279,9 +460,45 @@ public class Poster {
     /**
      * 
      * @return
+     *     The interestingProject
+     */
+    public String getInterestingProject() {
+        return interestingProject;
+    }
+
+    /**
+     * 
+     * @param interestingProject
+     *     The interestingProject
+     */
+    public void setInterestingProject(String interestingProject) {
+        this.interestingProject = interestingProject;
+    }
+
+    /**
+     * 
+     * @return
+     *     The hearAboutGigster
+     */
+    public String getHearAboutGigster() {
+        return hearAboutGigster;
+    }
+
+    /**
+     * 
+     * @param hearAboutGigster
+     *     The hearAboutGigster
+     */
+    public void setHearAboutGigster(String hearAboutGigster) {
+        this.hearAboutGigster = hearAboutGigster;
+    }
+
+    /**
+     * 
+     * @return
      *     The V
      */
-    public int getV() {
+    public long getV() {
         return V;
     }
 
@@ -290,7 +507,7 @@ public class Poster {
      * @param V
      *     The __v
      */
-    public void setV(int V) {
+    public void setV(long V) {
         this.V = V;
     }
 
@@ -328,6 +545,63 @@ public class Poster {
      */
     public void setReferral(String referral) {
         this.referral = referral;
+    }
+
+
+    /**
+     * 
+     * @return
+     *     The passwordResetHash
+     */
+
+
+    public String getPasswordResetHash() {
+        return passwordResetHash;
+    }
+
+    /**
+     * 
+     * @param passwordResetHash
+     *     The passwordResetHash
+     */
+    public void setPasswordResetHash(String passwordResetHash) {
+        this.passwordResetHash = passwordResetHash;
+    }
+
+    /**
+     * 
+     * @return
+     *     The passwordResetTimestamp
+     */
+    public String getPasswordResetTimestamp() {
+        return passwordResetTimestamp;
+    }
+
+    /**
+     * 
+     * @param passwordResetTimestamp
+     *     The passwordResetTimestamp
+     */
+    public void setPasswordResetTimestamp(String passwordResetTimestamp) {
+        this.passwordResetTimestamp = passwordResetTimestamp;
+    }
+
+    /**
+     * 
+     * @return
+     *     The uuid
+     */
+    public String getUuid() {
+        return uuid;
+    }
+
+    /**
+     * 
+     * @param uuid
+     *     The uuid
+     */
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 
     /**
@@ -490,6 +764,24 @@ public class Poster {
      */
     public void setSeAvailableSlots(List<Object> seAvailableSlots) {
         this.seAvailableSlots = seAvailableSlots;
+    }
+
+    /**
+     * 
+     * @return
+     *     The devices
+     */
+    public Devices getDevices() {
+        return devices;
+    }
+
+    /**
+     * 
+     * @param devices
+     *     The devices
+     */
+    public void setDevices(Devices devices) {
+        this.devices = devices;
     }
 
     /**
@@ -875,7 +1167,7 @@ public class Poster {
      * @return
      *     The numRatings
      */
-    public int getNumRatings() {
+    public long getNumRatings() {
         return numRatings;
     }
 
@@ -884,7 +1176,7 @@ public class Poster {
      * @param numRatings
      *     The numRatings
      */
-    public void setNumRatings(int numRatings) {
+    public void setNumRatings(long numRatings) {
         this.numRatings = numRatings;
     }
 
@@ -893,7 +1185,7 @@ public class Poster {
      * @return
      *     The rating
      */
-    public int getRating() {
+    public long getRating() {
         return rating;
     }
 
@@ -902,7 +1194,7 @@ public class Poster {
      * @param rating
      *     The rating
      */
-    public void setRating(int rating) {
+    public void setRating(long rating) {
         this.rating = rating;
     }
 
@@ -947,7 +1239,7 @@ public class Poster {
      * @return
      *     The karma
      */
-    public int getKarma() {
+    public long getKarma() {
         return karma;
     }
 
@@ -956,7 +1248,7 @@ public class Poster {
      * @param karma
      *     The karma
      */
-    public void setKarma(int karma) {
+    public void setKarma(long karma) {
         this.karma = karma;
     }
 
@@ -965,7 +1257,7 @@ public class Poster {
      * @return
      *     The bestProjects
      */
-    public List<Object> getBestProjects() {
+    public List<BestProject> getBestProjects() {
         return bestProjects;
     }
 
@@ -974,7 +1266,7 @@ public class Poster {
      * @param bestProjects
      *     The bestProjects
      */
-    public void setBestProjects(List<Object> bestProjects) {
+    public void setBestProjects(List<BestProject> bestProjects) {
         this.bestProjects = bestProjects;
     }
 
@@ -1158,21 +1450,14 @@ public class Poster {
         this.accepted = accepted;
     }
 
-    public String getImgURL() {
-        return imgURL;
-    }
-
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(Id).append(provider).append(name).append(budget).append(durationPref).append(email).append(hashedPassword).append(salt).append(fact).append(phone).append(timezone).append(V).append(signupGig).append(referral).append(slackId).append(notifyOnLogin).append(hideMilestonesTutorial).append(receiveKarmaNotifications).append(workSamples).append(acceptChats).append(availabilityHistory).append(available).append(seAvailableSlots).append(delightApproved).append(delightRequested).append(architectApproved).append(architectRequested).append(codeReviewerApproved).append(codeReviewerRequested).append(qaApproved).append(qaRequested).append(writerApproved).append(writerRequested).append(designerApproved).append(designerRequested).append(seApproved).append(seRequested).append(pmApproved).append(pmRequested).append(gigsterApproved).append(gigsterRequested).append(type).append(role).append(votes).append(numRatings).append(rating).append(karmaHistory).append(karmaDimensions).append(karma).append(bestProjects).append(techs).append(platforms).append(skills).append(profileLinks).append(city).append(lastActionTime).append(interviews).append(updated).append(created).append(accepted).append(additionalProperties).toHashCode();
+        return new HashCodeBuilder().append(Id).append(provider).append(name).append(budget).append(durationPref).append(email).append(hashedPassword).append(salt).append(fact).append(phone).append(profileRole).append(company).append(timezone).append(interestingProject).append(hearAboutGigster).append(V).append(signupGig).append(referral).append(passwordResetHash).append(passwordResetTimestamp).append(uuid).append(slackId).append(notifyOnLogin).append(hideMilestonesTutorial).append(receiveKarmaNotifications).append(workSamples).append(acceptChats).append(availabilityHistory).append(available).append(seAvailableSlots).append(devices).append(delightApproved).append(delightRequested).append(architectApproved).append(architectRequested).append(codeReviewerApproved).append(codeReviewerRequested).append(qaApproved).append(qaRequested).append(writerApproved).append(writerRequested).append(designerApproved).append(designerRequested).append(seApproved).append(seRequested).append(pmApproved).append(pmRequested).append(gigsterApproved).append(gigsterRequested).append(type).append(role).append(votes).append(numRatings).append(rating).append(karmaHistory).append(karmaDimensions).append(karma).append(bestProjects).append(techs).append(platforms).append(skills).append(profileLinks).append(city).append(lastActionTime).append(interviews).append(updated).append(created).append(accepted).toHashCode();
     }
 
     @Override
@@ -1184,7 +1469,10 @@ public class Poster {
             return false;
         }
         Poster rhs = ((Poster) other);
-        return new EqualsBuilder().append(Id, rhs.Id).append(provider, rhs.provider).append(name, rhs.name).append(budget, rhs.budget).append(durationPref, rhs.durationPref).append(email, rhs.email).append(hashedPassword, rhs.hashedPassword).append(salt, rhs.salt).append(fact, rhs.fact).append(phone, rhs.phone).append(timezone, rhs.timezone).append(V, rhs.V).append(signupGig, rhs.signupGig).append(referral, rhs.referral).append(slackId, rhs.slackId).append(notifyOnLogin, rhs.notifyOnLogin).append(hideMilestonesTutorial, rhs.hideMilestonesTutorial).append(receiveKarmaNotifications, rhs.receiveKarmaNotifications).append(workSamples, rhs.workSamples).append(acceptChats, rhs.acceptChats).append(availabilityHistory, rhs.availabilityHistory).append(available, rhs.available).append(seAvailableSlots, rhs.seAvailableSlots).append(delightApproved, rhs.delightApproved).append(delightRequested, rhs.delightRequested).append(architectApproved, rhs.architectApproved).append(architectRequested, rhs.architectRequested).append(codeReviewerApproved, rhs.codeReviewerApproved).append(codeReviewerRequested, rhs.codeReviewerRequested).append(qaApproved, rhs.qaApproved).append(qaRequested, rhs.qaRequested).append(writerApproved, rhs.writerApproved).append(writerRequested, rhs.writerRequested).append(designerApproved, rhs.designerApproved).append(designerRequested, rhs.designerRequested).append(seApproved, rhs.seApproved).append(seRequested, rhs.seRequested).append(pmApproved, rhs.pmApproved).append(pmRequested, rhs.pmRequested).append(gigsterApproved, rhs.gigsterApproved).append(gigsterRequested, rhs.gigsterRequested).append(type, rhs.type).append(role, rhs.role).append(votes, rhs.votes).append(numRatings, rhs.numRatings).append(rating, rhs.rating).append(karmaHistory, rhs.karmaHistory).append(karmaDimensions, rhs.karmaDimensions).append(karma, rhs.karma).append(bestProjects, rhs.bestProjects).append(techs, rhs.techs).append(platforms, rhs.platforms).append(skills, rhs.skills).append(profileLinks, rhs.profileLinks).append(city, rhs.city).append(lastActionTime, rhs.lastActionTime).append(interviews, rhs.interviews).append(updated, rhs.updated).append(created, rhs.created).append(accepted, rhs.accepted).append(additionalProperties, rhs.additionalProperties).isEquals();
+        return new EqualsBuilder().append(Id, rhs.Id).append(provider, rhs.provider).append(name, rhs.name).append(budget, rhs.budget).append(durationPref, rhs.durationPref).append(email, rhs.email).append(hashedPassword, rhs.hashedPassword).append(salt, rhs.salt).append(fact, rhs.fact).append(phone, rhs.phone).append(profileRole, rhs.profileRole).append(company, rhs.company).append(timezone, rhs.timezone).append(interestingProject, rhs.interestingProject).append(hearAboutGigster, rhs.hearAboutGigster).append(V, rhs.V).append(signupGig, rhs.signupGig).append(referral, rhs.referral).append(passwordResetHash, rhs.passwordResetHash).append(passwordResetTimestamp, rhs.passwordResetTimestamp).append(uuid, rhs.uuid).append(slackId, rhs.slackId).append(notifyOnLogin, rhs.notifyOnLogin).append(hideMilestonesTutorial, rhs.hideMilestonesTutorial).append(receiveKarmaNotifications, rhs.receiveKarmaNotifications).append(workSamples, rhs.workSamples).append(acceptChats, rhs.acceptChats).append(availabilityHistory, rhs.availabilityHistory).append(available, rhs.available).append(seAvailableSlots, rhs.seAvailableSlots).append(devices, rhs.devices).append(delightApproved, rhs.delightApproved).append(delightRequested, rhs.delightRequested).append(architectApproved, rhs.architectApproved).append(architectRequested, rhs.architectRequested).append(codeReviewerApproved, rhs.codeReviewerApproved).append(codeReviewerRequested, rhs.codeReviewerRequested).append(qaApproved, rhs.qaApproved).append(qaRequested, rhs.qaRequested).append(writerApproved, rhs.writerApproved).append(writerRequested, rhs.writerRequested).append(designerApproved, rhs.designerApproved).append(designerRequested, rhs.designerRequested).append(seApproved, rhs.seApproved).append(seRequested, rhs.seRequested).append(pmApproved, rhs.pmApproved).append(pmRequested, rhs.pmRequested).append(gigsterApproved, rhs.gigsterApproved).append(gigsterRequested, rhs.gigsterRequested).append(type, rhs.type).append(role, rhs.role).append(votes, rhs.votes).append(numRatings, rhs.numRatings).append(rating, rhs.rating).append(karmaHistory, rhs.karmaHistory).append(karmaDimensions, rhs.karmaDimensions).append(karma, rhs.karma).append(bestProjects, rhs.bestProjects).append(techs, rhs.techs).append(platforms, rhs.platforms).append(skills, rhs.skills).append(profileLinks, rhs.profileLinks).append(city, rhs.city).append(lastActionTime, rhs.lastActionTime).append(interviews, rhs.interviews).append(updated, rhs.updated).append(created, rhs.created).append(accepted, rhs.accepted).isEquals();
     }
 
+    public String getImgURL() {
+        return imgURL;
+    }
 }

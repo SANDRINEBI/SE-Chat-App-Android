@@ -1,93 +1,51 @@
 
 package com.gigster.semessaging.gigs;
 
-import java.util.HashMap;
-import java.util.Map;
 import javax.annotation.Generated;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 @Generated("org.jsonschema2pojo")
 public class Specification {
 
-    private Object readyDate;
-    private Object readyBy;
-    private boolean ready;
-    private Object approvedDate;
-    private Object approvedBy;
+    @SerializedName("approved")
+    @Expose
     private boolean approved;
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    @SerializedName("approvedBy")
+    @Expose
+    private Object approvedBy;
+    @SerializedName("approvedDate")
+    @Expose
+    private Object approvedDate;
+    @SerializedName("ready")
+    @Expose
+    private boolean ready;
+    @SerializedName("readyBy")
+    @Expose
+    private Object readyBy;
+    @SerializedName("readyDate")
+    @Expose
+    private Object readyDate;
 
     /**
      * 
      * @return
-     *     The readyDate
+     *     The approved
      */
-    public Object getReadyDate() {
-        return readyDate;
+    public boolean isApproved() {
+        return approved;
     }
 
     /**
      * 
-     * @param readyDate
-     *     The readyDate
+     * @param approved
+     *     The approved
      */
-    public void setReadyDate(Object readyDate) {
-        this.readyDate = readyDate;
-    }
-
-    /**
-     * 
-     * @return
-     *     The readyBy
-     */
-    public Object getReadyBy() {
-        return readyBy;
-    }
-
-    /**
-     * 
-     * @param readyBy
-     *     The readyBy
-     */
-    public void setReadyBy(Object readyBy) {
-        this.readyBy = readyBy;
-    }
-
-    /**
-     * 
-     * @return
-     *     The ready
-     */
-    public boolean isReady() {
-        return ready;
-    }
-
-    /**
-     * 
-     * @param ready
-     *     The ready
-     */
-    public void setReady(boolean ready) {
-        this.ready = ready;
-    }
-
-    /**
-     * 
-     * @return
-     *     The approvedDate
-     */
-    public Object getApprovedDate() {
-        return approvedDate;
-    }
-
-    /**
-     * 
-     * @param approvedDate
-     *     The approvedDate
-     */
-    public void setApprovedDate(Object approvedDate) {
-        this.approvedDate = approvedDate;
+    public void setApproved(boolean approved) {
+        this.approved = approved;
     }
 
     /**
@@ -111,32 +69,83 @@ public class Specification {
     /**
      * 
      * @return
-     *     The approved
+     *     The approvedDate
      */
-    public boolean isApproved() {
-        return approved;
+    public Object getApprovedDate() {
+        return approvedDate;
     }
 
     /**
      * 
-     * @param approved
-     *     The approved
+     * @param approvedDate
+     *     The approvedDate
      */
-    public void setApproved(boolean approved) {
-        this.approved = approved;
+    public void setApprovedDate(Object approvedDate) {
+        this.approvedDate = approvedDate;
     }
 
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
+    /**
+     * 
+     * @return
+     *     The ready
+     */
+    public boolean isReady() {
+        return ready;
     }
 
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
+    /**
+     * 
+     * @param ready
+     *     The ready
+     */
+    public void setReady(boolean ready) {
+        this.ready = ready;
+    }
+
+    /**
+     * 
+     * @return
+     *     The readyBy
+     */
+    public Object getReadyBy() {
+        return readyBy;
+    }
+
+    /**
+     * 
+     * @param readyBy
+     *     The readyBy
+     */
+    public void setReadyBy(Object readyBy) {
+        this.readyBy = readyBy;
+    }
+
+    /**
+     * 
+     * @return
+     *     The readyDate
+     */
+    public Object getReadyDate() {
+        return readyDate;
+    }
+
+    /**
+     * 
+     * @param readyDate
+     *     The readyDate
+     */
+    public void setReadyDate(Object readyDate) {
+        this.readyDate = readyDate;
+    }
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(readyDate).append(readyBy).append(ready).append(approvedDate).append(approvedBy).append(approved).append(additionalProperties).toHashCode();
+        return new HashCodeBuilder().append(approved).append(approvedBy).append(approvedDate).append(ready).append(readyBy).append(readyDate).toHashCode();
     }
 
     @Override
@@ -148,7 +157,7 @@ public class Specification {
             return false;
         }
         Specification rhs = ((Specification) other);
-        return new EqualsBuilder().append(readyDate, rhs.readyDate).append(readyBy, rhs.readyBy).append(ready, rhs.ready).append(approvedDate, rhs.approvedDate).append(approvedBy, rhs.approvedBy).append(approved, rhs.approved).append(additionalProperties, rhs.additionalProperties).isEquals();
+        return new EqualsBuilder().append(approved, rhs.approved).append(approvedBy, rhs.approvedBy).append(approvedDate, rhs.approvedDate).append(ready, rhs.ready).append(readyBy, rhs.readyBy).append(readyDate, rhs.readyDate).isEquals();
     }
 
 }

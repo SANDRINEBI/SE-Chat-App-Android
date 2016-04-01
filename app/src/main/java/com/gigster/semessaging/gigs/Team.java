@@ -2,18 +2,20 @@
 package com.gigster.semessaging.gigs;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import javax.annotation.Generated;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 @Generated("org.jsonschema2pojo")
 public class Team {
 
+    @SerializedName("members")
+    @Expose
     private List<Object> members = new ArrayList<Object>();
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     /**
      * 
@@ -33,17 +35,14 @@ public class Team {
         this.members = members;
     }
 
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(members).append(additionalProperties).toHashCode();
+        return new HashCodeBuilder().append(members).toHashCode();
     }
 
     @Override
@@ -55,7 +54,7 @@ public class Team {
             return false;
         }
         Team rhs = ((Team) other);
-        return new EqualsBuilder().append(members, rhs.members).append(additionalProperties, rhs.additionalProperties).isEquals();
+        return new EqualsBuilder().append(members, rhs.members).isEquals();
     }
 
 }
