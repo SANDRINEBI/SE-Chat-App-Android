@@ -36,7 +36,7 @@ public interface GigsterService {
 
     @FormUrlEncoded
     @POST("api/v1/users/{id}/devices/gcm")
-    Response registerDevice(@Header("Cookie") String cookie, @Path("id") String userID, @Field("token") String token);
+    Call<Object> registerDevice(@Header("Cookie") String cookie, @Path("id") String userID, @Field("token") String token);
 
     @FormUrlEncoded
     @POST("api/v1/gigs/{gig_id}/messages")

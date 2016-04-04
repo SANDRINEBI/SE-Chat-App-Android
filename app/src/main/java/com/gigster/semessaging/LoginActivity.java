@@ -29,6 +29,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.gigster.semessaging.user.User;
+import com.google.android.gms.gcm.GoogleCloudMessaging;
+import com.google.android.gms.iid.InstanceID;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -39,6 +41,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static android.Manifest.permission.CALL_PHONE;
 import static android.Manifest.permission.READ_CONTACTS;
 
 public class LoginActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
@@ -305,9 +308,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
                     return false;
                 }else{
                     Log.d("Status", "logging in succeded");
+                    String cookie = r.headers().get("Set-Cookie");
+//                    InstanceID instanceID = InstanceID.getInstance(getApplicationContext());
+//                    String token = instanceID.getToken("app",
+//                            GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);
+//                    serv.registerDevice(cookie, mEmail, token);
                     SharedPreferences settings = getSharedPreferences("settings", 0);
                     SharedPreferences.Editor editor = settings.edit();
-                    editor.putString("cookie", r.headers().get("Set-Cookie"));
+                    editor.putString("cookie", cookie);
                     editor.putString("email", mEmail);
                     editor.putString("password", mPassword);
                     editor.putBoolean("loggedIn", true);

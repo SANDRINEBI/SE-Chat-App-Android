@@ -2,6 +2,7 @@
 package com.gigster.semessaging.gigs;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.Generated;
 import com.google.gson.annotations.Expose;
@@ -9,9 +10,10 @@ import com.google.gson.annotations.SerializedName;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.joda.time.DateTime;
 
 @Generated("org.jsonschema2pojo")
-public class Datum {
+public class Datum implements Comparable<Datum>{
 
     @SerializedName("_id")
     @Expose
@@ -1732,8 +1734,9 @@ public class Datum {
      * @return
      *     The lastChatTime
      */
-    public String getLastChatTime() {
-        return lastChatTime;
+    public DateTime getLastChatTime() {
+        DateTime d = new DateTime(lastChatTime);
+        return d;
     }
 
     /**
@@ -2325,4 +2328,9 @@ public class Datum {
         return new EqualsBuilder().append(Id, rhs.Id).append(canonical, rhs.canonical).append(category, rhs.category).append(duration, rhs.duration).append(durationUnits, rhs.durationUnits).append(dollarAmount, rhs.dollarAmount).append(name, rhs.name).append(salesEngineerGuess, rhs.salesEngineerGuess).append(emailLater, rhs.emailLater).append(organizationSize, rhs.organizationSize).append(poster, rhs.poster).append(V, rhs.V).append(stale, rhs.stale).append(organization, rhs.organization).append(tracking, rhs.tracking).append(flags, rhs.flags).append(qualified, rhs.qualified).append(engaged, rhs.engaged).append(meta, rhs.meta).append(designPolish, rhs.designPolish).append(checkedForMissedChatEmail, rhs.checkedForMissedChatEmail).append(docs, rhs.docs).append(payMilestones, rhs.payMilestones).append(tags, rhs.tags).append(tools, rhs.tools).append(risks, rhs.risks).append(reviews, rhs.reviews).append(requiredTeamSize, rhs.requiredTeamSize).append(team, rhs.team).append(colleagues, rhs.colleagues).append(qualityReviews, rhs.qualityReviews).append(specReviews, rhs.specReviews).append(nps, rhs.nps).append(customerLike, rhs.customerLike).append(customerDislike, rhs.customerDislike).append(customerLikelyToRecommend, rhs.customerLikelyToRecommend).append(customerSatisfactions, rhs.customerSatisfactions).append(pmStatus, rhs.pmStatus).append(statusReached, rhs.statusReached).append(staleReason, rhs.staleReason).append(state, rhs.state).append(status, rhs.status).append(paymentMade, rhs.paymentMade).append(paymentReceived, rhs.paymentReceived).append(terms, rhs.terms).append(progressUpdates, rhs.progressUpdates).append(milestonesSpecification, rhs.milestonesSpecification).append(currentMilestoneIndex, rhs.currentMilestoneIndex).append(milestones, rhs.milestones).append(qualifiers, rhs.qualifiers).append(postDevTasks, rhs.postDevTasks).append(preDevTasks, rhs.preDevTasks).append(whiteboard, rhs.whiteboard).append(features, rhs.features).append(keyFeatures, rhs.keyFeatures).append(polishLevel, rhs.polishLevel).append(templates, rhs.templates).append(skills, rhs.skills).append(projectTypes, rhs.projectTypes).append(techs, rhs.techs).append(platforms, rhs.platforms).append(margin, rhs.margin).append(cost, rhs.cost).append(costingType, rhs.costingType).append(hoursEstimate, rhs.hoursEstimate).append(chatPrice, rhs.chatPrice).append(price, rhs.price).append(firstMessage, rhs.firstMessage).append(lastContactChannel, rhs.lastContactChannel).append(lastContactByGigster, rhs.lastContactByGigster).append(lastContactByClient, rhs.lastContactByClient).append(lastEmailBy, rhs.lastEmailBy).append(lastEmailTime, rhs.lastEmailTime).append(lastChatBy, rhs.lastChatBy).append(lastMissedChatEmailToPoc, rhs.lastMissedChatEmailToPoc).append(lastMissedChatEmailToClient, rhs.lastMissedChatEmailToClient).append(lastChatEmail, rhs.lastChatEmail).append(lastChatTime, rhs.lastChatTime).append(clientOwnsCode, rhs.clientOwnsCode).append(gigsterEsign, rhs.gigsterEsign).append(boughtNDA, rhs.boughtNDA).append(clientNDASign, rhs.clientNDASign).append(clientEsign, rhs.clientEsign).append(internalType, rhs.internalType).append(type, rhs.type).append(lastUpdate, rhs.lastUpdate).append(updated, rhs.updated).append(created, rhs.created).append(howDidTheCustomerFindUs, rhs.howDidTheCustomerFindUs).append(pdfUrl, rhs.pdfUrl).append(salesEngineer, rhs.salesEngineer).append(seNotes, rhs.seNotes).append(info, rhs.info).append(timeline, rhs.timeline).append(customerPersonality, rhs.customerPersonality).append(legalEntity, rhs.legalEntity).append(startDate, rhs.startDate).append(projectManager, rhs.projectManager).append(lastHealthReportDate, rhs.lastHealthReportDate).append(quote, rhs.quote).append(calculator, rhs.calculator).append(gdriveUrl, rhs.gdriveUrl).append(trelloUrl, rhs.trelloUrl).append(githubUrl, rhs.githubUrl).append(buildUrl, rhs.buildUrl).append(dropboxUrl, rhs.dropboxUrl).append(numberOfFeatures, rhs.numberOfFeatures).append(maxStartDate, rhs.maxStartDate).append(techStack, rhs.techStack).isEquals();
     }
 
+    public int compareTo(Datum d){
+        DateTime date1 = getLastChatTime();
+        DateTime date2 = d.getLastChatTime();
+        return date1.compareTo(date2);
+    }
 }

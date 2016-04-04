@@ -14,19 +14,32 @@ class Chat implements Serializable, Comparable<Chat> {
     private final String imageUri;
     private final String chatName;
     private String gigID;
+    private String phoneNumber;
     private ArrayList<ChatMessage> chat;
 
     public Chat(){
         imageUri = "https://pbs.twimg.com/profile_images/562466745340817408/_nIu8KHX.jpeg";
         chatName = "TestChatName";
         urgency = 2;
+        String number = null;
     }
+
     public Chat(String imgUri, String chatName, String gigID){
         this.urgency=0;
         this.imageUri=imgUri;
         this.chatName=chatName;
         this.gigID = gigID;
         this.chat = new ArrayList<ChatMessage>();
+        this.phoneNumber = null;
+    }
+
+    public Chat(String imgUri, String chatName, String gigID, String number){
+        this.urgency=0;
+        this.imageUri=imgUri;
+        this.chatName=chatName;
+        this.gigID = gigID;
+        this.chat = new ArrayList<ChatMessage>();
+        this.phoneNumber = number;
     }
 
     public int getUrgency(){
@@ -35,6 +48,10 @@ class Chat implements Serializable, Comparable<Chat> {
 
     public String getImageUri() {
         return imageUri;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
     public String getChatName() {
@@ -104,6 +121,12 @@ class Chat implements Serializable, Comparable<Chat> {
     }
 
     public int compareTo(Chat c) {
-        return Long.valueOf(this.getMillisSinceLastMessage()).compareTo(Long.valueOf(c.getMillisSinceLastMessage()));
+        long selfTime = getMillisSinceLastMessage();
+        long otherTime = c.getMillisSinceLastMessage();
+        if(selfTime==-1)
+            return 1;
+        else if(otherTime==-1)
+            return -1;
+        return Long.valueOf(selfTime).compareTo(Long.valueOf(otherTime));
     }
 }

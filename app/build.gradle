@@ -26,6 +26,7 @@ android {
         exclude 'META-INF/LICENSE-FIREBASE.txt'
         exclude 'META-INF/LICENSE.txt'
         exclude 'META-INF/NOTICE'
+        exclude 'META-INF/NOTICE.txt'
     }
 
 }
@@ -49,4 +50,5 @@ dependencies {
     compile 'com.google.android.gms:play-services-appindexing:8.4.0'
     compile 'com.github.boxme:asyncmanager:1.0.0'
     compile 'com.squareup.okhttp3:logging-interceptor:3.0.1'
+    compile 'net.danlew:android.joda:2.9.3'
 }

@@ -47,8 +47,27 @@ class ChatMessage implements Serializable {
         else
             avatar = "";
 
-        text = EmojiParser.demojizedText((String) map.get("text"));
+        if(map.containsKey("toClient"))
+            toClient = Boolean.valueOf(map.get("toClient").toString());
+        else
+            toClient = false;
+
         type = (String) map.get("type");
+        type = type.trim();
+        if(type.equals("phonecall"))
+            if(toClient)
+                text = "You made a phone call";
+            else
+                text = "The client made a phone call";
+        else if(type.equals("email"))
+            if(toClient)
+                text = "You sent an email";
+            else
+                text = "The client sent an email";
+        else if(type.equals("text"))
+            text = EmojiParser.demojizedText((String) map.get("text"));
+        else
+            text = type;
 
         if(map.containsKey("isWireframe"))
             isWireFrame = Boolean.valueOf(map.get("isWireframe").toString());
@@ -62,10 +81,6 @@ class ChatMessage implements Serializable {
             isAuto = Boolean.valueOf( map.get("isAuto").toString());
         else
             isAuto = false;
-        if(map.containsKey("toClient"))
-            toClient = Boolean.valueOf(map.get("toClient").toString());
-        else
-            toClient = false;
         if(map.containsKey("isProposalReady"))
             isProposalReady = Boolean.valueOf(map.get("isProposalReady").toString());
         else
