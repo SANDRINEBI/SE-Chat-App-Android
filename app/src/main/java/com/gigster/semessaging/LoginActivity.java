@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.LoaderManager;
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.content.Loader;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -294,7 +295,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
             // TODO: attempt authentication against a network service.
 
             Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl("https://app.gigster.com/")
+                    .baseUrl(getString(R.string.base_url))
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
             GigsterService serv = retrofit.create(GigsterService.class);
@@ -308,15 +309,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
                     return false;
                 }else{
                     Log.d("Status", "logging in succeded");
+                    User user= r.body();
                     String cookie = r.headers().get("Set-Cookie");
-//                    InstanceID instanceID = InstanceID.getInstance(getApplicationContext());
-//                    String token = instanceID.getToken("app",
-//                            GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);
-//                    serv.registerDevice(cookie, mEmail, token);
                     SharedPreferences settings = getSharedPreferences("settings", 0);
                     SharedPreferences.Editor editor = settings.edit();
                     editor.putString("cookie", cookie);
                     editor.putString("email", mEmail);
+                    editor.putString("userid", user.getId());
                     editor.putString("password", mPassword);
                     editor.putBoolean("loggedIn", true);
                     editor.commit();
@@ -335,6 +334,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
             showProgress(false);
 
             if (success) {
+
+                Intent intent = new Intent(LoginActivity.this, IntanceIDService.class);
+                startService(intent);
+                intent = new Intent(LoginActivity.this, RegistrationIntentService.class);
+                startService(intent);
                 finish();
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));

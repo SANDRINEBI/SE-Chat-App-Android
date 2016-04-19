@@ -19,11 +19,11 @@ import java.util.List;
 
 class ChatListAdapter extends ArrayAdapter<Chat> {
     public static final Transformation transformation = new RoundedTransformationBuilder()
-    .borderColor(Color.BLACK)
-    .borderWidthDp(0)
-    .cornerRadiusDp(30)
-    .oval(false)
-    .build();
+        .borderColor(Color.BLACK)
+        .borderWidthDp(0)
+        .cornerRadiusDp(30)
+        .oval(false)
+        .build();
     public ChatListAdapter(Context context, int resource, List<Chat> items) {
         super(context, resource, items);
     }
@@ -52,13 +52,10 @@ class ChatListAdapter extends ArrayAdapter<Chat> {
             switch(p.getUrgency()) {
                 case 0:
                     timeSinceMessage.setTextColor(Color.BLACK);
+                    dotDrawable.setColor(Color.LTGRAY);
                     break;
                 case 1:
                     dotDrawable.setColor(Color.BLUE);
-                    timeSinceMessage.setTextColor(Color.BLUE);
-                    break;
-                case 2:
-                    dotDrawable.setColor(Color.RED);
                     timeSinceMessage.setTextColor(Color.RED);
                     break;
                 default:
@@ -86,7 +83,6 @@ class ChatListAdapter extends ArrayAdapter<Chat> {
             if (timeSinceMessage!=null){
                 timeSinceMessage.setText(p.getTimeSinceMessage());
             }
-//            Log.d("Time Since", String.valueOf(p.getMillisSinceLastMessage()));
         }
 
         return v;

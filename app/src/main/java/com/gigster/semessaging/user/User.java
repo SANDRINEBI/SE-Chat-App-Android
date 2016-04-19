@@ -13,7 +13,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 @Generated("org.jsonschema2pojo")
 public class User {
-
+    @SerializedName("_id")
     private String Id;
 
     @SerializedName("img_url")

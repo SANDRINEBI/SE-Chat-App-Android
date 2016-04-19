@@ -1,6 +1,7 @@
 package com.gigster.semessaging;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -91,6 +92,12 @@ class ChatAdapter extends BaseAdapter {
             if (datetime != null) {
                 DateFormat format = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT);
                 datetime.setText(format.format(p.getDate()));
+            }
+            if(p.isRead()){
+                message.setTextColor(Color.BLACK);
+            }
+            else{
+                message.setTextColor(Color.BLUE);
             }
         }
 

@@ -22,6 +22,8 @@ class Chat implements Serializable, Comparable<Chat> {
         chatName = "TestChatName";
         urgency = 2;
         String number = null;
+        this.chat = new ArrayList<ChatMessage>();
+        this.phoneNumber = null;
     }
 
     public Chat(String imgUri, String chatName, String gigID){
@@ -34,7 +36,7 @@ class Chat implements Serializable, Comparable<Chat> {
     }
 
     public Chat(String imgUri, String chatName, String gigID, String number){
-        this.urgency=0;
+        this.urgency=1;
         this.imageUri=imgUri;
         this.chatName=chatName;
         this.gigID = gigID;
@@ -44,6 +46,15 @@ class Chat implements Serializable, Comparable<Chat> {
 
     public int getUrgency(){
         return urgency;
+    }
+
+    public void updateUrgency(){
+        if(chat!=null && chat.size()>0){
+            boolean isRead = chat.get(chat.size()-1).isRead() ;
+            urgency = isRead ? 0 : 1;
+        }
+        else
+            urgency = 1;
     }
 
     public String getImageUri() {
@@ -87,12 +98,6 @@ class Chat implements Serializable, Comparable<Chat> {
             long hour = (millis / (1000 * 60 * 60)) % 24;
             long day = (millis / (1000 * 60 * 60 * 24)) % 365;
 
-            if(millis>1000*60*60*24)
-                urgency=2;
-            else if(millis>1000*60*60*5)
-                urgency=1;
-            else
-                urgency=0;
             StringBuilder sb = new StringBuilder();
             if(day!=0)
                 sb.append(day + "d ");
@@ -116,7 +121,7 @@ class Chat implements Serializable, Comparable<Chat> {
     }
 
     @Override public boolean equals(Object obj){
-        EqualsBuilder builder = new EqualsBuilder().append(this.getGigID(), ((Chat)obj).getGigID());
+        EqualsBuilder builder = new EqualsBuilder().append(this.getGigID(), ((Chat)obj).getGigID());//.append(this.getUrgency(), ((Chat) obj).getUrgency());
         return builder.isEquals();
     }
 

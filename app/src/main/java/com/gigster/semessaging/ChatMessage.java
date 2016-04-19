@@ -1,10 +1,9 @@
 package com.gigster.semessaging;
 
-import android.util.Log;
-
 import org.apache.commons.lang3.builder.EqualsBuilder;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -23,8 +22,12 @@ class ChatMessage implements Serializable {
     private final Date date;
     private final boolean isMine;
     private final String gigID;
+    private boolean read;
+    private String myID;
+    private String messageKey;
+    private ArrayList<HashMap> readSnippets;
 
-    public ChatMessage(String text, Date date, boolean isMine, String type, String gigID){
+    public ChatMessage(String text, Date date, boolean isMine, String type, String gigID, String myID){
         this.text=text;
         this.date=date;
         this.isMine=isMine;
@@ -35,9 +38,13 @@ class ChatMessage implements Serializable {
         this.isAuto = false;
         this.showAuto = false;
         this.gigID = gigID;
+        this.read = false;
+        this.myID=myID;
+        this.messageKey = "";
+        this.readSnippets = new ArrayList<>();
     }
 
-    public ChatMessage(HashMap map, String gigID){
+    public ChatMessage(HashMap map, String gigID, String myID, String messageKey){
         if(map.containsKey("firstName"))
             firstName = (String) map.get("firstName");
         else
@@ -90,6 +97,50 @@ class ChatMessage implements Serializable {
         date = new Date(timestamp);
         isMine = toClient;
         this.gigID=gigID;
+        this.myID = myID;
+        this.messageKey = messageKey;
+
+        if(this.isMine || this.type.equals("typing"))
+            this.read = true;
+        else
+            this.read = false;
+        if(map.containsKey("read") && !this.isMine){
+            readSnippets = (ArrayList<HashMap>) map.get("read");
+
+            for(HashMap readEvent: readSnippets) {
+                String readBy = (String) readEvent.get("id");
+                if (readBy.equals(this.myID)) {
+                    this.read = true;
+                    break;
+                }
+            }
+        }
+        else{
+            readSnippets = new ArrayList<>();
+        }
+
+    }
+
+    public void readIt(){
+        if(!read){
+            HashMap myRead = new HashMap();
+            myRead.put("id", myID);
+            myRead.put("timestamp", new Date().getTime());
+            readSnippets.add(myRead);
+            read = true;
+        }
+    }
+
+    public ArrayList<HashMap> getReadSnippets() {
+        return readSnippets;
+    }
+
+    public String getMessageKey() {
+        return messageKey;
+    }
+
+    public String getMyID() {
+        return myID;
     }
 
     public boolean isMine() {
@@ -120,6 +171,10 @@ class ChatMessage implements Serializable {
         return type;
     }
 
+    public boolean isRead() {
+        return read;
+    }
+
     public HashMap<String, Object> toMap(){
         HashMap<String, Object> map = new HashMap<>();
         map.put("firstName", firstName);
@@ -132,11 +187,16 @@ class ChatMessage implements Serializable {
         map.put("toClient",toClient);
         map.put("isProposalReady",isProposalReady);
         map.put("timestamp",timestamp);
+        map.put("read",readSnippets);
         return map;
     }
 
     @Override public boolean equals(Object obj){
         EqualsBuilder builder = new EqualsBuilder().append(this.getTimestamp(), ((ChatMessage)obj).getTimestamp());
         return builder.isEquals();
+    }
+
+    public String toString(){
+        return toMap().toString();
     }
 }

@@ -1,7 +1,8 @@
 <resources>
-    <string name="app_name">SE Messaging</string>
+    <string name="app_name">PoolDay</string>
 
     <!-- Strings related to login -->
+    <string name="base_url">https://app.gigster.com/</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in</string>
@@ -23,4 +24,21 @@
     <string name="edit_text_hint">Send message</string>
 
     <string name="default_date"> </string>
+    <string name="gcm_defaultSenderId">145841301759</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <string name="pref_phone_notifications_title">Phone Notifications</string>
+
+    <string name="pref_phone_notifications_summary">Disable or enable phone notifications.</string>
+
+    <string name="pref_watch_notifications_title">Android Wear Notifications</string>
+
+    <string name="pref_watch_notifications_summary">Disable or enable android wear notifications. Note: Android Wear notifications automatically enable phone notifications</string>
+
+    <string name="logout_title">Logout</string>
+
+    <string name="logout_summary">Click here to logout</string>
+
+    <string name="logoutButton">logoutButton</string>
+
 </resources>

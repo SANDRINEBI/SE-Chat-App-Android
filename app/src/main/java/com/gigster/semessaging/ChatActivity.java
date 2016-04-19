@@ -1,6 +1,5 @@
 package com.gigster.semessaging;
 
-import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -13,10 +12,10 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Looper;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -32,15 +31,21 @@ import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
-import com.firebase.client.ValueEventListener;
-import com.gigster.semessaging.gigs.GigList;
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
-import javax.xml.transform.Result;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -51,19 +56,30 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static android.Manifest.permission.CALL_PHONE;
-import static android.Manifest.permission.PACKAGE_USAGE_STATS;
-import static android.Manifest.permission.READ_CONTACTS;
 
 public class ChatActivity extends AppCompatActivity {
+    private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
     private ListView lv;
     private static final int REQUEST_CALL_PHONE = 0;
-    ArrayList<ChatMessage> messages= new ArrayList<ChatMessage>();
+    ArrayList<ChatMessage> messages = new ArrayList<ChatMessage>();
     ChatAdapter adapter;
+    ChildEventListener listener;
     Chat chat;
     Firebase db;
+    boolean inActivity = false;
     AppCompatActivity activity = this;
-    @Bind(R.id.editText) EditText text;
-    @Bind(R.id.call) ImageView call;
+    SharedPreferences settings;
+    String myID;
+    @Bind(R.id.editText)
+    EditText text;
+    @Bind(R.id.call)
+    ImageView call;
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,47 +87,63 @@ public class ChatActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chat);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        settings = getSharedPreferences("settings", 0);
+        myID = settings.getString("userid", "");
         db = new Firebase("https://gigster-debo.firebaseio.com/messages/");
         ButterKnife.bind(this);
         chat = new Chat();
-        try{
-           chat = (Chat) getIntent().getSerializableExtra("Chat");
-        } catch (Exception e){
+        try {
+            chat = (Chat) getIntent().getSerializableExtra("Chat");
+        } catch (Exception e) {
 
         }
         Date d = new Date();
+
         TextView title = (TextView) findViewById(R.id.chatName);
-        if (chat!=null) {
+        if (chat != null) {
             title.setText(chat.getChatName());
             messages = chat.getChat();
             adapter = new ChatAdapter(this, messages);
-        }
-        else
+        } else
             adapter = new ChatAdapter(this);
         lv = (ListView) findViewById(R.id.chatListView);
 
         lv.setAdapter(adapter);
         messages.clear();
-        db.child(chat.getGigID()).orderByChild("timestamp").addChildEventListener(new ChildEventListener() {
+        listener = new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                HashMap val = (HashMap) dataSnapshot.getValue();
-                ChatMessage msg = new ChatMessage(val,chat.getGigID());
 
-                Log.d("Child Added", msg.getText());
-                if(!msg.getType().equals("typing")){
+
+                HashMap val = (HashMap) dataSnapshot.getValue();
+                ChatMessage msg = new ChatMessage(val, chat.getGigID(), myID, dataSnapshot.getKey());
+                if (!msg.getType().equals("typing")) {
                     messages.add(msg);
                     adapter.notifyDataSetChanged();
+                    final ChatMessage ms = msg;
+                    if (!msg.isRead()&& inActivity)
+                        scheduler.schedule(new Runnable(){
+                            @Override
+                            public void run(){
+                                Firebase message = db.child(chat.getGigID()).child(ms.getMessageKey());
+                                ArrayList read = ms.getReadSnippets();
+                                ms.readIt();
+                                read = ms.getReadSnippets();
+                                Map<String, Object> readMap = new HashMap<>();
+                                readMap.put("read", read);
+                                message.updateChildren(readMap);
+                            }
+                        }, 1, TimeUnit.SECONDS);
+
                 }
             }
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
                 HashMap val = (HashMap) dataSnapshot.getValue();
-                ChatMessage msg = new ChatMessage(val,chat.getGigID());
-                Log.d("Child Changed", msg.getText());
-                if (messages.contains(msg)){
-                    messages.set(messages.indexOf(msg),msg);
+                ChatMessage msg = new ChatMessage(val, chat.getGigID(), myID, dataSnapshot.getKey());
+                if (messages.contains(msg)) {
+                    messages.set(messages.indexOf(msg), msg);
                     adapter.notifyDataSetChanged();
                 }
             }
@@ -119,9 +151,8 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
                 HashMap val = (HashMap) dataSnapshot.getValue();
-                ChatMessage msg = new ChatMessage(val,chat.getGigID());
-                Log.d("Child Removed", msg.getText());
-                if (messages.contains(msg)){
+                ChatMessage msg = new ChatMessage(val, chat.getGigID(), myID, dataSnapshot.getKey());
+                if (messages.contains(msg)) {
                     messages.remove(messages.indexOf(msg));
                     adapter.notifyDataSetChanged();
                 }
@@ -136,25 +167,21 @@ public class ChatActivity extends AppCompatActivity {
             public void onCancelled(FirebaseError firebaseError) {
 
             }
-        });
+        };
 
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
-    @OnClick(R.id.send)
-    public void addItems(View v) {
-        String message = text.getText().toString();
-        if(message.length()<=0)
-            return;
 
-        message = message.trim();
-        String emoij = EmojiParser.demojizedText(message);
-        ChatMessage msg = new ChatMessage(emoij, new Date(), true, "text", chat.getGigID());
-
+    public void sendMessage(ChatMessage msg) {
         AsyncManager.runBackgroundTask(new TaskRunnable<ChatMessage, Boolean, Void>() {
             @Override
             public Boolean doLongOperation(ChatMessage params) throws InterruptedException {
                 SharedPreferences settings = getSharedPreferences("settings", 0);
                 Retrofit retrofit = new Retrofit.Builder()
-                        .baseUrl("https://app.gigster.com/")
+                        .baseUrl(getString(R.string.base_url))
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
                 GigsterService serv = retrofit.create(GigsterService.class);
@@ -163,7 +190,6 @@ public class ChatActivity extends AppCompatActivity {
                 try {
                     Response<Object> resp = sendMessage.execute();
                     if (resp.code() == 200) {
-                        Log.d("SendMessageTask", "Successfully sent message");
 
                         return true;
                     } else {
@@ -176,16 +202,24 @@ public class ChatActivity extends AppCompatActivity {
 
                 return true;
             }
-
-            // Override this callback if you need to handle the result on the UI thread
-            @Override
-            public void callback(Boolean result) {
-                // Handle the result from doLongOperation()
-            }
         }.setParams(msg));
+    }
+
+    @OnClick(R.id.send)
+    public void addItems(View v) {
+        String message = text.getText().toString();
+        if (message.length() <= 0)
+            return;
+
+        message = message.trim();
+        String emoij = EmojiParser.demojizedText(message);
+        ChatMessage msg = new ChatMessage(emoij, new Date(), true, "text", chat.getGigID(), myID);
+
+        sendMessage(msg);
 
         text.setText("", TextView.BufferType.EDITABLE);
     }
+
     private boolean mayRequestCall() {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             return true;
@@ -220,44 +254,91 @@ public class ChatActivity extends AppCompatActivity {
             }
         }
     }
-    public void makeCall(){
+
+    public void makeCall() {
         String number = chat.getPhoneNumber();
         Context context = getApplicationContext();
 
-        if(!mayRequestCall())
+        if (!mayRequestCall())
             return;
-        if(context.checkCallingOrSelfPermission(CALL_PHONE)==PackageManager.PERMISSION_GRANTED)
-            if(number==null)
-            {
+        if (context.checkCallingOrSelfPermission(CALL_PHONE) == PackageManager.PERMISSION_GRANTED)
+            if (number == null) {
                 ErrorDialog alert = new ErrorDialog();
                 alert.setDialogInfo("Call Failed", "No number on file");
                 alert.show(getFragmentManager(), "ErrorDialog");
-                Log.d("Call Failed", "No Number");
-            }else{
-                String uri = "tel:" + number.trim() ;
+            } else {
+                String uri = "tel:" + number.trim();
+                SharedPreferences settings = getSharedPreferences("settings", 0);
+                String email = settings.getString("email", "");
+                ChatMessage msg = new ChatMessage(email + ", had a phone call with client", new Date(), true, "phonecall", chat.getGigID(), myID);
+                sendMessage(msg);
                 Intent intent = new Intent(Intent.ACTION_CALL);
                 intent.setData(Uri.parse(uri));
                 startActivity(intent);
-                Log.d("Call", "Succeeded");
             }
-        else{
+        else {
 
             ErrorDialog alert = new ErrorDialog();
             alert.setDialogInfo("Call Failed", "Permission not granted");
             alert.show(getFragmentManager(), "ErrorDialog");
-            Log.d("Call Failed", "No Permission");
         }
     }
 
-    public static class ErrorDialog extends DialogFragment{
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client.connect();
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "Chat Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app deep link URI is correct.
+                Uri.parse("android-app://com.gigster.semessaging/http/host/path")
+        );
+        AppIndex.AppIndexApi.start(client, viewAction);
+        db.child(chat.getGigID()).orderByChild("timestamp").addChildEventListener(listener);
+        inActivity = true;
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "Chat Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app deep link URI is correct.
+                Uri.parse("android-app://com.gigster.semessaging/http/host/path")
+        );
+        AppIndex.AppIndexApi.end(client, viewAction);
+        client.disconnect();
+        db.removeEventListener(listener);
+        inActivity = false;
+    }
+
+    public static class ErrorDialog extends DialogFragment {
         String dialogName;
         String dialogMessage;
-        public void setDialogInfo(String name, String message){
+
+        public void setDialogInfo(String name, String message) {
             dialogName = name;
             dialogMessage = message;
 
         }
-        public Dialog onCreateDialog(Bundle savedInstance){
+
+        public Dialog onCreateDialog(Bundle savedInstance) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this.getContext());
             builder.setTitle(dialogName);
             builder.setMessage(dialogMessage);
@@ -269,19 +350,27 @@ public class ChatActivity extends AppCompatActivity {
             return builder.create();
         }
     }
+
     @OnClick(R.id.call)
-    public void call(View v){
+    public void call(View v) {
         Context context = v.getContext();
         makeCall();
     }
 
     @OnClick(R.id.backArrow)
-    public void back(View v){
+    public void back(View v) {
         int resultCode = 200;
         Intent resultIntent = new Intent();
         resultIntent.putExtra("Chat", chat);
         setResult(resultCode, resultIntent);
         finish();
+    }
+
+    @OnClick(R.id.info)
+    public void showInfo(View v) {
+        Intent intent = new Intent(this, WebViewActivity.class);
+        intent.putExtra("Chat", chat);
+        startActivity(intent);
     }
 
     @Override

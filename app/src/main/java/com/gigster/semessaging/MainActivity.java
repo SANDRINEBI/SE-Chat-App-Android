@@ -10,19 +10,16 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v4.app.NotificationCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.firebase.client.AuthData;
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
-import com.firebase.client.ValueEventListener;
 import com.gigster.semessaging.gigs.Datum;
 import com.gigster.semessaging.gigs.GigList;
 import com.gigster.semessaging.gigs.Poster;
@@ -35,7 +32,6 @@ import net.danlew.android.joda.JodaTimeAndroid;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
@@ -48,18 +44,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainActivity extends AppCompatActivity {
     private ListView lv;
     Firebase db;
-//    TreeMultiset<Chat> chats;
     ArrayList<Chat> chats;
     ArrayList<Chat> temp;
     ChatListAdapter adapter;
     ArrayList<ChildEventListener> listeners;
-    Comparator chatComparator;
-    boolean initialLoad = true;
     Context appContext;
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
+
     private GoogleApiClient client;
 
     @Override
@@ -79,18 +69,9 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
 
-
         chats = new ArrayList<>();
         temp = new ArrayList<>();
         listeners = new ArrayList<>();
-//                TreeMultiset.create(new Comparator<Chat>() {
-//            @Override
-//            public int compare(Chat c1, Chat c2)
-//            {
-//
-//                return  Long.valueOf(c1.getMillisSinceLastMessage()).compareTo(c2.getMillisSinceLastMessage());
-//            }
-//        });
 
         lv = (ListView) findViewById(R.id.listView);
         adapter = new ChatListAdapter(this, R.id.listView, chats);
@@ -102,23 +83,28 @@ public class MainActivity extends AppCompatActivity {
                 Chat entry = (Chat) parent.getItemAtPosition(position);
                 Intent intent = new Intent(MainActivity.this, ChatActivity.class);
                 intent.putExtra("Chat", entry);
-                Log.d("Listeners", "cleared");
                 startActivityForResult(intent, position);
             }
         });
 
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
     public void updateContent() {
         Collections.sort(temp);
         adapter.clear();
+        ArrayList<Chat> subList;// = new ArrayList(temp.subList(0,30));
         if(temp.size()>30)
-            adapter.addAll(new ArrayList(temp.subList(0,30)));
+            subList = new ArrayList(temp.subList(0,30));//adapter.addAll(sublist);
         else
-            adapter.addAll(temp);
+            subList = temp;//adapter.addAll(temp);
+
+        for(Chat c: subList){
+            c.updateUrgency();
+        }
+
+        adapter.addAll(subList);
+
         adapter.notifyDataSetChanged();
     }
 
@@ -126,29 +112,18 @@ public class MainActivity extends AppCompatActivity {
         Chat c = (Chat) data.getExtras().getSerializable("Chat");
         if (c==null)
             return;
-        chats.set(requestCode, c);
+        c.updateUrgency();
+        temp.set(temp.indexOf(c), c);
+        updateContent();
         GetGigsTask task = new GetGigsTask();
         task.execute();
         adapter.notifyDataSetChanged();
     }
 
-    public boolean isTop(){
-        Context c = getApplicationContext();
-        return c.getPackageName().equalsIgnoreCase(((ActivityManager)c.getSystemService(Context.ACTIVITY_SERVICE)).getRunningTasks(1).get(0).topActivity.getPackageName());
-    }
     @OnClick(R.id.settingsDots)
-    public void logoutAndReset(View v){
-        Context context = getApplicationContext();
-        Intent mStartActivity = new Intent(context, MainActivity.class);
-        int mPendingIntentId = 123456;
-        PendingIntent mPendingIntent = PendingIntent.getActivity(context, mPendingIntentId, mStartActivity, PendingIntent.FLAG_CANCEL_CURRENT);
-        AlarmManager mgr = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
-        mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 100, mPendingIntent);
-        SharedPreferences settings = getSharedPreferences("settings", 0);
-        SharedPreferences.Editor editor = settings.edit();
-        editor.clear();
-        editor.commit();
-        finish();
+    public void settings(View v){
+        Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+        startActivity(intent);
     }
 
     @Override
@@ -157,35 +132,26 @@ public class MainActivity extends AppCompatActivity {
 
         client.connect();
         Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "Main Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
+                Action.TYPE_VIEW,
+                "Main Page",
                 Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app deep link URI is correct.
                 Uri.parse("android-app://com.gigster.semessaging/http/host/path")
         );
         AppIndex.AppIndexApi.start(client, viewAction);
 
         GetGigsTask task = new GetGigsTask();
         task.execute();
+        updateContent();
     }
 
     @Override
     public void onStop() {
         super.onStop();
 
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
         Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "Main Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
+                Action.TYPE_VIEW,
+                "Main Page",
                 Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app deep link URI is correct.
                 Uri.parse("android-app://com.gigster.semessaging/http/host/path")
         );
         AppIndex.AppIndexApi.end(client, viewAction);
@@ -198,16 +164,12 @@ public class MainActivity extends AppCompatActivity {
         protected GigList doInBackground(Void... params) {
 
             SharedPreferences settings = getSharedPreferences("settings", 0);
-//            HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-//            logging.setLevel(HttpLoggingInterceptor.Level.BODY);
-//            OkHttpClient httpClient = new OkHttpClient.Builder().addInterceptor((okhttp3.Interceptor)logging).build();
             Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl("https://app.gigster.com/")
+                    .baseUrl(getString(R.string.base_url))
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
             GigsterService serv = retrofit.create(GigsterService.class);
             String cookie = settings.getString("cookie", "");
-            GigList gigs = null;
             Call<GigList> gigsRequest = serv.getSeGigs(cookie);
             try {
                 Response<GigList> resp = gigsRequest.execute();
@@ -225,7 +187,8 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(final GigList gigs) {
 
             if (gigs != null) {
-//                chats.clear();
+                SharedPreferences settings = getSharedPreferences("settings", 0);
+                final String myID = settings.getString("userid", "");
                 List<Datum> datums = gigs.getData();
                 Collections.sort(datums);
                 Collections.reverse(datums);
@@ -255,26 +218,27 @@ public class MainActivity extends AppCompatActivity {
                         public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
                             HashMap val = (HashMap) dataSnapshot.getValue();
-                            ChatMessage msg = new ChatMessage(val, gigID);
-                            if(!isTop()){
+                            ChatMessage msg = new ChatMessage(val, gigID, myID, dataSnapshot.getKey());
 
-                                Intent resultIntent = new Intent(MainActivity.this, ChatActivity.class);
-                                resultIntent.putExtra("Chat", ch);
-                                PendingIntent resultPendingIntent =
-                                        PendingIntent.getActivity(
-                                                appContext,
-                                                0,
-                                                resultIntent,
-                                                PendingIntent.FLAG_UPDATE_CURRENT
-                                        );
-                                NotificationCompat.Builder mBuilder =
-                                        new NotificationCompat.Builder(appContext)
-                                                .setSmallIcon(R.mipmap.ic_launcher)
-                                                .setContentTitle(msg.getFirstName())
-                                                .setContentText(msg.getText())
-                                                .setContentIntent(resultPendingIntent);;
+                            if(!temp.contains(ch))
+                                temp.add(ch);
 
+                            if(!chat.contains(msg))
+                            {
+                                if(!msg.getType().equals("typing")) {
+                                    chat.add(msg);
+                                    Log.d(String.valueOf(Math.floor(size * 0.9)), String.valueOf(temp.size()));
+                                    updateContent();
+                                    Log.d("Content Added", String.valueOf(temp.size()));
+                                }
                             }
+                        }
+
+                        @Override
+                        public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                            Log.d("Child", "changed in MAIN");
+                            HashMap val = (HashMap) dataSnapshot.getValue();
+                            ChatMessage msg = new ChatMessage(val, gigID, myID, dataSnapshot.getKey());
 
                             if(!temp.contains(ch))
                                 temp.add(ch);
@@ -282,18 +246,15 @@ public class MainActivity extends AppCompatActivity {
                             if(!chat.contains(msg))
                             {
                                 chat.add(msg);
-                                Log.d("Message Added", String.valueOf(temp.size()));
                                 Log.d(String.valueOf(Math.floor(size*0.9)), String.valueOf(temp.size()));
-//                                if(Math.floor(size * 0.9)<temp.size() || (ind>30)){
-//                                if(Math.floor(size * 0.9)<temp.size() || (30<ind && ind<35)){
-                                    updateContent();
-                                    Log.d("Content Updated", String.valueOf(temp.size()));
-//                                }
+                                updateContent();
+                                Log.d("Content Added", String.valueOf(temp.size()));
                             }
-                        }
-
-                        @Override
-                        public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                            else{
+                                chat.set(chat.indexOf(msg), msg);
+                                updateContent();
+                                Log.d("Existing Updated", String.valueOf(temp.size()));
+                            }
 
                         }
 
@@ -321,6 +282,10 @@ public class MainActivity extends AppCompatActivity {
                 }
             } else {
                 Log.d("Status", "failed to load chat");
+                SharedPreferences settings = getSharedPreferences("settings", 0);
+                String myID = settings.getString("userID", "");
+                Log.d("Status", myID);
+
             }
         }
 

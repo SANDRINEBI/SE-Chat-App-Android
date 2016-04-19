@@ -15,6 +15,7 @@ import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface GigsterService {
 
@@ -34,9 +35,8 @@ public interface GigsterService {
     @GET("api/users/batch")
     Call<User> getBatch(@Header("Cookie") String cookie, @Body List<String> userIDs);
 
-    @FormUrlEncoded
     @POST("api/v1/users/{id}/devices/gcm")
-    Call<Object> registerDevice(@Header("Cookie") String cookie, @Path("id") String userID, @Field("token") String token);
+    Call<Object> registerDevice(@Header("Cookie") String cookie, @Path("id") String userID, @Query("token") String token);
 
     @FormUrlEncoded
     @POST("api/v1/gigs/{gig_id}/messages")
